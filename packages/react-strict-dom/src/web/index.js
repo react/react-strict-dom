@@ -16,6 +16,7 @@ import type {
 } from '@stylexjs/stylex';
 
 import * as html from './html';
+import * as svg from './svg';
 import * as css from '@stylexjs/stylex';
 
 type StyleTheme<V, T> = Theme<V, T>;
@@ -25,4 +26,4 @@ type StylesWithout<T> = StyleXStylesWithout<T>;
 
 export type { StaticStyles, StyleTheme, StyleVars, Styles, StylesWithout };
 
-export { css, html };
+export { css, html, svg };

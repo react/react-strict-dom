@@ -20,6 +20,7 @@ import typeof * as TStyleX from '@stylexjs/stylex';
 import * as React from 'react';
 import * as compat from './compat';
 import * as html from './html';
+import * as svg from './svg';
 import * as _css from './css';
 import { ProvideCustomProperties } from './modules/ContextCustomProperties';
 import {
@@ -64,5 +65,6 @@ export {
   contexts,
   css,
   html,
+  svg,
   useViewportScale as useViewportScale_DO_NOT_USE
 };

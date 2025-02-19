@@ -17,6 +17,7 @@ import type { StrictReactDOMLabelProps } from './StrictReactDOMLabelProps';
 import type { StrictReactDOMListItemProps } from './StrictReactDOMListItemProps';
 import type { StrictReactDOMOptionProps } from './StrictReactDOMOptionProps';
 import type { StrictReactDOMSelectProps } from './StrictReactDOMSelectProps';
+import type { StrictReactDOMSvgProps } from './StrictReactDOMSvgProps';
 import type { StrictReactDOMTextAreaProps } from './StrictReactDOMTextAreaProps';
 
 export type StrictProps = Readonly<{
@@ -29,5 +30,6 @@ export type StrictProps = Readonly<{
   ...StrictReactDOMListItemProps,
   ...StrictReactDOMOptionProps,
   ...StrictReactDOMSelectProps,
+  ...StrictReactDOMSvgProps,
   ...StrictReactDOMTextAreaProps
 }>;
