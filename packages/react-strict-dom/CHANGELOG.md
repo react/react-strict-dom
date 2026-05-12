@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+### Breaking changes
+
+* [Native] Bumped `react-native` peer dependency to `>=0.82.0`. The native build now relies on the stable DOM Node APIs shipped in React Native 0.82.
+
+### Internal
+
+* [Native] `useStrictDOMElement` now wraps the underlying React Native host node in a thin `Proxy` instead of cloning it via `Object.create` and `Object.defineProperties`. Strict-dom continues to override `nodeName` (returns uppercase DOM names like `'DIV'`), to scale `getBoundingClientRect` and length properties by the active viewport scale, to polyfill `<img>.complete`, and to polyfill the `setSelectionRange` / `selectionStart` / `selectionEnd` trio on `<input>` / `<textarea>`. All other DOM Node properties and methods (`ownerDocument`, `getRootNode`, `children`, `childNodes`, `parentNode`, `parentElement`, `contains`, `compareDocumentPosition`, pointer-capture methods, legacy `measure*`, etc.) now pass through directly from the underlying RN node.
+
 ## 0.0.55 (Jan 9, 2026)
 
 ### New features
