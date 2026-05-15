@@ -39,10 +39,12 @@ const lengthPropertySet: ReadonlySet<string> = new Set([
 ]);
 
 /**
- * Wraps a React Native host node in a Proxy so strict-dom can override the
- * remaining DOM APIs it polyfills while forwarding RN's DOM Node APIs.
- * Methods are bound to the host node so RN internals receive the expected
- * `this` value.
+ * Uses the RN host node as the wrapper's prototype so non-overridden reads
+ * resolve via the prototype chain — including the symbol-keyed internals
+ * RN's prototype methods consult via `this`. Keeps a static hidden class so
+ * Hermes can optimize access; a Proxy cannot.
+ *
+ * Descendants are not wrapped; values read after traversal are not scaled.
  */
 function getOrCreateStrictRef(
   node: Node,
@@ -54,72 +56,87 @@ function getOrCreateStrictRef(
     return ref;
   }
 
-  const isImg = tagName === 'img';
-  const isTextInput = tagName === 'input' || tagName === 'textarea';
-  const upperTagName = tagName.toUpperCase();
-  const scaled = (n: number) => n / viewportScale;
+  const strictRef: Node = Object.create(node);
 
-  // $FlowFixMe[unclear-type] - ProxyHandler is not in Flow's built-in types.
-  const handler: any = {
-    get(target, prop, _receiver) {
-      if (prop === 'nodeName') {
-        return upperTagName;
-      }
-      if (prop === 'getBoundingClientRect') {
-        const fn = target.getBoundingClientRect;
-        if (typeof fn !== 'function') {
-          return fn;
-        }
-        return () => {
-          const rect = fn.call(target);
-          if (viewportScale !== 1) {
-            return new DOMRect(
-              scaled(rect.x),
-              scaled(rect.y),
-              scaled(rect.width),
-              scaled(rect.height)
-            );
-          }
-          return rect;
-        };
-      }
-      if (
-        viewportScale !== 1 &&
-        typeof prop === 'string' &&
-        lengthPropertySet.has(prop)
-      ) {
-        const raw = target[prop];
-        return typeof raw === 'number' ? scaled(raw) : raw;
-      }
-      if (isImg && prop === 'complete') {
-        return target.complete ?? false;
-      }
-      if (isTextInput) {
-        if (prop === 'setSelectionRange' && target.setSelectionRange == null) {
-          return (a: number, b: number) => {
-            target.setSelection(a, b);
-            target._selectionStart = a;
-            target._selectionEnd = b;
-          };
-        }
-        if (prop === 'selectionStart' && target.selectionStart == null) {
-          return target._selectionStart ?? 0;
-        }
-        if (prop === 'selectionEnd' && target.selectionEnd == null) {
-          return target._selectionEnd ?? 0;
-        }
-      }
-      // $FlowFixMe[unclear-type]
-      const value: any = Reflect.get(target, prop, target);
-      if (typeof value === 'function') {
-        return value.bind(target);
-      }
-      return value;
+  // $FlowFixMe[prop-missing]
+  Object.defineProperty(strictRef, 'nodeName', {
+    value: tagName.toUpperCase(),
+    configurable: true
+  });
+
+  if (viewportScale !== 1) {
+    const scale = (n: number) => n / viewportScale;
+
+    if (typeof node.getBoundingClientRect === 'function') {
+      // $FlowFixMe[prop-missing]
+      Object.defineProperty(strictRef, 'getBoundingClientRect', {
+        value: () => {
+          const rect = node.getBoundingClientRect();
+          return new DOMRect(
+            scale(rect.x),
+            scale(rect.y),
+            scale(rect.width),
+            scale(rect.height)
+          );
+        },
+        configurable: true
+      });
     }
-  };
 
-  // $FlowFixMe[invalid-constructor] - Flow types Proxy strictly here.
-  const strictRef: Node = new Proxy(node, handler);
+    for (const prop of lengthPropertySet) {
+      if (prop in node) {
+        // $FlowFixMe[prop-missing]
+        Object.defineProperty(strictRef, prop, {
+          get() {
+            const value = node[prop];
+            return typeof value === 'number' ? scale(value) : value;
+          },
+          configurable: true
+        });
+      }
+    }
+  }
+
+  if (tagName === 'img') {
+    // $FlowFixMe[prop-missing]
+    Object.defineProperty(strictRef, 'complete', {
+      get() {
+        return node.complete ?? false;
+      },
+      configurable: true
+    });
+  } else if (tagName === 'input' || tagName === 'textarea') {
+    if (node.setSelectionRange == null) {
+      // $FlowFixMe[prop-missing]
+      Object.defineProperty(strictRef, 'setSelectionRange', {
+        value: (a: number, b: number) => {
+          node.setSelection(a, b);
+          node._selectionStart = a;
+          node._selectionEnd = b;
+        },
+        configurable: true
+      });
+    }
+    if (node.selectionStart == null) {
+      // $FlowFixMe[prop-missing]
+      Object.defineProperty(strictRef, 'selectionStart', {
+        get() {
+          return node._selectionStart ?? 0;
+        },
+        configurable: true
+      });
+    }
+    if (node.selectionEnd == null) {
+      // $FlowFixMe[prop-missing]
+      Object.defineProperty(strictRef, 'selectionEnd', {
+        get() {
+          return node._selectionEnd ?? 0;
+        },
+        configurable: true
+      });
+    }
+  }
+
   memoizedStrictRefs.set(node, strictRef);
   return strictRef;
 }
@@ -130,33 +147,27 @@ export function useStrictDOMElement<T>(
 ): CallbackRef<T> {
   const { scale: viewportScale } = useViewportScale();
 
-  const elementCallback = useElementCallback(
+  return useElementCallback(
     React.useCallback(
       // $FlowFixMe[unclear-type]
       (node: any) => {
-        if (ref == null) {
-          return undefined;
-        } else {
-          const strictRef = getOrCreateStrictRef(node, tagName, viewportScale);
-          if (typeof ref === 'function') {
-            // $FlowFixMe[incompatible-type] - Flow does not understand ref cleanup.
-            const cleanup: void | (() => void) = ref(strictRef);
-            return typeof cleanup === 'function'
-              ? cleanup
-              : () => {
-                  ref(null);
-                };
-          } else {
-            ref.current = strictRef;
-            return () => {
-              ref.current = null;
-            };
-          }
+        if (ref == null) return undefined;
+        const strictRef = getOrCreateStrictRef(node, tagName, viewportScale);
+        if (typeof ref === 'function') {
+          // $FlowFixMe[incompatible-type] - Flow does not understand ref cleanup.
+          const cleanup: void | (() => void) = ref(strictRef);
+          return typeof cleanup === 'function'
+            ? cleanup
+            : () => {
+                ref(null);
+              };
         }
+        ref.current = strictRef;
+        return () => {
+          ref.current = null;
+        };
       },
       [ref, tagName, viewportScale]
     )
   );
-
-  return elementCallback;
 }

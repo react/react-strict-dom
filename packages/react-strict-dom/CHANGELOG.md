@@ -8,7 +8,7 @@
 
 ### Internal
 
-* [Native] `useStrictDOMElement` now wraps the underlying React Native host node in a thin `Proxy` instead of cloning it via `Object.create` and `Object.defineProperties`. Strict-dom continues to override `nodeName` (returns uppercase DOM names like `'DIV'`), to scale `getBoundingClientRect` and length properties by the active viewport scale, to polyfill `<img>.complete`, and to polyfill the `setSelectionRange` / `selectionStart` / `selectionEnd` trio on `<input>` / `<textarea>`. All other DOM Node properties and methods (`ownerDocument`, `getRootNode`, `children`, `childNodes`, `parentNode`, `parentElement`, `contains`, `compareDocumentPosition`, pointer-capture methods, legacy `measure*`, etc.) now pass through directly from the underlying RN node.
+* [Native] `useStrictDOMElement` now wraps the RN host node via `Object.create(node)` and defines only strict-dom's overrides as own properties. Non-overridden reads resolve through the prototype chain to the real node, keeping a static hidden class Hermes can optimize. Overrides unchanged: uppercase `nodeName`, viewport-scaled `getBoundingClientRect` and length properties, `<img>.complete`, and `setSelectionRange` / `selectionStart` / `selectionEnd` on `<input>` / `<textarea>`.
 
 ## 0.0.55 (Jan 9, 2026)
 
