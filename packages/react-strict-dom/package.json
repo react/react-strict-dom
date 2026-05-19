@@ -54,7 +54,7 @@
     "react": "~19.0.0",
     "react-dom": "~19.0.0",
     "react-test-renderer": "~19.0.0",
-    "rollup": "^4.22.4"
+    "rollup": "^4.59.0"
   },
   "peerDependencies": {
     "react": "^19.0.0",
