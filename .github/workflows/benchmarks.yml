@@ -2,6 +2,9 @@ name: benchmarks
 
 on: [pull_request]
 
+permissions:
+  contents: read
+
 jobs:
   size:
     runs-on: ubuntu-latest
@@ -33,24 +36,16 @@ jobs:
         npm run size -w benchmarks -- -o ${{ env.PATCH_JSON }}
         echo "Ran successfully on patch branch"
     - name: 'Collect results'
-      id: collect
       run: |
-        echo "table<<EOF" >> $GITHUB_OUTPUT
-        node packages/benchmarks/compare.js ${{ env.BASE_JSON }} ${{ env.PATCH_JSON }} >> markdown
-        cat markdown >> $GITHUB_OUTPUT
-        echo "EOF" >> $GITHUB_OUTPUT
-    - name: 'Post comment'
-      uses: edumserrano/find-create-or-update-comment@v3
+        mkdir -p benchmark-output
+        echo "${{ github.event.pull_request.number }}" > benchmark-output/pr-number.txt
+        node packages/benchmarks/compare.js ${{ env.BASE_JSON }} ${{ env.PATCH_JSON }} > benchmark-output/table.md
+    - name: 'Upload results'
+      uses: actions/upload-artifact@v4
       with:
-        issue-number: ${{ github.event.pull_request.number }}
-        body-includes: '<!-- workflow-benchmarks-size-data -->'
-        comment-author: 'github-actions[bot]'
-        body: |
-          <!-- workflow-benchmarks-size-data -->
-          ### workflow: benchmarks/size
-          Comparison of minified (terser) and compressed (brotli) size results, measured in bytes. Smaller is better.
-          ${{ steps.collect.outputs.table }}
-        edit-mode: replace
+        name: benchmarks-size
+        path: benchmark-output/
+        retention-days: 1
 
   perf:
     runs-on: ubuntu-latest
@@ -82,21 +77,13 @@ jobs:
         npm run perf -w benchmarks -- -o ${{ env.PATCH_JSON }}
         echo "Ran successfully on patch branch"
     - name: 'Collect results'
-      id: collect
       run: |
-        echo "table<<EOF" >> $GITHUB_OUTPUT
-        node packages/benchmarks/compare.js ${{ env.BASE_JSON }} ${{ env.PATCH_JSON }} >> markdown
-        cat markdown >> $GITHUB_OUTPUT
-        echo "EOF" >> $GITHUB_OUTPUT
-    - name: 'Post comment'
-      uses: edumserrano/find-create-or-update-comment@v3
+        mkdir -p benchmark-output
+        echo "${{ github.event.pull_request.number }}" > benchmark-output/pr-number.txt
+        node packages/benchmarks/compare.js ${{ env.BASE_JSON }} ${{ env.PATCH_JSON }} > benchmark-output/table.md
+    - name: 'Upload results'
+      uses: actions/upload-artifact@v4
       with:
-        issue-number: ${{ github.event.pull_request.number }}
-        body-includes: '<!-- workflow-benchmarks-perf-data -->'
-        comment-author: 'github-actions[bot]'
-        body: |
-          <!-- workflow-benchmarks-perf-data -->
-          ### workflow: benchmarks/perf (native)
-          Comparison of performance test results, measured in operations per second. Larger is better.
-          ${{ steps.collect.outputs.table }}
-        edit-mode: replace
+        name: benchmarks-perf
+        path: benchmark-output/
+        retention-days: 1
