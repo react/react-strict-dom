@@ -93,6 +93,20 @@ const nativeConfigs = [
       format: 'es'
     },
     plugins: [...sharedPlugins]
+  },
+  {
+    external: [
+      'react',
+      'react/jsx-runtime',
+      /^react-native.*/,
+      '@stylexjs/stylex'
+    ],
+    input: path.join(__dirname, '../src/native/unstable_internal.js'),
+    output: {
+      file: path.join(__dirname, '../dist/native/unstable_internal.js'),
+      format: 'es'
+    },
+    plugins: [...sharedPlugins]
   }
 ];
 

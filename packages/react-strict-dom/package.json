@@ -16,6 +16,12 @@
     "./babel-preset": "./babel/preset.js",
     "./postcss-plugin": "./postcss/plugin.js",
     "./runtime": "./dist/web/runtime.js",
+    "./unstable_internal": {
+      "react-native": {
+        "types": "./dist/native/unstable_internal.d.ts",
+        "default": "./dist/native/unstable_internal.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "files": [
