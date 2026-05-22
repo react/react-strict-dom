@@ -1,0 +1,65 @@
+name: benchmarks-comment
+
+# https://securitylab.github.com/research/github-actions-preventing-pwn-requests/
+
+on:
+  workflow_run:
+    workflows: ['benchmarks']
+    types: [completed]
+
+permissions:
+  pull-requests: write
+  contents: read
+  actions: read
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - artifact: benchmarks-size
+            marker: '<!-- workflow-benchmarks-size-data -->'
+            heading: 'workflow: benchmarks/size'
+            description: 'Comparison of minified (terser) and compressed (brotli) size results, measured in bytes. Smaller is better.'
+          - artifact: benchmarks-perf
+            marker: '<!-- workflow-benchmarks-perf-data -->'
+            heading: 'workflow: benchmarks/perf (native)'
+            description: 'Comparison of performance test results, measured in operations per second. Larger is better.'
+    steps:
+    - name: 'Download artifact'
+      uses: actions/download-artifact@v5
+      with:
+        name: ${{ matrix.artifact }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        run-id: ${{ github.event.workflow_run.id }}
+    - name: 'Read PR number and table'
+      id: read
+      run: |
+        # Validate the PR number is a positive integer to avoid any injection
+        # via the artifact (artifact contents come from a fork-triggered job).
+        pr_number="$(cat pr-number.txt | tr -d '[:space:]')"
+        if ! [[ "$pr_number" =~ ^[0-9]+$ ]]; then
+          echo "Invalid PR number in artifact: $pr_number" >&2
+          exit 1
+        fi
+        echo "pr-number=$pr_number" >> "$GITHUB_OUTPUT"
+        {
+          echo 'table<<MARKDOWN_EOF'
+          cat table.md
+          echo 'MARKDOWN_EOF'
+        } >> "$GITHUB_OUTPUT"
+    - name: 'Post comment'
+      uses: edumserrano/find-create-or-update-comment@v3
+      with:
+        issue-number: ${{ steps.read.outputs.pr-number }}
+        body-includes: ${{ matrix.marker }}
+        comment-author: 'github-actions[bot]'
+        body: |
+          ${{ matrix.marker }}
+          ### ${{ matrix.heading }}
+          ${{ matrix.description }}
+          ${{ steps.read.outputs.table }}
+        edit-mode: replace
