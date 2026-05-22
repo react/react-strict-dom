@@ -7,4 +7,6 @@
  * @flow strict
  */
 
-export type ReactRef<T> = { -current: T | null, ... } | ((T | null) => unknown);
+export type ReactRef<T> =
+  | { writeonly current: T | null, ... }
+  | ((T | null) => unknown);

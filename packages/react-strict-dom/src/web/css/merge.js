@@ -21,7 +21,7 @@ type InlineStyle = Readonly<{
   [key: string]: string
 }>;
 
-type StylesArray<+T> = T | ReadonlyArray<StylesArray<T>>;
+type StylesArray<out T> = T | ReadonlyArray<StylesArray<T>>;
 
 type Props = Readonly<{
   className?: string,

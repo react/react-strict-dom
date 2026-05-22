@@ -10,5 +10,5 @@
 import * as React from 'react';
 
 export type CallbackRef<T> = (node: T | null) => unknown;
-export type ObjectRef<T> = { -current: T, ... };
+export type ObjectRef<T> = { writeonly current: T, ... };
 export type Ref<T> = CallbackRef<T> | ObjectRef<T | null> | React.RefObject<T>;
