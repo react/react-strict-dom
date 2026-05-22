@@ -1,5 +1,5 @@
 [version]
-0.307.1
+0.314.0
 
 [ignore]
 .*/malformed_package_json/.*
@@ -18,7 +18,7 @@ module.system.node.resolve_dirname=flow_modules
 module.system.node.resolve_dirname=node_modules
 react.runtime=automatic
 
-experimental.ts_utility_syntax=true
+experimental.allow_variance_keywords=true
 experimental.deprecated_utilities='$ReadOnlyArray' -> '<PROJECT_ROOT>/'
 experimental.deprecated_utilities='$NonMaybeType' -> '<PROJECT_ROOT>/'
 experimental.deprecated_utilities='$ReadOnly' -> '<PROJECT_ROOT>/'
