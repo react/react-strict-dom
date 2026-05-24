@@ -4,11 +4,11 @@
 
 ### Breaking changes
 
-* [Native] Bumped `react-native` peer dependency to `>=0.82.0`. The native build now relies on the stable DOM Node APIs shipped in React Native 0.82.
+* [Native] React Strict DOM and React Strict Animated now require `react-native >=0.82.0` for native builds that use RN DOM Node APIs.
 
 ### Internal
 
-* [Native] `useStrictDOMElement` now wraps the RN host node via `Object.create(node)` and defines only strict-dom's overrides as own properties. Non-overridden reads resolve through the prototype chain to the real node, keeping a static hidden class Hermes can optimize. Overrides unchanged: uppercase `nodeName`, viewport-scaled `getBoundingClientRect` and length properties, `<img>.complete`, and `setSelectionRange` / `selectionStart` / `selectionEnd` on `<input>` / `<textarea>`.
+* [Native] `useStrictDOMElement` now wraps the RN host node with `Object.create(node)` and defines only strict-dom overrides as own properties.
 
 ## 0.0.55 (Jan 9, 2026)
 
