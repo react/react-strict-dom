@@ -50,7 +50,7 @@ function _create<S extends { +[string]: { +[string]: unknown } }>(styles: S): {
 }
 export const create: IStyleX['create'] = _create as $FlowFixMe;
 
-const RE_CAPTURE_VAR_NAME = /^var\(--(.*)\)$/;
+const VAR_FUNCTION_PREFIX = 'var(--';
 export const createTheme = (
   baseTokens: Tokens,
   overrides: CustomProperties
@@ -58,7 +58,10 @@ export const createTheme = (
   const result: MutableCustomProperties = { $$theme: 'theme' };
   for (const key in baseTokens) {
     const varName: string = baseTokens[key];
-    const normalizedKey = varName.replace(RE_CAPTURE_VAR_NAME, '$1');
+    const normalizedKey =
+      varName.startsWith(VAR_FUNCTION_PREFIX) && varName.endsWith(')')
+        ? varName.slice(VAR_FUNCTION_PREFIX.length, -1)
+        : varName;
     result[normalizedKey] = overrides[key];
   }
   return result;
