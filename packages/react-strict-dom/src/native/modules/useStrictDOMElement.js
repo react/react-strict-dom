@@ -11,7 +11,6 @@ import type { CallbackRef } from '../../types/react';
 
 import * as React from 'react';
 
-import { errorMsg } from '../../shared/logUtils';
 import { useElementCallback } from '../../shared/useElementCallback';
 import { useViewportScale } from './ContextViewportScale';
 
@@ -22,9 +21,9 @@ type Options = {
 // $FlowFixMe[unclear-type]
 type Node = any;
 
-const memoizedStrictRefs: WeakMap<Node, unknown> = new WeakMap();
+const memoizedStrictRefs: WeakMap<Node, Node> = new WeakMap();
 
-const lengthPropertySet = new Set([
+const lengthPropertySet: ReadonlySet<string> = new Set([
   'clientHeight',
   'clientLeft',
   'clientTop',
@@ -40,132 +39,106 @@ const lengthPropertySet = new Set([
 ]);
 
 /**
- * Copying the node is necessary because getBoundingClientRect is replaced to
- * polyfill viewport scaling. It means we have to forward private fields
- * to improve compatibility with most React Native code.
+ * Uses the RN host node as the wrapper's prototype so non-overridden reads
+ * resolve via the prototype chain — including the symbol-keyed internals
+ * RN's prototype methods consult via `this`. Keeps a static hidden class so
+ * Hermes can optimize access; a Proxy cannot.
  *
- * We're not modifying child nodes to account for viewport scaling. Reading
- * values from those nodes after traversal is not recommended.
+ * Descendants are not wrapped; values read after traversal are not scaled.
  */
 function getOrCreateStrictRef(
   node: Node,
   tagName: string,
   viewportScale: number
-) {
+): Node {
   const ref = memoizedStrictRefs.get(node);
   if (ref != null) {
     return ref;
-  } else {
-    try {
-      // Create object with prototype chain intact (preserves instanceof)
-      const strictRef = Object.create(Object.getPrototypeOf(node));
+  }
 
-      // Copy all own properties including React Native internals
-      const descriptors = Object.getOwnPropertyDescriptors(node);
-      Object.defineProperties(strictRef, descriptors);
+  const strictRef: Node = Object.create(node);
 
-      const scale = (number: number) => number / viewportScale;
+  // $FlowFixMe[prop-missing]
+  Object.defineProperty(strictRef, 'nodeName', {
+    value: tagName.toUpperCase(),
+    configurable: true
+  });
 
-      // Override getBoundingClientRect for viewport-scaling
-      const getBoundingClientRect = node?.getBoundingClientRect;
-      if (getBoundingClientRect) {
-        // $FlowFixMe[prop-missing]
-        Object.defineProperty(strictRef, 'getBoundingClientRect', {
-          value: () => {
-            const rect = getBoundingClientRect.call(node);
-            if (viewportScale !== 1) {
-              return new DOMRect(
-                scale(rect.x),
-                scale(rect.y),
-                scale(rect.width),
-                scale(rect.height)
-              );
-            }
-            return rect;
-          },
-          configurable: true,
-          writable: true
-        });
-      }
+  if (viewportScale !== 1) {
+    const scale = (n: number) => n / viewportScale;
 
-      // Override length properties for viewport-scaling
-      for (const prop of lengthPropertySet) {
-        if (prop in strictRef) {
-          if (viewportScale !== 1) {
-            // $FlowFixMe[prop-missing]
-            Object.defineProperty(strictRef, prop, {
-              get() {
-                const value = node[prop];
-                return typeof value === 'number' ? scale(value) : value;
-              }
-            });
-          }
-        }
-      }
-
+    if (typeof node.getBoundingClientRect === 'function') {
       // $FlowFixMe[prop-missing]
-      Object.defineProperty(strictRef, 'nodeName', {
-        get() {
-          return tagName.toUpperCase();
-        }
+      Object.defineProperty(strictRef, 'getBoundingClientRect', {
+        value: () => {
+          const rect = node.getBoundingClientRect();
+          return new DOMRect(
+            scale(rect.x),
+            scale(rect.y),
+            scale(rect.width),
+            scale(rect.height)
+          );
+        },
+        configurable: true
       });
-      if (tagName === 'img') {
-        // $FlowFixMe[prop-missing]
-        Object.defineProperty(strictRef, 'complete', {
-          get() {
-            if (node?.complete == null) {
-              return false;
-            } else {
-              return node.complete;
-            }
-          }
-        });
-      } else if (tagName === 'input' || tagName === 'textarea') {
-        const setSelectionRange = node?.setSelectionRange;
-        if (setSelectionRange == null) {
-          // $FlowFixMe[prop-missing]
-          Object.defineProperty(strictRef, 'setSelectionRange', {
-            value: (a: number, b: number) => {
-              node.setSelection(a, b);
-              // Update cached selection state
-              node._selectionStart = a;
-              node._selectionEnd = b;
-            },
-            configurable: true,
-            writable: true
-          });
-        }
-        const selectionStart = node?.selectionStart;
-        if (selectionStart == null) {
-          // $FlowFixMe[prop-missing]
-          Object.defineProperty(strictRef, 'selectionStart', {
-            get() {
-              return node._selectionStart ?? 0;
-            }
-          });
-        }
-        const selectionEnd = node?.selectionEnd;
-        if (selectionEnd == null) {
-          // $FlowFixMe[prop-missing]
-          Object.defineProperty(strictRef, 'selectionEnd', {
-            get() {
-              return node._selectionEnd ?? 0;
-            }
-          });
-        }
-      }
+    }
 
-      memoizedStrictRefs.set(node, strictRef);
-      return strictRef;
-    } catch (e) {
-      // Fallback to original node if copying fails
-      if (__DEV__) {
-        errorMsg('failed to create strict ref. Falling back to original node');
-        console.error(e);
+    for (const prop of lengthPropertySet) {
+      if (prop in node) {
+        // $FlowFixMe[prop-missing]
+        Object.defineProperty(strictRef, prop, {
+          get() {
+            const value = node[prop];
+            return typeof value === 'number' ? scale(value) : value;
+          },
+          configurable: true
+        });
       }
-      return node;
     }
   }
+
+  if (tagName === 'img') {
+    // $FlowFixMe[prop-missing]
+    Object.defineProperty(strictRef, 'complete', {
+      get() {
+        return node.complete ?? false;
+      },
+      configurable: true
+    });
+  } else if (tagName === 'input' || tagName === 'textarea') {
+    if (node.setSelectionRange == null) {
+      // $FlowFixMe[prop-missing]
+      Object.defineProperty(strictRef, 'setSelectionRange', {
+        value: (a: number, b: number) => {
+          node.setSelection(a, b);
+          node._selectionStart = a;
+          node._selectionEnd = b;
+        },
+        configurable: true
+      });
+    }
+    if (node.selectionStart == null) {
+      // $FlowFixMe[prop-missing]
+      Object.defineProperty(strictRef, 'selectionStart', {
+        get() {
+          return node._selectionStart ?? 0;
+        },
+        configurable: true
+      });
+    }
+    if (node.selectionEnd == null) {
+      // $FlowFixMe[prop-missing]
+      Object.defineProperty(strictRef, 'selectionEnd', {
+        get() {
+          return node._selectionEnd ?? 0;
+        },
+        configurable: true
+      });
+    }
+  }
+
+  memoizedStrictRefs.set(node, strictRef);
+  return strictRef;
 }
 
 export function useStrictDOMElement<T>(
@@ -174,33 +147,27 @@ export function useStrictDOMElement<T>(
 ): CallbackRef<T> {
   const { scale: viewportScale } = useViewportScale();
 
-  const elementCallback = useElementCallback(
+  return useElementCallback(
     React.useCallback(
       // $FlowFixMe[unclear-type]
       (node: any) => {
-        if (ref == null) {
-          return undefined;
-        } else {
-          const strictRef = getOrCreateStrictRef(node, tagName, viewportScale);
-          if (typeof ref === 'function') {
-            // $FlowFixMe[incompatible-type] - Flow does not understand ref cleanup.
-            const cleanup: void | (() => void) = ref(strictRef);
-            return typeof cleanup === 'function'
-              ? cleanup
-              : () => {
-                  ref(null);
-                };
-          } else {
-            ref.current = strictRef;
-            return () => {
-              ref.current = null;
-            };
-          }
+        if (ref == null) return undefined;
+        const strictRef = getOrCreateStrictRef(node, tagName, viewportScale);
+        if (typeof ref === 'function') {
+          // $FlowFixMe[incompatible-type] - Flow does not understand ref cleanup.
+          const cleanup: void | (() => void) = ref(strictRef);
+          return typeof cleanup === 'function'
+            ? cleanup
+            : () => {
+                ref(null);
+              };
         }
+        ref.current = strictRef;
+        return () => {
+          ref.current = null;
+        };
       },
       [ref, tagName, viewportScale]
     )
   );
-
-  return elementCallback;
 }

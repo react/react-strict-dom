@@ -26,12 +26,9 @@ type StrictProps = Readonly<{
   children?: React.Node | ((ReactNativeProps) => React.Node)
 }>;
 
-const AnimatedPressable = ReactNative.Animated.createAnimatedComponent<
-  // $FlowFixMe[invalid-component-prop]
-  React.ElementConfig<typeof ReactNative.Pressable>,
-  typeof ReactNative.Pressable
-  // $FlowFixMe[incompatible-type]
->(ReactNative.Pressable);
+const AnimatedPressable = ReactNative.Animated.createAnimatedComponent(
+  ReactNative.Pressable
+);
 
 export function createStrictDOMComponent<T, P extends StrictProps>(
   tagName: string,
