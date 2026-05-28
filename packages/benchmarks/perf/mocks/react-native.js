@@ -111,6 +111,8 @@ export const TextInput = 'TextInput';
 
 export const Text = 'Text';
 
+export const unstable_TextAncestorContext = 'TextAncestorContext';
+
 export const View = 'View';
 
 export const experimental_LayoutConformance = 'LayoutConformance';
