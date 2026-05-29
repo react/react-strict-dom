@@ -593,6 +593,66 @@ describe('<html.*> (native polyfills)', () => {
       expect(getFontSize(secondSecond)).toBe(1.5 * 3 * 16);
     });
 
+    test('inherited color from transitioned parent', () => {
+      const styles = css.create({
+        container: {
+          padding: '32px',
+          transitionProperty: 'backgroundColor, color',
+          transitionDuration: '300ms',
+          backgroundColor: {
+            default: 'blue',
+            ':active': 'darkblue'
+          },
+          color: {
+            default: 'white',
+            ':active': 'green'
+          }
+        },
+        text: {
+          fontSize: '24px',
+          color: 'inherit'
+        }
+      });
+
+      let root;
+      act(() => {
+        root = create(
+          <html.button style={styles.container}>
+            <html.span style={styles.text}>Alert Banner</html.span>
+          </html.button>
+        );
+      });
+
+      let button = root.toJSON();
+      let span = button.children[0];
+      expect(span.type).toBe('Text');
+      expect(span.props.style.color).toBe('white');
+
+      act(() => {
+        button.props.onPointerDown();
+      });
+
+      button = root.toJSON();
+      span = button.children[0];
+      expect(span.type).toBe('Animated.Text');
+      expect(span.props.style.color).toEqual({
+        inputRange: [0, 1],
+        outputRange: ['white', 'green']
+      });
+
+      act(() => {
+        button.props.onPointerUp();
+      });
+
+      button = root.toJSON();
+      span = button.children[0];
+      expect(span.type).toBe('Animated.Text');
+      expect(span.props.style.color).toEqual({
+        inputRange: [0, 1],
+        outputRange: ['green', 'white']
+      });
+    });
+
     test('inherited lineHeight (unitless)', () => {
       const styles = css.create({
         root: {

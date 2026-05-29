@@ -8,8 +8,11 @@
  */
 
 import type { CustomProperties, Style } from '../../types/styles';
-import type { ReactNativeProps } from '../../types/renderer.native';
-import type { ReactNativeStyle } from '../../types/renderer.native';
+import type {
+  ReactNativeProps,
+  ReactNativeStyle,
+  ReactNativeStyleValue
+} from '../../types/renderer.native';
 
 import * as css from '../css';
 import * as ReactNative from '../react-native';
@@ -74,6 +77,10 @@ function resolveUnitlessLineHeight(style: ReactNativeStyle): ReactNativeStyle {
     style.lineHeight = parseFloat(style.lineHeight) * fontSize;
   }
   return style;
+}
+
+function isAnimatedNode(value: ?ReactNativeStyleValue): boolean {
+  return value instanceof ReactNative.AnimatedNode;
 }
 
 /**
@@ -208,6 +215,9 @@ export function useStyleProps(
       val = inheritedValue;
     }
     if (val != null) {
+      if (isAnimatedNode(val)) {
+        styleProps.animated = true;
+      }
       hasInheritableStyle = true;
       inheritableStyle[key] = val;
       styleProps.style[key] = val;

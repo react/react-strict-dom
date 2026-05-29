@@ -17,6 +17,7 @@ export {
   Text,
   TextInput
 } from 'react-native';
+export { AnimatedNode } from './AnimatedNode';
 export { LayoutConformance } from './LayoutConformance';
 export { TextAncestorContext } from './TextAncestorContext';
 export { ViewNativeComponent } from './ViewNativeComponent';

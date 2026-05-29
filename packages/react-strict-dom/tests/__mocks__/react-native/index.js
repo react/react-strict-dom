@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { createAnimatedNode } from './Libraries/Animated/nodes/AnimatedNode';
+
 export const AccessibilityInfo = {
   addEventListener: jest.fn().mockReturnValue({ remove: jest.fn() }),
   isReduceMotionEnabled: jest.fn().mockReturnValue(Promise.resolve(false))
@@ -19,7 +21,9 @@ export const Animated = {
   Text: 'Animated.Text',
   Value: jest.fn(() => {
     return {
-      interpolate: jest.fn().mockImplementation((value) => value)
+      interpolate: jest
+        .fn()
+        .mockImplementation((value) => createAnimatedNode(value))
     };
   }),
   timing: jest.fn(() => {

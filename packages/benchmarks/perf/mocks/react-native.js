@@ -9,6 +9,8 @@
  * React Native mock for Node.js benchmarks
  */
 
+import { createAnimatedNode } from './AnimatedNode';
+
 export const AccessibilityInfo = {
   addEventListener: () => ({
     remove: () => {}
@@ -25,7 +27,7 @@ export const Animated = {
   Text: 'Animated.Text',
   Value: () => {
     return {
-      interpolate: (value) => value
+      interpolate: (value) => createAnimatedNode(value)
     };
   },
   timing: () => {
