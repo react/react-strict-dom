@@ -89,12 +89,23 @@ export function createStrictDOMComponent<T, P extends StrictProps>(
 
     // Component-specific props
 
+    // Forward `disabled` to the Pressable only when it is an explicit boolean,
+    // so that toggling `true` <-> `false` resets the native view's enabled
+    // state. On Android, re-enabling by dropping the prop (`true` -> `undefined`)
+    // leaves `accessibilityState.disabled` unset and the native `enabled` state
+    // stays false, making the Pressable unclickable. Emitting only for explicit
+    // booleans keeps elements that never opt into `disabled` unchanged; the
+    // `true` -> `undefined` transition is intentionally not covered, but a
+    // controlled `disabled` toggles `true` <-> `false`.
     if (NativeComponent === ReactNative.Pressable) {
       if (props.disabled === true) {
         // $FlowFixMe[react-rule-hook-mutation]
         nativeProps.disabled = true;
         // $FlowFixMe[react-rule-hook-mutation]
         nativeProps.focusable = false;
+      } else if (props.disabled === false) {
+        // $FlowFixMe[react-rule-hook-mutation]
+        nativeProps.disabled = false;
       }
     }
 
