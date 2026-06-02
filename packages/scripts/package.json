@@ -9,6 +9,6 @@
   },
   "dependencies": {
     "flow-api-translator": "^0.36.1",
-    "yargs": "17.7.2"
+    "yargs": "^17.7.2"
   }
 }
