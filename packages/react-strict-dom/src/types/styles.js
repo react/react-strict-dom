@@ -20,7 +20,7 @@ import typeof * as TStyleX from '@stylexjs/stylex';
 export type Style = InlineStyles;
 
 export type Styles = StyleXArray<
-  StyleXStyles<> | Theme<VarGroup<{ +[string]: unknown }>>
+  StyleXStyles<> | Theme<VarGroup<{ readonly [string]: unknown }>>
 >;
 
 export type IStyleX = Readonly<{

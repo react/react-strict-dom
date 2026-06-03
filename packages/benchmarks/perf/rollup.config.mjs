@@ -43,13 +43,6 @@ const config = [
               __dirname,
               './mocks/ViewNativeComponent.js'
             )
-          },
-          {
-            find: 'react-native/Libraries/Text/TextAncestor',
-            replacement: path.resolve(
-              __dirname,
-              './mocks/TextAncestorContext.js'
-            )
           }
         ]
       }),

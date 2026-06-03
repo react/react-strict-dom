@@ -18,11 +18,9 @@ import { mergeRefs } from '../../shared/mergeRefs';
 import { useNativeProps } from './useNativeProps';
 import { useStrictDOMElement } from './useStrictDOMElement';
 
-const AnimatedTextInput = ReactNative.Animated.createAnimatedComponent<
-  React.ElementConfig<typeof ReactNative.TextInput>,
-  typeof ReactNative.TextInput
-  // $FlowFixMe[incompatible-type]: React Native animated component typing issue
->(ReactNative.TextInput);
+const AnimatedTextInput = ReactNative.Animated.createAnimatedComponent(
+  ReactNative.TextInput
+);
 
 // $FlowFixMe[unclear-type]
 type Node = any;
@@ -250,7 +248,10 @@ export function createStrictDOMTextInputComponent<
       typeof props.children === 'function' ? (
         props.children(nativeProps)
       ) : (
+        // strict-dom's wide ReactNativeProps spreads onto RN 0.83's exact
+        // TextInputProps; harmless extras are ignored at runtime.
         // $FlowFixMe[incompatible-type]
+        // $FlowFixMe[incompatible-use]
         <NativeComponent {...nativeProps} />
       );
 

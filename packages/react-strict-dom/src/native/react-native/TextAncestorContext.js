@@ -7,5 +7,5 @@
  * @flow strict-local
  */
 
-import TextAncestorContext from 'react-native/Libraries/Text/TextAncestor';
+import { unstable_TextAncestorContext as TextAncestorContext } from 'react-native';
 export { TextAncestorContext };

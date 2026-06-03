@@ -124,7 +124,10 @@ export function createStrictDOMImageComponent<
       typeof props.children === 'function' ? (
         props.children(nativeProps)
       ) : (
+        // strict-dom's wide ReactNativeProps spreads onto RN 0.83's exact
+        // ImageProps; harmless extras are ignored at runtime.
         // $FlowFixMe[incompatible-type]
+        // $FlowFixMe[incompatible-use]
         <NativeComponent {...nativeProps} />
       );
 
