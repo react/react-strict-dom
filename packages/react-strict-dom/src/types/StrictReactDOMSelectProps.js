@@ -13,6 +13,7 @@ export type StrictReactDOMSelectProps = Readonly<{
   ...StrictReactDOMProps,
   autoComplete?: AutoComplete,
   defaultValue?: ?(Stringish | Array<Stringish>),
+  disabled?: ?boolean,
   multiple?: ?boolean,
   name?: ?string,
   required?: ?boolean,
