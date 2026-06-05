@@ -7,8 +7,8 @@
  * @flow strict
  */
 
-import type { StrictReactDOMProps } from './StrictReactDOMProps';
 import type { Styles } from './styles';
+import type { StrictReactDOMProps } from './StrictReactDOMProps';
 
 type Units = 'userSpaceOnUse' | 'objectBoundingBox';
 
@@ -82,7 +82,7 @@ type TextProps = Readonly<{
 }>;
 
 export type StrictReactDOMSvgProps = Readonly<{
-  ...StrictReactDOMProps,
+  ...Omit<StrictReactDOMProps, 'ref'>,
   ...StrictReactDOMGProps,
   height?: string | number,
   preserveAspectRatio?: string,

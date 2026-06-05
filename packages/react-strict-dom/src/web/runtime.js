@@ -157,8 +157,6 @@ const sub: StrictReactDOMPropsStyle = styles.inline;
 // $FlowFixMe[incompatible-type]
 const sup: StrictReactDOMPropsStyle = styles.inline;
 // $FlowFixMe[incompatible-type]
-const svg: StrictReactDOMPropsStyle = styles.img;
-// $FlowFixMe[incompatible-type]
 const textarea: StrictReactDOMPropsStyle = [
   styles.inlineblock,
   styles.textarea
@@ -214,7 +212,6 @@ export const defaultStyles = {
   strong: strong as typeof strong,
   sub: sub as typeof sub,
   sup: sup as typeof sup,
-  svg: svg as typeof svg,
   textarea: textarea as typeof textarea,
   u: u as typeof u,
   ul: ul as typeof ul

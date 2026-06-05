@@ -63,9 +63,11 @@ import {
   TSpan,
   Use
 } from 'react-native-svg';
-import { useNativeProps } from './useNativeProps';
-import { useStrictDOMElement } from './useStrictDOMElement';
-import * as css from '../css';
+import {
+  css,
+  useNativeProps_DO_NOT_USE as useNativeProps,
+  useStrictDOMElement_DO_NOT_USE as useStrictDOMElement
+} from 'react-strict-dom';
 
 const RE_CAPTURE_VAR_NAME = /^var\(--(.*)\)$/;
 

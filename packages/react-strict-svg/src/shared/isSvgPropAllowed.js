@@ -4,10 +4,10 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @flow strict
+ * @flow strict-local
  */
 
-import { isPropAllowed } from './isPropAllowed';
+import { isPropAllowed_DO_NOT_USE } from 'react-strict-dom';
 
 const strictAttributeSet: Set<string> = new Set([
   'children',
@@ -166,5 +166,5 @@ const strictAttributeSet: Set<string> = new Set([
 ]);
 
 export function isSvgPropAllowed(key: string): boolean {
-  return isPropAllowed(key) || strictAttributeSet.has(key);
+  return isPropAllowed_DO_NOT_USE(key) || strictAttributeSet.has(key);
 }

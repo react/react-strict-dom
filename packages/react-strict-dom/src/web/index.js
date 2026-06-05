@@ -16,8 +16,8 @@ import type {
 } from '@stylexjs/stylex';
 
 import * as html from './html';
-import * as svg from './svg';
 import * as css from '@stylexjs/stylex';
+import { isPropAllowed } from '../shared/isPropAllowed';
 
 type StyleTheme<V, T> = Theme<V, T>;
 type StyleVars<T> = VarGroup<T>;
@@ -26,4 +26,4 @@ type StylesWithout<T> = StyleXStylesWithout<T>;
 
 export type { StaticStyles, StyleTheme, StyleVars, Styles, StylesWithout };
 
-export { css, html, svg };
+export { css, html, isPropAllowed as isPropAllowed_DO_NOT_USE };

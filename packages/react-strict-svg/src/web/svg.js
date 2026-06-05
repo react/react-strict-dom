@@ -60,6 +60,7 @@ import type {
   StrictReactDOMUseProps
 } from '../types/StrictReactDOMSvgProps';
 
+// $FlowFixMe[nonstrict-import]
 import { createStrictDOMSvgComponent as createStrictSvg } from './modules/createStrictDOMSvgComponent';
 import { defaultStyles } from './runtime';
 

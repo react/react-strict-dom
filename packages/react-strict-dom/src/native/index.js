@@ -20,13 +20,15 @@ import typeof * as TStyleX from '@stylexjs/stylex';
 import * as React from 'react';
 import * as compat from './compat';
 import * as html from './html';
-import * as svg from './svg';
 import * as _css from './css';
 import { ProvideCustomProperties } from './modules/ContextCustomProperties';
 import {
   ProvideViewportScale,
   useViewportScale
 } from './modules/ContextViewportScale';
+import { useNativeProps } from './modules/useNativeProps';
+import { useStrictDOMElement } from './modules/useStrictDOMElement';
+import { isPropAllowed } from '../shared/isPropAllowed';
 
 type StyleTheme<V, T> = Theme<V, T>;
 type StyleVars<T> = VarGroup<T>;
@@ -65,6 +67,8 @@ export {
   contexts,
   css,
   html,
-  svg,
-  useViewportScale as useViewportScale_DO_NOT_USE
+  useViewportScale as useViewportScale_DO_NOT_USE,
+  useNativeProps as useNativeProps_DO_NOT_USE,
+  useStrictDOMElement as useStrictDOMElement_DO_NOT_USE,
+  isPropAllowed as isPropAllowed_DO_NOT_USE
 };
