@@ -2023,14 +2023,15 @@ describe('css.create()', () => {
           width: 'calc(2 * 1rem)'
         }
       });
-      expect(console.warn).toHaveBeenCalledWith(
+      expect(console.warn).not.toHaveBeenCalledWith(
         expect.stringContaining('React Strict DOM')
       );
       let root;
       act(() => {
         root = create(<html.span style={styles.root} />);
       });
-      expect(root.toJSON().props.style).toMatchSnapshot();
+      // calc(2 * 1rem) = 2 * 16px = 32
+      expect(root.toJSON().props.style.width).toBe(32);
     });
 
     test('currentcolor', () => {

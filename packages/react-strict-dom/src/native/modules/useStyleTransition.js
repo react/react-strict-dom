@@ -92,6 +92,53 @@ function getTransitionProperties(property: unknown): ?(string[]) {
   return null;
 }
 
+function createIdentityTransforms(
+  transforms: $ReadOnlyArray<ReactNativeTransform>
+): Array<ReactNativeTransform> {
+  return transforms.map((t) => {
+    if (t.perspective != null) {
+      return { perspective: 1 };
+    }
+    if (t.rotate != null) {
+      return { rotate: '0deg' };
+    }
+    if (t.rotateX != null) {
+      return { rotateX: '0deg' };
+    }
+    if (t.rotateY != null) {
+      return { rotateY: '0deg' };
+    }
+    if (t.rotateZ != null) {
+      return { rotateZ: '0deg' };
+    }
+    if (t.scale != null) {
+      return { scale: 1 };
+    }
+    if (t.scaleX != null) {
+      return { scaleX: 1 };
+    }
+    if (t.scaleY != null) {
+      return { scaleY: 1 };
+    }
+    if (t.scaleZ != null) {
+      return { scaleZ: 1 };
+    }
+    if (t.skewX != null) {
+      return { skewX: '0deg' };
+    }
+    if (t.skewY != null) {
+      return { skewY: '0deg' };
+    }
+    if (t.translateX != null) {
+      return { translateX: 0 };
+    }
+    if (t.translateY != null) {
+      return { translateY: 0 };
+    }
+    return t;
+  });
+}
+
 function transformsHaveSameLengthTypesAndOrder(
   transformsA: ReadonlyArray<ReactNativeTransform>,
   transformsB: ReadonlyArray<ReactNativeTransform>
@@ -177,12 +224,10 @@ function transitionStyleHasChanged(
       }
 
       // handle transform value differences
-      else if (
-        Array.isArray(prevValue) &&
-        Array.isArray(nextValue) &&
-        !transformListsAreEqual(prevValue, nextValue)
-      ) {
-        return true;
+      else if (Array.isArray(prevValue) && Array.isArray(nextValue)) {
+        if (!transformListsAreEqual(prevValue, nextValue)) {
+          return true;
+        }
       }
 
       // handle literal value differences
@@ -280,22 +325,28 @@ export function useStyleTransition(style: ReactNativeStyle): ReactNativeStyle {
     ? _timingFunction
     : null;
 
-  const transitionStyle = getTransitionProperties(
-    _transitionProperty
-  )?.reduce<ReactNativeStyle>((output, property) => {
-    const value = style[property];
-    if (isString(value) || isNumber(value) || Array.isArray(value)) {
-      output[property] = value;
-    }
-    return output;
-  }, {});
-
   const [currentStyle, setCurrentStyle] =
     React.useState<ReactNativeStyle | void>(style);
   const [previousStyle, setPreviousStyle] =
     React.useState<ReactNativeStyle | void>(undefined);
   const [animatedValue, setAnimatedValue] =
     React.useState<ReactNative.Animated.Value | void>(undefined);
+
+  const transitionStyle = getTransitionProperties(
+    _transitionProperty
+  )?.reduce<ReactNativeStyle>((output, property) => {
+    const value = style[property];
+    if (isString(value) || isNumber(value) || Array.isArray(value)) {
+      output[property] = value;
+    } else if (
+      property === 'transform' &&
+      value == null &&
+      Array.isArray(currentStyle?.[property])
+    ) {
+      output[property] = createIdentityTransforms(currentStyle[property]);
+    }
+    return output;
+  }, {});
 
   // This ref is utilized as a performance optimization so that the effect that contains the
   // animation trigger only is called when the animated value's identity changes. As far as the effect
@@ -354,7 +405,7 @@ export function useStyleTransition(style: ReactNativeStyle): ReactNativeStyle {
   }
 
   if (transitionStyleHasChanged(transitionStyle, currentStyle)) {
-    setCurrentStyle(style);
+    setCurrentStyle({ ...style, ...transitionStyle });
     setPreviousStyle(currentStyle);
     setAnimatedValue(new ReactNative.Animated.Value(0));
     // This commit will be thrown away due to the above state setters so we can bail out early
@@ -368,7 +419,17 @@ export function useStyleTransition(style: ReactNativeStyle): ReactNativeStyle {
   const outputAnimatedStyle: AnimatedStyle = Object.entries(
     transitionStyle
   ).reduce<AnimatedStyle>((animatedStyle, [property, value]) => {
-    const prevValue = previousStyle?.[property] ?? value;
+    const rawPrevValue = previousStyle?.[property];
+    let prevValue;
+    if (
+      property === 'transform' &&
+      Array.isArray(value) &&
+      !Array.isArray(rawPrevValue)
+    ) {
+      prevValue = createIdentityTransforms(value);
+    } else {
+      prevValue = rawPrevValue ?? value;
+    }
 
     if (animatedValue === undefined || prevValue === value) {
       animatedStyle[property] = value;
@@ -386,16 +447,19 @@ export function useStyleTransition(style: ReactNativeStyle): ReactNativeStyle {
       return animatedStyle;
     } else if (property === 'transform' && Array.isArray(value)) {
       const transforms = value;
-      const prevTransforms = prevValue;
+      let prevTransforms = prevValue;
 
-      // Check that there are the same number of transforms
-      if (
-        !Array.isArray(prevTransforms) ||
-        transforms.length !== prevTransforms.length
+      if (!Array.isArray(prevTransforms)) {
+        prevTransforms = createIdentityTransforms(transforms);
+      } else if (
+        transforms.length !== prevTransforms.length ||
+        !transformsHaveSameLengthTypesAndOrder(transforms, prevTransforms)
       ) {
         if (__DEV__) {
           warnMsg(
-            'The number or types of transforms must be the same before and after the transition. The transition will not animate.'
+            'The number or types of transforms must be the same before and after the transition. The transition will not animate.\n' +
+              `Before: ${JSON.stringify(prevTransforms)}\n` +
+              `After: ${JSON.stringify(transforms)}`
           );
         }
         animatedStyle[property] = transforms;
@@ -413,19 +477,6 @@ export function useStyleTransition(style: ReactNativeStyle): ReactNativeStyle {
           animatedStyle[property] = transforms;
           return animatedStyle;
         }
-      }
-
-      // Check that the transforms have the same types in the same order
-      if (!transformsHaveSameLengthTypesAndOrder(transforms, prevTransforms)) {
-        if (__DEV__) {
-          warnMsg(
-            'The types of transforms must be the same before and after the transition. The transition will not animate.\n' +
-              `Before: ${JSON.stringify(transforms)}\n` +
-              `After: ${JSON.stringify(prevTransforms)}`
-          );
-        }
-        animatedStyle[property] = transforms;
-        return animatedStyle;
       }
 
       // Animate the transforms

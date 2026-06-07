@@ -1879,10 +1879,28 @@ exports[`css.create() properties: "transition" transition with missing propertie
       "position": "static",
       "transform": [
         {
-          "translateY": 50,
+          "translateY": {
+            "inputRange": [
+              0,
+              1,
+            ],
+            "outputRange": [
+              0,
+              50,
+            ],
+          },
         },
         {
-          "rotateX": "90deg",
+          "rotateX": {
+            "inputRange": [
+              0,
+              1,
+            ],
+            "outputRange": [
+              "0deg",
+              "90deg",
+            ],
+          },
         },
       ],
     }
@@ -2005,14 +2023,6 @@ exports[`css.create() pseudo-elements ::placeholder syntax: placeholderTextColor
     "overflow": "visible",
     "position": "static",
   },
-}
-`;
-
-exports[`css.create() values: general calc() 1`] = `
-{
-  "boxSizing": "content-box",
-  "overflow": "visible",
-  "position": "static",
 }
 `;
 
