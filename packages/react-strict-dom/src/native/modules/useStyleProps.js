@@ -95,7 +95,7 @@ export function useStyleProps(
     writingDirection: dir
   } = options;
 
-  const { fontScale, height, width } = ReactNative.useWindowDimensions();
+  const { height, width } = ReactNative.useWindowDimensions();
   const colorScheme = ReactNative.useColorScheme();
   const { scale: viewportScale } = useViewportScale();
 
@@ -130,7 +130,6 @@ export function useStyleProps(
       colorScheme: colorScheme === 'unspecified' ? 'light' : colorScheme,
       customProperties: customProperties ?? emptyObject,
       focus,
-      fontScale,
       hover,
       inheritedFontSize:
         typeof inheritedFontSize === 'number' ? inheritedFontSize : undefined,

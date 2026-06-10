@@ -497,29 +497,6 @@ describe('css.create()', () => {
       expect(root.toJSON().props.style).toMatchSnapshot();
     });
 
-    describe('fontSize scaling', () => {
-      const ReactNative = require('../../src/native/react-native');
-      beforeEach(() => {
-        ReactNative.useWindowDimensions.mockReturnValue({ fontScale: 2 });
-      });
-      afterEach(() => {
-        ReactNative.useWindowDimensions.mockReturnValue({ fontScale: 1 });
-      });
-
-      test('fontScale:2', () => {
-        const styles = css.create({
-          root: {
-            fontSize: '2.5rem'
-          }
-        });
-        let root;
-        act(() => {
-          root = create(<html.span style={styles.root} />);
-        });
-        expect(root.toJSON().props.style).toMatchSnapshot();
-      });
-    });
-
     test('fontVariant', () => {
       const styles = css.create({
         root: {

@@ -2116,35 +2116,35 @@ exports[`css.create() values: length units 10 "rem" units are resolved to pixels
 exports[`css.create() values: length units 10 "vh" units are resolved to pixels: vh 1`] = `
 {
   "boxSizing": "content-box",
-  "height": NaN,
+  "height": -100,
   "position": "static",
-  "width": NaN,
+  "width": 100,
 }
 `;
 
 exports[`css.create() values: length units 10 "vmax" units are resolved to pixels: vmax 1`] = `
 {
   "boxSizing": "content-box",
-  "height": NaN,
+  "height": -200,
   "position": "static",
-  "width": NaN,
+  "width": 200,
 }
 `;
 
 exports[`css.create() values: length units 10 "vmin" units are resolved to pixels: vmin 1`] = `
 {
   "boxSizing": "content-box",
-  "height": NaN,
+  "height": -100,
   "position": "static",
-  "width": NaN,
+  "width": 100,
 }
 `;
 
 exports[`css.create() values: length units 10 "vw" units are resolved to pixels: vw 1`] = `
 {
   "boxSizing": "content-box",
-  "height": NaN,
+  "height": -200,
   "position": "static",
-  "width": NaN,
+  "width": 200,
 }
 `;

@@ -13,7 +13,7 @@ const LENGTH_REGEX = /^(-?[0-9]*[.]?[0-9]+)(em|px|rem|vh|vmax|vmin|vw)$/;
 
 type CSSLengthUnitType = 'em' | 'px' | 'rem' | 'vh' | 'vmax' | 'vmin' | 'vw';
 
-type ResolvePixelValueOptions = Readonly<{
+type ResolvePixelValueOptions = $ReadOnly<{
   fontScale: number | void,
   inheritedFontSize: ?number,
   viewportHeight: number,
@@ -54,7 +54,6 @@ export class CSSLengthUnitValue {
 
   resolvePixelValue(options: ResolvePixelValueOptions): number {
     const {
-      fontScale = 1,
       inheritedFontSize,
       viewportHeight,
       viewportScale = 1,
@@ -66,7 +65,7 @@ export class CSSLengthUnitValue {
     switch (unit) {
       case 'em': {
         if (inheritedFontSize == null) {
-          return fontScale * 16 * value * viewportScale;
+          return 16 * value * viewportScale;
         } else {
           return inheritedFontSize * value;
         }
@@ -75,7 +74,7 @@ export class CSSLengthUnitValue {
         return value * viewportScale;
       }
       case 'rem': {
-        return fontScale * 16 * value * viewportScale;
+        return 16 * value * viewportScale;
       }
       case 'vh': {
         return viewportHeight * valuePercent;

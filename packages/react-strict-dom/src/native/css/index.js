@@ -119,7 +119,6 @@ type ResolveStyleOptions = Readonly<{
   colorScheme: ?('light' | 'dark'),
   customProperties: CustomProperties,
   focus?: ?boolean,
-  fontScale: number | void,
   fontSize?: ?number,
   hover?: ?boolean,
   inheritedFontSize: ?number,
@@ -142,7 +141,6 @@ function resolveStyle(
   const {
     active,
     focus,
-    fontScale,
     fontSize: _fontSize,
     hover,
     inheritedFontSize,
@@ -183,7 +181,6 @@ function resolveStyle(
       // we use the inherited fontSize.
       if (propName === 'fontSize' || fontSize == null) {
         result[propName] = styleValue.resolvePixelValue({
-          fontScale,
           inheritedFontSize: inheritedFontSize,
           viewportHeight,
           viewportScale,
@@ -196,7 +193,6 @@ function resolveStyle(
         // used as the "inherited" value to resolve other lengths correctly.
         if (typeof fontSize === 'number') {
           result[propName] = styleValue.resolvePixelValue({
-            fontScale,
             inheritedFontSize: fontSize,
             viewportHeight,
             viewportScale,
