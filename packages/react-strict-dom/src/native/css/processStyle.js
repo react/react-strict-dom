@@ -115,9 +115,9 @@ export function processStyle(
         result[propName] = CSSUnparsedValue.parse(propName, styleValue);
         continue;
       }
-      // Polyfill support for backgroundImage using experimental API
+      // Polyfill support for backgroundImage
       else if (propName === 'backgroundImage') {
-        result.experimental_backgroundImage = styleValue;
+        result.backgroundImage = styleValue;
         continue;
       }
       // Warn for unsupported caretColor values

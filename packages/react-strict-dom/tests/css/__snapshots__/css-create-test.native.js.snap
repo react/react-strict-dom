@@ -19,7 +19,7 @@ exports[`css.create() properties animationDuration 1`] = `
 exports[`css.create() properties backgroundImage 1`] = `
 {
   "boxSizing": "content-box",
-  "experimental_backgroundImage": "linear-gradient(to bottom right, yellow, green)",
+  "backgroundImage": "linear-gradient(to bottom right, yellow, green)",
   "position": "static",
 }
 `;
