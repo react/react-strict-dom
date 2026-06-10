@@ -29,6 +29,7 @@ function reactStrictPreset(_, options = {}) {
       {
         debug: opts.debug,
         dev: opts.dev,
+        aliases: opts.aliases,
         importSources: [{ from: 'react-strict-dom', as: 'css' }],
         runtimeInjection: false,
         styleResolution: 'property-specificity',
