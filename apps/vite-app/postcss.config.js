@@ -4,10 +4,11 @@ export default {
   plugins: {
     'react-strict-dom/postcss-plugin': {
       include: [
-        'src/**/*.{js,jsx,ts,tsx}',
-        '../../node_modules/example-ui/**/*.jsx'
+        'src/**/*.{js,jsx,mjs,ts,tsx}',
+        '../../node_modules/example-ui/**/*.{js,jsx,mjs}'
       ],
-      babelConfig
+      babelConfig,
+      useLayers: true
     },
     autoprefixer: {}
   }
