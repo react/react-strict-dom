@@ -8,6 +8,7 @@
  */
 
 import type { StrictProps } from '../types/StrictProps';
+import type { StrictReactNativeMetaProps } from '../types/renderer.native';
 
 import * as React from 'react';
 
@@ -31,7 +32,9 @@ import { createStrictDOMTextInputComponent as createStrictTextInput } from './mo
  *   aria-label="label"
  *   as="text"
  * >
- *   {(nativeProps: React.PropsOf<Text>)) => (
+ *   {(nativeProps: React.PropsOf<Text>, meta) => (
+ *     // `meta.inheritedTextStyle` and `meta.resolveStyleValue` allow resolving
+ *     // CSS inheritance and `var(...)` for non-RSD host components.
  *     <Text {...nativeProps} />
  *   )}
  * </compat.native>
@@ -42,7 +45,7 @@ const defaultProps = {};
 type StrictPropsOnlyCompat<T> = {
   ...StrictProps,
   as?: 'div' | 'img' | 'input' | 'span' | 'textarea',
-  children: (nativeProps: T) => React.Node
+  children: (nativeProps: T, meta: StrictReactNativeMetaProps) => React.Node
 };
 
 const StrictText = createStrictText('span', defaultProps) as $FlowFixMe;
