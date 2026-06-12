@@ -1,4 +1,4 @@
-import babelConfig from './babel.config.js';
+import babelConfig from './babel.config.cjs';
 
 export default {
   plugins: {
