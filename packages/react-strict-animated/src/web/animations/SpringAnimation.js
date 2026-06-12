@@ -109,7 +109,7 @@ export default class SpringAnimation implements AnimatedAnimation {
       throw new Error('Damping value must be greater than 0');
     }
     if (this.#mass <= 0) {
-      throw new Error('Damping value must be greater than 0');
+      throw new Error('Mass value must be greater than 0');
     }
   }
 
