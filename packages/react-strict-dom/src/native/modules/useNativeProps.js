@@ -8,19 +8,32 @@
  */
 
 import type { CustomProperties } from '../../types/styles';
-import type { ReactNativeProps } from '../../types/renderer.native';
+import type {
+  ReactNativeProps,
+  StrictReactNativeMetaProps
+} from '../../types/renderer.native';
 import type { StrictProps as StrictPropsOriginal } from '../../types/StrictProps';
 import type { Style } from '../../types/styles';
 
+import * as ReactNative from '../react-native';
+import { CSSUnparsedValue } from '../css/typed-om/CSSUnparsedValue';
+import {
+  resolveVariableReferences,
+  stringContainsVariables
+} from '../css/customProperties';
 import { errorMsg, warnMsg } from '../../shared/logUtils';
 import { extractStyleThemes } from './extractStyleThemes';
 import { isPropAllowed } from '../../shared/isPropAllowed';
 import { useCustomProperties } from './ContextCustomProperties';
 import { useStyleProps } from './useStyleProps';
 
+export type ResolveStyleValue = (value: string) => string | number | null;
+
 type StrictProps = Readonly<{
   ...StrictPropsOriginal,
-  children?: React.Node | ((ReactNativeProps) => React.Node)
+  children?:
+    | React.Node
+    | ((ReactNativeProps, StrictReactNativeMetaProps) => React.Node)
 }>;
 
 /**
@@ -83,6 +96,7 @@ type OptionsType = {|
 |};
 type ReturnType = {|
   customProperties: ?CustomProperties,
+  resolveStyleValue: ResolveStyleValue,
   nativeProps: ReactNativeProps,
   inheritableStyle: ?Style
 |};
@@ -157,6 +171,19 @@ export function useNativeProps(
   const [extractedStyle, customPropertiesFromThemes] =
     extractStyleThemes(renderStyle);
   const customProperties = useCustomProperties(customPropertiesFromThemes);
+
+  const colorScheme = ReactNative.useColorScheme();
+  const resolveStyleValue: ResolveStyleValue = (value) => {
+    if (typeof value !== 'string' || !stringContainsVariables(value)) {
+      return value;
+    }
+    return resolveVariableReferences(
+      'styleValue',
+      CSSUnparsedValue.parse('styleValue', value),
+      customProperties,
+      colorScheme === 'dark' ? 'dark' : 'light'
+    );
+  };
 
   const { nativeProps, inheritableStyle } = useStyleProps(extractedStyle, {
     customProperties,
@@ -440,6 +467,7 @@ export function useNativeProps(
   return {
     customProperties:
       customPropertiesFromThemes != null ? customProperties : null,
+    resolveStyleValue,
     nativeProps,
     inheritableStyle
   };

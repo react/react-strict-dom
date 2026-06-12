@@ -180,6 +180,70 @@ describe('<compat.native>', () => {
     expect(root.toJSON()).toMatchSnapshot('nested');
   });
 
+  test('exposes inheritedTextStyle (resolved inherited color) to the function child', () => {
+    const styles = css.create({
+      red: { color: 'red' }
+    });
+
+    let captured;
+    act(() => {
+      create(
+        <html.p style={styles.red}>
+          <compat.native>
+            {(nativeProps, meta) => {
+              captured = meta;
+              return <View {...nativeProps} />;
+            }}
+          </compat.native>
+        </html.p>
+      );
+    });
+    expect(captured.inheritedTextStyle.color).toBe('red');
+  });
+
+  test('own inheritable style overrides inherited in inheritedTextStyle', () => {
+    const ancestor = css.create({ red: { color: 'red' } });
+    const own = css.create({ green: { color: 'green' } });
+
+    let captured;
+    act(() => {
+      create(
+        <html.p style={ancestor.red}>
+          <compat.native style={own.green}>
+            {(nativeProps, meta) => {
+              captured = meta;
+              return <View {...nativeProps} />;
+            }}
+          </compat.native>
+        </html.p>
+      );
+    });
+    expect(captured.inheritedTextStyle.color).toBe('green');
+  });
+
+  test('exposes resolveStyleValue so var(...) can be resolved on host-only props', () => {
+    const vars = css.defineVars({ brand: 'blue' });
+    const theme = css.createTheme(vars, { brand: 'magenta' });
+
+    let captured;
+    act(() => {
+      create(
+        <html.div style={theme}>
+          <compat.native>
+            {(nativeProps, meta) => {
+              captured = meta;
+              return <View {...nativeProps} />;
+            }}
+          </compat.native>
+        </html.div>
+      );
+    });
+    // a literal value is returned unchanged
+    expect(captured.resolveStyleValue('red')).toBe('red');
+    // a theme token resolves through the cascade
+    expect(captured.resolveStyleValue(vars.brand)).toBe('magenta');
+  });
+
   test('styled', () => {
     const styles = css.create({
       block: {

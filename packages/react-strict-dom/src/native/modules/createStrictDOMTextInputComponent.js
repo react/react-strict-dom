@@ -15,6 +15,8 @@ import * as ReactNative from '../react-native';
 
 import { errorMsg } from '../../shared/logUtils';
 import { mergeRefs } from '../../shared/mergeRefs';
+import { useInheritedStyles } from './ContextInheritedStyles';
+import { flattenStyle } from './flattenStyle';
 import { useNativeProps } from './useNativeProps';
 import { useStrictDOMElement } from './useStrictDOMElement';
 
@@ -76,11 +78,21 @@ export function createStrictDOMTextInputComponent<
      * Resolve global HTML and style props
      */
 
-    const { nativeProps } = useNativeProps(defaultProps, props, {
-      provideInheritableStyle: false,
-      withInheritedStyle: false,
-      withTextStyle: true
-    });
+    const { resolveStyleValue, nativeProps, inheritableStyle } = useNativeProps(
+      defaultProps,
+      props,
+      {
+        provideInheritableStyle: false,
+        withInheritedStyle: false,
+        withTextStyle: true
+      }
+    );
+
+    const ancestorInheritedStyle = useInheritedStyles();
+    const inheritedTextStyle = flattenStyle([
+      ancestorInheritedStyle,
+      inheritableStyle
+    ]);
 
     // Tag-specific props
 
@@ -246,7 +258,7 @@ export function createStrictDOMTextInputComponent<
 
     const element =
       typeof props.children === 'function' ? (
-        props.children(nativeProps)
+        props.children(nativeProps, { inheritedTextStyle, resolveStyleValue })
       ) : (
         // strict-dom's wide ReactNativeProps spreads onto RN 0.83's exact
         // TextInputProps; harmless extras are ignored at runtime.

@@ -8,20 +8,27 @@
  */
 
 import type { ReactNativeProps } from '../../types/renderer.native';
+import type { StrictReactNativeMetaProps } from '../../types/renderer.native';
 import type { StrictProps as StrictPropsOriginal } from '../../types/StrictProps';
 
 import * as React from 'react';
 import * as ReactNative from '../react-native';
 
 import { ProvideCustomProperties } from './ContextCustomProperties';
-import { ProvideInheritedStyles } from './ContextInheritedStyles';
+import {
+  ProvideInheritedStyles,
+  useInheritedStyles
+} from './ContextInheritedStyles';
+import { flattenStyle } from './flattenStyle';
 import { errorMsg } from '../../shared/logUtils';
 import { useNativeProps } from './useNativeProps';
 import { useStrictDOMElement } from './useStrictDOMElement';
 
 type StrictProps = Readonly<{
   ...StrictPropsOriginal,
-  children?: React.Node | ((ReactNativeProps) => React.Node)
+  children?:
+    | React.Node
+    | ((ReactNativeProps, StrictReactNativeMetaProps) => React.Node)
 }>;
 
 function hasElementChildren(children: unknown): boolean {
@@ -44,19 +51,26 @@ export function createStrictDOMTextComponent<T, P extends StrictProps>(
      * Resolve global HTML and style props
      */
 
-    const { customProperties, nativeProps, inheritableStyle } = useNativeProps(
-      defaultProps,
-      props,
-      {
-        provideInheritableStyle:
-          tagName !== 'br' ||
-          // $FlowFixMe[invalid-compare]
-          tagName !== 'option' ||
-          hasElementChildren(props.children),
-        withInheritedStyle: true,
-        withTextStyle: true
-      }
-    );
+    const {
+      customProperties,
+      resolveStyleValue,
+      nativeProps,
+      inheritableStyle
+    } = useNativeProps(defaultProps, props, {
+      provideInheritableStyle:
+        tagName !== 'br' ||
+        // $FlowFixMe[invalid-compare]
+        tagName !== 'option' ||
+        hasElementChildren(props.children),
+      withInheritedStyle: true,
+      withTextStyle: true
+    });
+
+    const ancestorInheritedStyle = useInheritedStyles();
+    const inheritedTextStyle = flattenStyle([
+      ancestorInheritedStyle,
+      inheritableStyle
+    ]);
 
     // Tag-specific props
 
@@ -128,7 +142,7 @@ export function createStrictDOMTextComponent<T, P extends StrictProps>(
 
     let element: React.Node =
       typeof props.children === 'function' ? (
-        props.children(nativeProps)
+        props.children(nativeProps, { inheritedTextStyle, resolveStyleValue })
       ) : (
         // $FlowFixMe[incompatible-type]
         <NativeComponent {...nativeProps} />

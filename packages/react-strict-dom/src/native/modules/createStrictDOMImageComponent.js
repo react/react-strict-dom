@@ -13,6 +13,8 @@ import * as React from 'react';
 import * as ReactNative from '../react-native';
 
 import { useNativeProps } from './useNativeProps';
+import { useInheritedStyles } from './ContextInheritedStyles';
+import { flattenStyle } from './flattenStyle';
 import { useStrictDOMElement } from './useStrictDOMElement';
 import * as css from '../css';
 
@@ -52,11 +54,21 @@ export function createStrictDOMImageComponent<
       ]
     };
 
-    const { nativeProps } = useNativeProps(defaultProps, props, {
-      provideInheritableStyle: false,
-      withInheritedStyle: false,
-      withTextStyle: false
-    });
+    const { resolveStyleValue, nativeProps, inheritableStyle } = useNativeProps(
+      defaultProps,
+      props,
+      {
+        provideInheritableStyle: false,
+        withInheritedStyle: false,
+        withTextStyle: false
+      }
+    );
+
+    const ancestorInheritedStyle = useInheritedStyles();
+    const inheritedTextStyle = flattenStyle([
+      ancestorInheritedStyle,
+      inheritableStyle
+    ]);
 
     // Tag-specific props
 
@@ -122,7 +134,7 @@ export function createStrictDOMImageComponent<
 
     const element: React.Node =
       typeof props.children === 'function' ? (
-        props.children(nativeProps)
+        props.children(nativeProps, { inheritedTextStyle, resolveStyleValue })
       ) : (
         // strict-dom's wide ReactNativeProps spreads onto RN 0.83's exact
         // ImageProps; harmless extras are ignored at runtime.

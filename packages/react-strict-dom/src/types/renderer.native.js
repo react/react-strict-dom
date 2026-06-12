@@ -32,6 +32,7 @@ import type {
   // $FlowFixMe[nonstrict-import]
   ViewProps
 } from 'react-native/Libraries/Components/View/ViewPropTypes';
+import type { Style } from './styles';
 
 type ReactNativeProps = {
   accessible?: ViewProps['accessible'],
@@ -147,11 +148,17 @@ type ReactNativeStyleValue =
 
 type ReactNativeStyle = { [string]: ?ReactNativeStyleValue };
 
+type StrictReactNativeMetaProps = {
+  +inheritedTextStyle: Style,
+  +resolveStyleValue: (value: string) => string | number | null
+};
+
 export type {
   CompositeAnimation,
   ReactNativeProps,
   ReactNativeStyle,
   ReactNativeStyleValue,
   ReactNativeTransform,
+  StrictReactNativeMetaProps,
   SyntheticEvent
 };
