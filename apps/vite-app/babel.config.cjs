@@ -1,6 +1,6 @@
 const dev = process.env.NODE_ENV !== 'production';
 
-export default {
+module.exports = {
   parserOpts: {
     plugins: ['typescript', 'jsx']
   },
