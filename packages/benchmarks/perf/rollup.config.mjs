@@ -43,6 +43,10 @@ const config = [
               __dirname,
               './mocks/ViewNativeComponent.js'
             )
+          },
+          {
+            find: 'react-native/Libraries/Animated/nodes/AnimatedNode',
+            replacement: path.resolve(__dirname, './mocks/AnimatedNode.js')
           }
         ]
       }),
