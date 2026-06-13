@@ -74,10 +74,9 @@ exports[`css.create() properties blockSize: minBlockSize after minHeight 1`] = `
 
 exports[`css.create() properties borderBlock: borderBlock 1`] = `
 {
-  "borderBottomColor": "black",
+  "borderBlockColor": "black",
   "borderBottomStyle": "solid",
   "borderBottomWidth": 1,
-  "borderTopColor": "black",
   "borderTopStyle": "solid",
   "borderTopWidth": 1,
   "boxSizing": "content-box",
@@ -87,10 +86,10 @@ exports[`css.create() properties borderBlock: borderBlock 1`] = `
 
 exports[`css.create() properties borderBlock: borderBlock after borderBlockEnd 1`] = `
 {
-  "borderBottomColor": "red",
+  "borderBlockColor": "black",
+  "borderBlockEndColor": "red",
   "borderBottomStyle": "dotted",
   "borderBottomWidth": 2,
-  "borderTopColor": "black",
   "borderTopStyle": "solid",
   "borderTopWidth": 1,
   "boxSizing": "content-box",
@@ -100,10 +99,10 @@ exports[`css.create() properties borderBlock: borderBlock after borderBlockEnd 1
 
 exports[`css.create() properties borderBlock: borderBlock after borderBlockStart 1`] = `
 {
-  "borderBottomColor": "black",
+  "borderBlockColor": "black",
+  "borderBlockStartColor": "green",
   "borderBottomStyle": "solid",
   "borderBottomWidth": 1,
-  "borderTopColor": "green",
   "borderTopStyle": "dashed",
   "borderTopWidth": 3,
   "boxSizing": "content-box",
@@ -113,7 +112,7 @@ exports[`css.create() properties borderBlock: borderBlock after borderBlockStart
 
 exports[`css.create() properties borderBlock: borderBlockEnd 1`] = `
 {
-  "borderBottomColor": "red",
+  "borderBlockEndColor": "red",
   "borderBottomStyle": "dotted",
   "borderBottomWidth": 2,
   "boxSizing": "content-box",
@@ -123,7 +122,7 @@ exports[`css.create() properties borderBlock: borderBlockEnd 1`] = `
 
 exports[`css.create() properties borderBlock: borderBlockStart 1`] = `
 {
-  "borderTopColor": "green",
+  "borderBlockStartColor": "green",
   "borderTopStyle": "dashed",
   "borderTopWidth": 3,
   "boxSizing": "content-box",
@@ -200,7 +199,7 @@ exports[`css.create() properties borderInline: borderInlineStart 1`] = `
 
 exports[`css.create() properties borderRadius: endend 1`] = `
 {
-  "borderBottomEndRadius": 10,
+  "borderEndEndRadius": 10,
   "boxSizing": "content-box",
   "position": "static",
 }
@@ -208,7 +207,7 @@ exports[`css.create() properties borderRadius: endend 1`] = `
 
 exports[`css.create() properties borderRadius: endstart 1`] = `
 {
-  "borderBottomStartRadius": 10,
+  "borderEndStartRadius": 10,
   "boxSizing": "content-box",
   "position": "static",
 }
@@ -216,7 +215,7 @@ exports[`css.create() properties borderRadius: endstart 1`] = `
 
 exports[`css.create() properties borderRadius: startend 1`] = `
 {
-  "borderTopEndRadius": 10,
+  "borderStartEndRadius": 10,
   "boxSizing": "content-box",
   "position": "static",
 }
@@ -224,7 +223,7 @@ exports[`css.create() properties borderRadius: startend 1`] = `
 
 exports[`css.create() properties borderRadius: startstart 1`] = `
 {
-  "borderTopStartRadius": 10,
+  "borderStartStartRadius": 10,
   "boxSizing": "content-box",
   "position": "static",
 }
@@ -433,13 +432,10 @@ exports[`css.create() properties inlineSize: minInlineSize after minWidth 1`] = 
 
 exports[`css.create() properties inset: inset 1`] = `
 {
-  "bottom": 1,
   "boxSizing": "content-box",
-  "end": 1,
+  "inset": 1,
   "overflow": "visible",
   "position": "static",
-  "start": 1,
-  "top": 1,
 }
 `;
 
@@ -447,23 +443,21 @@ exports[`css.create() properties inset: inset vs phys 1`] = `
 {
   "bottom": 100,
   "boxSizing": "content-box",
-  "end": 1,
+  "inset": 1,
   "left": 10,
   "overflow": "visible",
   "position": "static",
   "right": 10,
-  "start": 1,
   "top": 100,
 }
 `;
 
 exports[`css.create() properties inset: insetBlock 1`] = `
 {
-  "bottom": 2,
   "boxSizing": "content-box",
+  "insetBlock": 2,
   "overflow": "visible",
   "position": "static",
-  "top": 2,
 }
 `;
 
@@ -471,6 +465,7 @@ exports[`css.create() properties inset: insetBlock vs phys 1`] = `
 {
   "bottom": 100,
   "boxSizing": "content-box",
+  "insetBlock": 2,
   "overflow": "visible",
   "position": "static",
   "top": 100,
@@ -479,8 +474,8 @@ exports[`css.create() properties inset: insetBlock vs phys 1`] = `
 
 exports[`css.create() properties inset: insetBlockEnd 1`] = `
 {
-  "bottom": 4,
   "boxSizing": "content-box",
+  "insetBlockEnd": 4,
   "overflow": "visible",
   "position": "static",
 }
@@ -488,8 +483,8 @@ exports[`css.create() properties inset: insetBlockEnd 1`] = `
 
 exports[`css.create() properties inset: insetBlockEnd vs phys 1`] = `
 {
-  "bottom": 4,
   "boxSizing": "content-box",
+  "insetBlockEnd": 4,
   "overflow": "visible",
   "position": "static",
   "top": 100,
@@ -499,9 +494,9 @@ exports[`css.create() properties inset: insetBlockEnd vs phys 1`] = `
 exports[`css.create() properties inset: insetBlockStart 1`] = `
 {
   "boxSizing": "content-box",
+  "insetBlockStart": 3,
   "overflow": "visible",
   "position": "static",
-  "top": 3,
 }
 `;
 
@@ -509,26 +504,25 @@ exports[`css.create() properties inset: insetBlockStart vs phys 1`] = `
 {
   "bottom": 100,
   "boxSizing": "content-box",
+  "insetBlockStart": 3,
   "overflow": "visible",
   "position": "static",
-  "top": 3,
 }
 `;
 
 exports[`css.create() properties inset: insetInline 1`] = `
 {
   "boxSizing": "content-box",
-  "end": 5,
+  "insetInline": 5,
   "overflow": "visible",
   "position": "static",
-  "start": 5,
 }
 `;
 
 exports[`css.create() properties inset: insetInlineEnd 1`] = `
 {
   "boxSizing": "content-box",
-  "end": 7,
+  "insetInlineEnd": 7,
   "overflow": "visible",
   "position": "static",
 }
@@ -537,9 +531,9 @@ exports[`css.create() properties inset: insetInlineEnd 1`] = `
 exports[`css.create() properties inset: insetInlineStart 1`] = `
 {
   "boxSizing": "content-box",
+  "insetInlineStart": 6,
   "overflow": "visible",
   "position": "static",
-  "start": 6,
 }
 `;
 
@@ -620,7 +614,7 @@ exports[`css.create() properties margin (with multiple values) 1`] = `
 exports[`css.create() properties margin*: marginBlock 1`] = `
 {
   "boxSizing": "content-box",
-  "marginVertical": 1,
+  "marginBlock": 1,
   "position": "static",
 }
 `;
@@ -628,7 +622,7 @@ exports[`css.create() properties margin*: marginBlock 1`] = `
 exports[`css.create() properties margin*: marginBlockEnd 1`] = `
 {
   "boxSizing": "content-box",
-  "marginBottom": 3,
+  "marginBlockEnd": 3,
   "position": "static",
 }
 `;
@@ -636,7 +630,7 @@ exports[`css.create() properties margin*: marginBlockEnd 1`] = `
 exports[`css.create() properties margin*: marginBlockStart 1`] = `
 {
   "boxSizing": "content-box",
-  "marginTop": 2,
+  "marginBlockStart": 2,
   "position": "static",
 }
 `;
@@ -644,7 +638,7 @@ exports[`css.create() properties margin*: marginBlockStart 1`] = `
 exports[`css.create() properties margin*: marginInline 1`] = `
 {
   "boxSizing": "content-box",
-  "marginHorizontal": 1,
+  "marginInline": 1,
   "position": "static",
 }
 `;
@@ -652,7 +646,7 @@ exports[`css.create() properties margin*: marginInline 1`] = `
 exports[`css.create() properties margin*: marginInlineEnd 1`] = `
 {
   "boxSizing": "content-box",
-  "marginEnd": 3,
+  "marginInlineEnd": 3,
   "position": "static",
 }
 `;
@@ -660,7 +654,7 @@ exports[`css.create() properties margin*: marginInlineEnd 1`] = `
 exports[`css.create() properties margin*: marginInlineStart 1`] = `
 {
   "boxSizing": "content-box",
-  "marginStart": 2,
+  "marginInlineStart": 2,
   "position": "static",
 }
 `;
@@ -785,7 +779,7 @@ exports[`css.create() properties padding (with multiple values) 1`] = `
 exports[`css.create() properties padding*: paddingBlock 1`] = `
 {
   "boxSizing": "content-box",
-  "paddingVertical": 1,
+  "paddingBlock": 1,
   "position": "static",
 }
 `;
@@ -793,7 +787,7 @@ exports[`css.create() properties padding*: paddingBlock 1`] = `
 exports[`css.create() properties padding*: paddingBlockEnd 1`] = `
 {
   "boxSizing": "content-box",
-  "paddingBottom": 3,
+  "paddingBlockEnd": 3,
   "position": "static",
 }
 `;
@@ -801,7 +795,7 @@ exports[`css.create() properties padding*: paddingBlockEnd 1`] = `
 exports[`css.create() properties padding*: paddingBlockStart 1`] = `
 {
   "boxSizing": "content-box",
-  "paddingTop": 2,
+  "paddingBlockStart": 2,
   "position": "static",
 }
 `;
@@ -809,7 +803,7 @@ exports[`css.create() properties padding*: paddingBlockStart 1`] = `
 exports[`css.create() properties padding*: paddingInline 1`] = `
 {
   "boxSizing": "content-box",
-  "paddingHorizontal": 1,
+  "paddingInline": 1,
   "position": "static",
 }
 `;
@@ -817,7 +811,7 @@ exports[`css.create() properties padding*: paddingInline 1`] = `
 exports[`css.create() properties padding*: paddingInlineEnd 1`] = `
 {
   "boxSizing": "content-box",
-  "paddingEnd": 3,
+  "paddingInlineEnd": 3,
   "position": "static",
 }
 `;
@@ -825,7 +819,7 @@ exports[`css.create() properties padding*: paddingInlineEnd 1`] = `
 exports[`css.create() properties padding*: paddingInlineStart 1`] = `
 {
   "boxSizing": "content-box",
-  "paddingStart": 2,
+  "paddingInlineStart": 2,
   "position": "static",
 }
 `;

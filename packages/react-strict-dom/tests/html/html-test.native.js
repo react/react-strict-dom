@@ -412,6 +412,14 @@ describe('<html.*> (native polyfills)', () => {
         expect(root.toJSON()).toMatchSnapshot();
       });
 
+      test('"readOnly" prop', () => {
+        let root;
+        act(() => {
+          root = create(<html.input readOnly />);
+        });
+        expect(root.toJSON()).toMatchSnapshot();
+      });
+
       test('"onChange" and "onInput" prop', () => {
         const onChange = jest.fn();
         const onInput = jest.fn();
@@ -488,6 +496,14 @@ describe('<html.*> (native polyfills)', () => {
         let root;
         act(() => {
           root = create(<html.textarea disabled={true} />);
+        });
+        expect(root.toJSON()).toMatchSnapshot();
+      });
+
+      test('"readOnly" prop', () => {
+        let root;
+        act(() => {
+          root = create(<html.textarea readOnly />);
         });
         expect(root.toJSON()).toMatchSnapshot();
       });

@@ -850,6 +850,21 @@ exports[`<html.*> (native polyfills) polyfills: props <input> "disabled" prop 1`
 />
 `;
 
+exports[`<html.*> (native polyfills) polyfills: props <input> "readOnly" prop 1`] = `
+<TextInput
+  onSelectionChange={[Function]}
+  readOnly={true}
+  ref={[Function]}
+  style={
+    {
+      "borderWidth": 1,
+      "boxSizing": "content-box",
+      "position": "static",
+    }
+  }
+/>
+`;
+
 exports[`<html.*> (native polyfills) polyfills: props <input> "style" prop 1`] = `
 <TextInput
   onSelectionChange={[Function]}
@@ -964,6 +979,23 @@ exports[`<html.*> (native polyfills) polyfills: props <textarea> "disabled" prop
   focusable={false}
   multiline={true}
   onSelectionChange={[Function]}
+  ref={[Function]}
+  style={
+    {
+      "borderWidth": 1,
+      "boxSizing": "content-box",
+      "position": "static",
+      "verticalAlign": "top",
+    }
+  }
+/>
+`;
+
+exports[`<html.*> (native polyfills) polyfills: props <textarea> "readOnly" prop 1`] = `
+<TextInput
+  multiline={true}
+  onSelectionChange={[Function]}
+  readOnly={true}
   ref={[Function]}
   style={
     {

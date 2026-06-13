@@ -219,7 +219,7 @@ export function createStrictDOMTextInputComponent<
     }
     if (readOnly != null) {
       // $FlowFixMe[react-rule-hook-mutation]
-      nativeProps.editable = !readOnly;
+      nativeProps.readOnly = readOnly;
     }
     if (spellCheck != null) {
       // $FlowFixMe[react-rule-hook-mutation]

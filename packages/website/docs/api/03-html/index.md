@@ -90,7 +90,7 @@ The following tables represent the compatibility status of the strict HTML API s
 
 | Props | Android | iOS | Issue # |
 | ---- | ---- | ---- | ---- |
-| alt (img)	| 🟡 | 🟡 | |
+| alt (img)	| ✅ | ✅ | |
 | aria-activedescendant | ❌ | ❌ | |
 | aria-atomic | ❌ | ❌ | |
 | aria-autocomplete | ❌ | ❌ | |
@@ -138,16 +138,16 @@ The following tables represent the compatibility status of the strict HTML API s
 | aria-valuemin | 🟡 | 🟡 | |
 | aria-valuenow | 🟡 | 🟡 | |
 | aria-valuetext | 🟡 | 🟡 | |
-| autoComplete (input) | 🟡 | 🟡 | |
-| autoComplete (textarea) | 🟡 | 🟡 | |
+| autoComplete (input) | ✅ | ✅ | |
+| autoComplete (textarea) | ✅ | ✅ | |
 | autoFocus | ❌ | ❌ | |
 | checked (input) | ❌ | ❌ | |
-| crossOrigin (img) | 🟡 | 🟡 | |
+| crossOrigin (img) | ✅ | ✅ | |
 | data-testid | 🟡 | 🟡 | |
 | data-* | ❌ | ❌ | |
 | decoding (img) | ❌ | ❌ | |
 | defaultChecked (input) | ❌ | ❌ | |
-| defaultValue (input) | ❌ | ❌ | |
+| defaultValue (input) | ✅ | ✅ | |
 | dir | 🟡 | 🟡 | |
 | disabled (button) | 🟡 | 🟡 | |
 | disabled (input) | 🟡 | 🟡 | |
@@ -155,17 +155,17 @@ The following tables represent the compatibility status of the strict HTML API s
 | download (a) | ❌ | ❌ | |
 | draggable (img) | ❌ | ❌ | |
 | elementTiming | ❌ | ❌ | |
-| enterKeyHint (input) | 🟡 | 🟡 | |
-| enterKeyHint (textarea) | 🟡 | 🟡 | |
+| enterKeyHint (input) | ✅ | ✅ | |
+| enterKeyHint (textarea) | ✅ | ✅ | |
 | fetchPriority (img) | ❌ | ❌ | |
 | for (label) | ❌ | ❌ | |
-| height (img) | 🟡 | 🟡 | |
+| height (img) | ✅ | ✅ | |
 | hidden | 🟡 | 🟡 | |
 | href (a) | ❌ | ❌ | |
 | id | 🟡 | 🟡 | |
 | inert | ❌ | ❌ | |
-| inputMode (input) | 🟡 | 🟡 | |
-| inputMode (textarea) | 🟡 | 🟡 | |
+| inputMode (input) | ✅ | ✅ | |
+| inputMode (textarea) | ✅ | ✅ | |
 | label (option) | ❌ | ❌ | |
 | label (optgroup) | ❌ | ❌ | |
 | lang | ❌ | ❌ | |
@@ -219,12 +219,12 @@ The following tables represent the compatibility status of the strict HTML API s
 | onSelect | ❌ | ❌ | [#38](https://github.com/facebook/react-strict-dom/issues/38) |
 | onSelectionChange | ❌ | ❌ | [#38](https://github.com/facebook/react-strict-dom/issues/38) |
 | open (dialog) | ❌ | ❌ | |
-| placeholder (input) | 🟡 | 🟡 | |
-| placeholder (textarea) | 🟡 | 🟡 | |
-| readOnly (input) | 🟡 | 🟡 | |
-| readOnly (textarea) | 🟡 | 🟡 | |
+| placeholder (input) | ✅ | ✅ | |
+| placeholder (textarea) | ✅ | ✅ | |
+| readOnly (input) | ✅ | ✅ | |
+| readOnly (textarea) | ✅ | ✅ | |
 | referrerPolicy (a) | ❌ | ❌ | |
-| referrerPolicy (img) | 🟡 | 🟡 | |
+| referrerPolicy (img) | ✅ | ✅ | |
 | rel (a) | ❌ | ❌ | |
 | required (input) | ❌ | ❌ | |
 | required (select) | ❌ | ❌ | |
@@ -232,10 +232,10 @@ The following tables represent the compatibility status of the strict HTML API s
 | role | 🟡 | 🟡 | |
 | rows (textarea) | 🟡 | 🟡 | |
 | selected (option) | ❌ | ❌ | |
-| spellCheck (input) | ❌ | ❌ | |
-| spellCheck (textarea) | ❌ | ❌ | |
-| src (img) | 🟡 | 🟡 | |
-| srcSet (img) | 🟡 | 🟡 | |
+| spellCheck (input) | ❌ | ✅ | |
+| spellCheck (textarea) | ❌ | ✅ | |
+| src (img) | ✅ | ✅ | |
+| srcSet (img) | ✅ | ✅ | |
 | step (input) | ❌ | ❌ | |
 | style | 🟡 | 🟡 | |
 | tabIndex | 🟡 | 🟡 | |
@@ -244,7 +244,7 @@ The following tables represent the compatibility status of the strict HTML API s
 | type (input) | 🟡 | 🟡 | |
 | value (input) | ✅ | ✅ | |
 | value (textarea) | ✅ | ✅ | |
-| width (img) | 🟡 | 🟡 | |
+| width (img) | ✅ | ✅ | |
 
 | Instance | Android | iOS | Issue # |
 | ---- | ---- | ---- | ---- |

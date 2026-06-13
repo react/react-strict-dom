@@ -104,14 +104,6 @@ function reactStrictPlugin({ types: t }, options = {}) {
             if (t.isJSXAttribute(attribute) && attribute.name.name === 'for') {
               attribute.name.name = 'htmlFor';
             }
-            // Browser compat: 'role=none' replaced by 'role=presentation'
-            if (
-              t.isJSXAttribute(attribute) &&
-              attribute.name.name === 'role' &&
-              attribute.value.value === 'none'
-            ) {
-              attribute.value.value = 'presentation';
-            }
             // React DOM compat: 'style' replaced by resolver that produces React DOM props
             if (
               t.isJSXAttribute(attribute) &&
