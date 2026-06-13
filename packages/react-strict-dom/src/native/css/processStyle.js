@@ -56,8 +56,9 @@ const placeContentValidValues = new Set<string>([
 ]);
 
 const timeValuedProperties = new Set<string>([
-  'animationDelay',
-  'animationDuration',
+  // Remove animation properties - they can have comma-separated values that need special handling
+  // 'animationDelay',    // Can be '0s, 0.2s, 0.4s' - don't preprocess
+  // 'animationDuration', // Can be '1s, 1s, 1s' - don't preprocess
   'transitionDelay',
   'transitionDuration'
 ]);

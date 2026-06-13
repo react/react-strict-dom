@@ -18,6 +18,7 @@ import { CSSTransformValue } from './CSSTransformValue';
 import { CSSUnparsedValue } from './typed-om/CSSUnparsedValue';
 import { errorMsg, warnMsg } from '../../shared/logUtils';
 import { flattenStyle } from './flattenStyleXStyles';
+import { keyframeRegistry } from './keyframeRegistry';
 import { lengthStyleKeySet } from './isLengthStyleKey';
 import { mediaQueryMatches } from './mediaQueryMatches';
 import { processStyle } from './processStyle';
@@ -95,13 +96,10 @@ export const firstThatWorks = <T extends string | number>(
 type Keyframes = {
   +[key: string]: { +[k: string]: string | number }
 };
-function _keyframes(k: Keyframes): Keyframes {
-  if (__DEV__) {
-    errorMsg('css.keyframes() is not supported.');
-  }
-  return k;
+function _keyframes(k: Keyframes): string {
+  return keyframeRegistry.register(k);
 }
-export const keyframes: (Keyframes) => string = _keyframes as $FlowFixMe;
+export const keyframes: (Keyframes) => string = _keyframes;
 
 type PositionTry = {
   +[k: string]: string | number

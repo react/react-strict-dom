@@ -150,6 +150,23 @@ function Shell(): React.MixedElement {
   const [fadeUpActive, setFadeUpActive] = React.useState(true);
   const [animate, setAnimate] = React.useState(false);
   const [shouldAnimate, setShouldAnimate] = React.useState(false);
+  const [fadeInKey, setFadeInKey] = React.useState(0);
+  const [bounceActive, setBounceActive] = React.useState(true);
+  const [scaleActive, setScaleActive] = React.useState(true);
+  const [rotateActive, setRotateActive] = React.useState(true);
+  const [complexActive, setComplexActive] = React.useState(true);
+  const [directionNormalActive, setDirectionNormalActive] =
+    React.useState(false);
+  const [directionReverseActive, setDirectionReverseActive] =
+    React.useState(false);
+  const [alternateActive, setAlternateActive] = React.useState(false);
+  const [alternateReverseActive, setAlternateReverseActive] =
+    React.useState(false);
+  const [fillModeKey, setFillModeKey] = React.useState(0);
+  const [dynamicPlayState, setDynamicPlayState] = React.useState(false);
+  const [multiAnimationActive, setMultiAnimationActive] = React.useState(true);
+  const [compositionTestActive, setCompositionTestActive] =
+    React.useState(false);
 
   return (
     <ScrollView>
@@ -263,6 +280,7 @@ function Shell(): React.MixedElement {
         </ExampleBlock>
 
         <ExampleBlock title="CSS Animations">
+          <html.p>Basic keyframe animation</html.p>
           <html.div
             style={[
               styles.square,
@@ -273,6 +291,243 @@ function Shell(): React.MixedElement {
           <html.button onClick={() => setAnimate(!animate)}>
             {animate ? 'Reset' : 'Start'}
           </html.button>
+
+          <html.p>Fade in animation with forwards fill</html.p>
+          <html.div
+            key={fadeInKey}
+            // $FlowFixMe[incompatible-type]
+            style={[styles.square, styles.fadeInAnimation]}
+          />
+          <html.button onClick={() => setFadeInKey((prev) => prev + 1)}>
+            Reset
+          </html.button>
+
+          <html.p>Infinite bounce animation</html.p>
+          <html.div
+            // $FlowFixMe[incompatible-type]
+            style={[
+              styles.square,
+              styles.bgBlue,
+              bounceActive && styles.bounceAnimation
+            ]}
+          />
+          <html.button onClick={() => setBounceActive(!bounceActive)}>
+            {bounceActive ? 'Stop' : 'Start'}
+          </html.button>
+
+          <html.p>Scale pulse animation</html.p>
+          <html.div
+            // $FlowFixMe[incompatible-type]
+            style={[
+              styles.square,
+              styles.bgGreen,
+              scaleActive && styles.scaleAnimation
+            ]}
+          />
+          <html.button onClick={() => setScaleActive(!scaleActive)}>
+            {scaleActive ? 'Stop' : 'Start'}
+          </html.button>
+
+          <html.p>Rotation animation</html.p>
+          <html.div
+            // $FlowFixMe[incompatible-type]
+            style={[
+              styles.square,
+              styles.bgYellow,
+              rotateActive && styles.rotateAnimation
+            ]}
+          />
+          <html.button onClick={() => setRotateActive(!rotateActive)}>
+            {rotateActive ? 'Stop' : 'Start'}
+          </html.button>
+
+          <html.p>Complex multi-property animation</html.p>
+          <html.div
+            // $FlowFixMe[incompatible-type]
+            style={[styles.square, complexActive && styles.complexAnimation]}
+          />
+          <html.button onClick={() => setComplexActive(!complexActive)}>
+            {complexActive ? 'Stop' : 'Start'}
+          </html.button>
+
+          <html.p>Multiple concurrent animations (fade + slide)</html.p>
+          <html.div
+            // $FlowFixMe[incompatible-type]
+            style={[
+              styles.square,
+              multiAnimationActive && styles.multiAnimation
+            ]}
+          />
+          <html.button
+            onClick={() => setMultiAnimationActive(!multiAnimationActive)}
+          >
+            {multiAnimationActive
+              ? 'Stop Array Animation'
+              : 'Start Array Animation'}
+          </html.button>
+
+          <html.p>
+            Animation composition modes (replace, add, accumulate)
+          </html.p>
+          <html.div
+            // $FlowFixMe[incompatible-type]
+            style={[
+              styles.square,
+              styles.bgBlue,
+              compositionTestActive && styles.compositionTest
+            ]}
+          />
+          <html.button
+            onClick={() => setCompositionTestActive(!compositionTestActive)}
+          >
+            {compositionTestActive
+              ? 'Stop Composition Test'
+              : 'Start Composition Test'}
+          </html.button>
+        </ExampleBlock>
+
+        <ExampleBlock title="Advanced CSS Animation Properties">
+          <html.p>Animation Direction Examples</html.p>
+          {/* $FlowFixMe[incompatible-type] */}
+          <html.div style={styles.row}>
+            <html.div style={styles.squareWithMargin}>
+              <html.div
+                // $FlowFixMe[incompatible-type]
+                style={[
+                  styles.smallSquare,
+                  directionNormalActive && styles.directionNormal
+                ]}
+              />
+            </html.div>
+            <html.div style={styles.squareWithMarginGreen}>
+              <html.div
+                // $FlowFixMe[incompatible-type]
+                style={[
+                  styles.smallSquareGreen,
+                  directionReverseActive && styles.directionReverse
+                ]}
+              />
+            </html.div>
+            <html.div style={styles.squareWithMarginYellow}>
+              <html.div
+                // $FlowFixMe[incompatible-type]
+                style={[
+                  styles.smallSquareOrange,
+                  alternateActive && styles.directionAlternate
+                ]}
+              />
+            </html.div>
+            <html.div style={styles.squareWithMarginPink}>
+              <html.div
+                // $FlowFixMe[incompatible-type]
+                style={[
+                  styles.smallSquarePurple,
+                  alternateReverseActive && styles.directionAlternateReverse
+                ]}
+              />
+            </html.div>
+          </html.div>
+          {/* $FlowFixMe[incompatible-type] */}
+          <html.div style={styles.directionControls}>
+            <html.button
+              onClick={() => setDirectionNormalActive(!directionNormalActive)}
+              style={styles.directionButton}
+            >
+              {directionNormalActive ? 'Stop Normal' : 'Start Normal'}
+            </html.button>
+            <html.button
+              onClick={() => setDirectionReverseActive(!directionReverseActive)}
+              style={styles.directionButton}
+            >
+              {directionReverseActive ? 'Stop Reverse' : 'Start Reverse'}
+            </html.button>
+            <html.button
+              onClick={() => setAlternateActive(!alternateActive)}
+              style={styles.directionButton}
+            >
+              {alternateActive ? 'Stop Alternate' : 'Start Alternate'}
+            </html.button>
+            <html.button
+              onClick={() => setAlternateReverseActive(!alternateReverseActive)}
+              style={styles.directionButton}
+            >
+              {alternateReverseActive ? 'Stop Alt-Rev' : 'Start Alt-Rev'}
+            </html.button>
+          </html.div>
+
+          <html.p>Animation Fill Mode Examples</html.p>
+          {/* $FlowFixMe[incompatible-type] */}
+          <html.div style={styles.row}>
+            <html.div style={styles.directionButton}>
+              <html.p style={styles.smallText}>none</html.p>
+              <html.div
+                key={`none-${fillModeKey}`}
+                // $FlowFixMe[incompatible-type]
+                style={[styles.square, styles.fillModeNone]}
+              />
+            </html.div>
+            <html.div style={styles.directionButton}>
+              <html.p style={styles.smallText}>forwards</html.p>
+              <html.div
+                key={`forwards-${fillModeKey}`}
+                // $FlowFixMe[incompatible-type]
+                style={[styles.square, styles.fillModeForwards]}
+              />
+            </html.div>
+            <html.div style={styles.directionButton}>
+              <html.p style={styles.smallText}>backwards</html.p>
+              <html.div
+                key={`backwards-${fillModeKey}`}
+                // $FlowFixMe[incompatible-type]
+                style={[styles.square, styles.fillModeBackwards]}
+              />
+            </html.div>
+            <html.div>
+              <html.p style={styles.smallText}>both</html.p>
+              <html.div
+                key={`both-${fillModeKey}`}
+                // $FlowFixMe[incompatible-type]
+                style={[styles.square, styles.fillModeBoth]}
+              />
+            </html.div>
+          </html.div>
+          <html.button onClick={() => setFillModeKey((prev) => prev + 1)}>
+            Restart Fill Mode Animations
+          </html.button>
+
+          <html.p>Animation Play State Examples</html.p>
+          {/* $FlowFixMe[incompatible-type] */}
+          <html.div style={styles.row}>
+            <html.div style={styles.containerWithMargin}>
+              <html.p style={styles.smallText}>Always Running</html.p>
+              <html.div
+                // $FlowFixMe[incompatible-type]
+                style={[styles.square, styles.playStateRunning]}
+              />
+            </html.div>
+            <html.div style={styles.containerWithMargin}>
+              <html.p style={styles.smallText}>Always Paused</html.p>
+              <html.div
+                // $FlowFixMe[incompatible-type]
+                style={[styles.square, styles.playStatePaused]}
+              />
+            </html.div>
+            <html.div>
+              <html.p style={styles.smallText}>Dynamic Control</html.p>
+              <html.div
+                // $FlowFixMe[incompatible-type]
+                style={[
+                  styles.square,
+                  styles.playStateDynamic(dynamicPlayState)
+                ]}
+              />
+              <html.button
+                onClick={() => setDynamicPlayState(!dynamicPlayState)}
+              >
+                {dynamicPlayState ? 'Resume' : 'Pause'}
+              </html.button>
+            </html.div>
+          </html.div>
         </ExampleBlock>
 
         <ExampleBlock title="CSS Inheritance">
@@ -501,7 +756,7 @@ function Shell(): React.MixedElement {
         {/* visibility */}
         <ExampleBlock title="CSS Visibility">
           {/* $FlowFixMe[incompatible-type] */}
-          <html.div style={styles.flex}>
+          <html.div style={styles.row}>
             {/* $FlowFixMe[incompatible-type] */}
             <html.div style={[styles.square, styles.visibilityCollapse]} />
             {/* $FlowFixMe[incompatible-type] */}
@@ -609,7 +864,7 @@ function Shell(): React.MixedElement {
           >
             <html.span style={styles.bgWhite}>{clickData.text}</html.span>
             {/* $FlowFixMe[incompatible-type] */}
-            <html.div style={styles.flex}>
+            <html.div style={styles.row}>
               {/* $FlowFixMe[incompatible-type] */}
               <html.div style={[styles.flex, styles.flexGrow]}>
                 <html.div>
@@ -696,6 +951,138 @@ const animateSequence = css.keyframes({
   }
 });
 
+const fadeInKeyframes = css.keyframes({
+  '0%': {
+    opacity: 0,
+    transform: 'translateY(-10px)'
+  },
+  '100%': {
+    opacity: 1,
+    transform: 'translateY(0px)'
+  }
+});
+
+const bounceKeyframes = css.keyframes({
+  '0%': {
+    transform: 'translateY(0px)'
+  },
+  '25%': {
+    transform: 'translateY(-20px)'
+  },
+  '50%': {
+    transform: 'translateY(0px)'
+  },
+  '75%': {
+    transform: 'translateY(-10px)'
+  },
+  '100%': {
+    transform: 'translateY(0px)'
+  }
+});
+
+const scaleKeyframes = css.keyframes({
+  '0%': {
+    transform: 'scale(1)'
+  },
+  '50%': {
+    transform: 'scale(1.2)'
+  },
+  '100%': {
+    transform: 'scale(1)'
+  }
+});
+
+const rotateKeyframes = css.keyframes({
+  '0%': {
+    transform: 'rotate(0deg)'
+  },
+  '100%': {
+    transform: 'rotate(360deg)'
+  }
+});
+
+const complexKeyframes = css.keyframes({
+  '0%': {
+    opacity: 0,
+    transform: 'translateX(-50px) scale(0.5) rotate(0deg)',
+    backgroundColor: 'red'
+  },
+  '25%': {
+    opacity: 0.5,
+    transform: 'translateX(-25px) scale(0.75) rotate(90deg)',
+    backgroundColor: 'orange'
+  },
+  '50%': {
+    opacity: 1,
+    transform: 'translateX(0px) scale(1) rotate(180deg)',
+    backgroundColor: 'yellow'
+  },
+  '75%': {
+    opacity: 0.8,
+    transform: 'translateX(25px) scale(1.1) rotate(270deg)',
+    backgroundColor: 'green'
+  },
+  '100%': {
+    opacity: 1,
+    transform: 'translateX(0px) scale(1) rotate(360deg)',
+    backgroundColor: 'blue'
+  }
+});
+
+const slideKeyframes = css.keyframes({
+  '0%': {
+    transform: 'translateX(0px)'
+  },
+  '100%': {
+    transform: 'translateX(100px)'
+  }
+});
+
+const fillModeKeyframes = css.keyframes({
+  '0%': {
+    opacity: 0,
+    backgroundColor: 'red',
+    transform: 'scale(0.5)'
+  },
+  '100%': {
+    opacity: 1,
+    backgroundColor: 'green',
+    transform: 'scale(1.2)'
+  }
+});
+
+const playStateKeyframes = css.keyframes({
+  '0%': {
+    transform: 'rotate(0deg) translateX(0px)',
+    backgroundColor: 'purple'
+  },
+  '25%': {
+    transform: 'rotate(90deg) translateX(50px)',
+    backgroundColor: 'blue'
+  },
+  '50%': {
+    transform: 'rotate(180deg) translateX(0px)',
+    backgroundColor: 'green'
+  },
+  '75%': {
+    transform: 'rotate(270deg) translateX(-50px)',
+    backgroundColor: 'orange'
+  },
+  '100%': {
+    transform: 'rotate(360deg) translateX(0px)',
+    backgroundColor: 'purple'
+  }
+});
+
+const slideRightKeyframes = css.keyframes({
+  '0%': {
+    transform: 'translateX(0px)'
+  },
+  '100%': {
+    transform: 'translateX(100px)'
+  }
+});
+
 const themedTokens = css.createTheme(tokens, {
   squareColor: 'purple',
   textColor: 'purple',
@@ -715,8 +1102,140 @@ const styles = css.create({
     animationDuration: '1s',
     animationIterationCount: 1,
     animationName: animateSequence,
-    animationTimingFunction: 'ease',
-    transform: 'translateX(150px)'
+    animationTimingFunction: 'ease'
+  },
+  fadeInAnimation: {
+    animationName: fadeInKeyframes,
+    animationDuration: '0.8s',
+    animationTimingFunction: 'ease-out',
+    animationFillMode: 'forwards',
+    opacity: 0
+  },
+  bounceAnimation: {
+    animationName: bounceKeyframes,
+    animationDuration: '1.5s',
+    animationTimingFunction: 'ease-in-out',
+    animationIterationCount: 'infinite'
+  },
+  scaleAnimation: {
+    animationName: scaleKeyframes,
+    animationDuration: '1s',
+    animationTimingFunction: 'ease-in-out',
+    animationIterationCount: 'infinite',
+    animationDirection: 'alternate'
+  },
+  rotateAnimation: {
+    animationName: rotateKeyframes,
+    animationDuration: '2s',
+    animationTimingFunction: 'linear',
+    animationIterationCount: 'infinite'
+  },
+  complexAnimation: {
+    animationName: complexKeyframes,
+    animationDuration: '3s',
+    animationTimingFunction: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+    animationIterationCount: 'infinite',
+    animationDelay: '0.5s'
+  },
+  directionNormal: {
+    animationName: slideKeyframes,
+    animationDuration: '2s',
+    animationTimingFunction: 'ease-in-out',
+    animationIterationCount: 'infinite',
+    animationDirection: 'normal'
+  },
+  directionReverse: {
+    animationName: slideKeyframes,
+    animationDuration: '2s',
+    animationTimingFunction: 'ease-in-out',
+    animationIterationCount: 'infinite',
+    animationDirection: 'reverse'
+  },
+  directionAlternate: {
+    animationName: slideKeyframes,
+    animationDuration: '1.5s',
+    animationTimingFunction: 'ease-in-out',
+    animationIterationCount: 'infinite',
+    animationDirection: 'alternate'
+  },
+  directionAlternateReverse: {
+    animationName: slideKeyframes,
+    animationDuration: '1.5s',
+    animationTimingFunction: 'ease-in-out',
+    animationIterationCount: 'infinite',
+    animationDirection: 'alternate-reverse'
+  },
+  fillModeNone: {
+    animationName: fillModeKeyframes,
+    animationDuration: '2s',
+    animationDelay: '0.5s',
+    animationFillMode: 'none',
+    opacity: 0.5,
+    backgroundColor: 'orange'
+  },
+  fillModeForwards: {
+    animationName: fillModeKeyframes,
+    animationDuration: '2s',
+    animationDelay: '0.5s',
+    animationFillMode: 'forwards',
+    opacity: 0.5,
+    backgroundColor: 'orange'
+  },
+  fillModeBackwards: {
+    animationName: fillModeKeyframes,
+    animationDuration: '2s',
+    animationDelay: '0.5s',
+    animationFillMode: 'backwards',
+    opacity: 0.5,
+    backgroundColor: 'orange'
+  },
+  fillModeBoth: {
+    animationName: fillModeKeyframes,
+    animationDuration: '2s',
+    animationDelay: '0.5s',
+    animationFillMode: 'both',
+    opacity: 0.5,
+    backgroundColor: 'orange'
+  },
+  playStateRunning: {
+    animationName: playStateKeyframes,
+    animationDuration: '4s',
+    animationTimingFunction: 'linear',
+    animationIterationCount: 'infinite',
+    animationPlayState: 'running'
+  },
+  playStatePaused: {
+    animationName: playStateKeyframes,
+    animationDuration: '4s',
+    animationTimingFunction: 'linear',
+    animationIterationCount: 'infinite',
+    animationPlayState: 'paused'
+  },
+  playStateDynamic: (paused: boolean) => ({
+    animationName: playStateKeyframes,
+    animationDuration: '3s',
+    animationTimingFunction: 'linear',
+    animationIterationCount: 'infinite',
+    animationPlayState: paused ? 'paused' : 'running'
+  }),
+  multiAnimation: {
+    animationName: `${fadeInKeyframes}, ${slideRightKeyframes}`,
+    animationDuration: '1.5s, 2s',
+    animationDelay: '0s, 0.5s',
+    animationTimingFunction: 'ease-out, ease-in-out',
+    animationIterationCount: '1, infinite',
+    animationFillMode: 'forwards, none',
+    opacity: 0
+  },
+  compositionTest: {
+    animationName: `${fadeInKeyframes}, ${slideRightKeyframes}, ${rotateKeyframes}`,
+    animationDuration: '1s, 1s, 1s',
+    animationDelay: '0s, 0.2s, 0.4s',
+    animationComposition: 'replace, add, accumulate',
+    animationIterationCount: '1, 1, 1',
+    animationFillMode: 'forwards, forwards, forwards',
+    opacity: 0.3,
+    transform: 'translateX(0px) rotate(0deg)'
   },
   row: {
     display: 'flex',
@@ -918,5 +1437,82 @@ const styles = css.create({
     borderBlockWidth: 20,
     borderInlineWidth: 20,
     borderStyle: 'solid'
+  },
+  directionControls: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 10
+  },
+  directionButton: {
+    marginRight: 10,
+    marginBottom: 5
+  },
+  squareWithMargin: {
+    height: 100,
+    width: 100,
+    marginRight: '10px',
+    backgroundColor: 'lightblue'
+  },
+  squareWithMarginGreen: {
+    height: 100,
+    width: 100,
+    marginRight: '10px',
+    backgroundColor: 'lightgreen'
+  },
+  squareWithMarginYellow: {
+    height: 100,
+    width: 100,
+    marginRight: '10px',
+    backgroundColor: 'lightyellow'
+  },
+  squareWithMarginPink: {
+    height: 100,
+    width: 100,
+    marginRight: '10px',
+    backgroundColor: 'lightpink'
+  },
+  smallSquare: {
+    height: 20,
+    width: 20,
+    backgroundColor: 'darkblue',
+    marginTop: 40
+  },
+  smallSquareGreen: {
+    height: 20,
+    width: 20,
+    backgroundColor: 'darkgreen',
+    marginTop: 40
+  },
+  smallSquareYellow: {
+    height: 20,
+    width: 20,
+    backgroundColor: 'darkyellow',
+    marginTop: 40
+  },
+  smallSquarePink: {
+    height: 20,
+    width: 20,
+    backgroundColor: 'darkpink',
+    marginTop: 40
+  },
+  smallSquareOrange: {
+    height: 20,
+    width: 20,
+    backgroundColor: 'orange',
+    marginTop: 40
+  },
+  smallSquarePurple: {
+    height: 20,
+    width: 20,
+    backgroundColor: 'purple',
+    marginTop: 40
+  },
+  containerWithMargin: {
+    marginRight: '20px'
+  },
+  smallText: {
+    fontSize: '12px',
+    marginBottom: '5px'
   }
 });

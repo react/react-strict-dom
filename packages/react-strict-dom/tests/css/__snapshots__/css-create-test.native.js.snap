@@ -2,7 +2,7 @@
 
 exports[`css.create() properties animationDelay 1`] = `
 {
-  "animationDelay": 300,
+  "animationDelay": "0.3s",
   "boxSizing": "content-box",
   "position": "static",
 }
@@ -10,7 +10,14 @@ exports[`css.create() properties animationDelay 1`] = `
 
 exports[`css.create() properties animationDuration 1`] = `
 {
-  "animationDuration": 500,
+  "animationDuration": "0.5s",
+  "boxSizing": "content-box",
+  "position": "static",
+}
+`;
+
+exports[`css.create() properties animationName 1`] = `
+{
   "boxSizing": "content-box",
   "position": "static",
 }
@@ -1422,6 +1429,7 @@ exports[`css.create() properties: "transition" other transforms: rotate 1`] = `
       "transform": [
         {
           "rotate": {
+            "extrapolate": "clamp",
             "inputRange": [
               0,
               1,
@@ -1434,6 +1442,7 @@ exports[`css.create() properties: "transition" other transforms: rotate 1`] = `
         },
         {
           "rotateX": {
+            "extrapolate": "clamp",
             "inputRange": [
               0,
               1,
@@ -1446,6 +1455,7 @@ exports[`css.create() properties: "transition" other transforms: rotate 1`] = `
         },
         {
           "rotateY": {
+            "extrapolate": "clamp",
             "inputRange": [
               0,
               1,
@@ -1458,6 +1468,7 @@ exports[`css.create() properties: "transition" other transforms: rotate 1`] = `
         },
         {
           "rotateZ": {
+            "extrapolate": "clamp",
             "inputRange": [
               0,
               1,
@@ -1485,6 +1496,7 @@ exports[`css.create() properties: "transition" other transforms: scale 1`] = `
       "transform": [
         {
           "scale": {
+            "extrapolate": "clamp",
             "inputRange": [
               0,
               1,
@@ -1497,6 +1509,7 @@ exports[`css.create() properties: "transition" other transforms: scale 1`] = `
         },
         {
           "scaleX": {
+            "extrapolate": "clamp",
             "inputRange": [
               0,
               1,
@@ -1509,6 +1522,7 @@ exports[`css.create() properties: "transition" other transforms: scale 1`] = `
         },
         {
           "scaleY": {
+            "extrapolate": "clamp",
             "inputRange": [
               0,
               1,
@@ -1521,6 +1535,7 @@ exports[`css.create() properties: "transition" other transforms: scale 1`] = `
         },
         {
           "scaleZ": {
+            "extrapolate": "clamp",
             "inputRange": [
               0,
               1,
@@ -1548,6 +1563,7 @@ exports[`css.create() properties: "transition" other transforms: skew 1`] = `
       "transform": [
         {
           "skewX": {
+            "extrapolate": "clamp",
             "inputRange": [
               0,
               1,
@@ -1560,6 +1576,7 @@ exports[`css.create() properties: "transition" other transforms: skew 1`] = `
         },
         {
           "skewY": {
+            "extrapolate": "clamp",
             "inputRange": [
               0,
               1,
@@ -1587,6 +1604,7 @@ exports[`css.create() properties: "transition" other transforms: translate 1`] =
       "transform": [
         {
           "translateX": {
+            "extrapolate": "clamp",
             "inputRange": [
               0,
               1,
@@ -1599,6 +1617,7 @@ exports[`css.create() properties: "transition" other transforms: translate 1`] =
         },
         {
           "translateY": {
+            "extrapolate": "clamp",
             "inputRange": [
               0,
               1,
@@ -1663,6 +1682,7 @@ exports[`css.create() properties: "transition" transform transition: end 1`] = `
       "transform": [
         {
           "translateY": {
+            "extrapolate": "clamp",
             "inputRange": [
               0,
               1,
@@ -1675,6 +1695,7 @@ exports[`css.create() properties: "transition" transform transition: end 1`] = `
         },
         {
           "rotateX": {
+            "extrapolate": "clamp",
             "inputRange": [
               0,
               1,
@@ -1733,6 +1754,7 @@ exports[`css.create() properties: "transition" transition all properties (opacit
       "transform": [
         {
           "perspective": {
+            "extrapolate": "clamp",
             "inputRange": [
               0,
               1,
@@ -1745,6 +1767,7 @@ exports[`css.create() properties: "transition" transition all properties (opacit
         },
         {
           "translateY": {
+            "extrapolate": "clamp",
             "inputRange": [
               0,
               1,
@@ -1757,6 +1780,7 @@ exports[`css.create() properties: "transition" transition all properties (opacit
         },
         {
           "rotateX": {
+            "extrapolate": "clamp",
             "inputRange": [
               0,
               1,

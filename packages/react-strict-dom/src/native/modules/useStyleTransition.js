@@ -10,14 +10,24 @@
 import type {
   CompositeAnimation,
   ReactNativeStyle,
-  ReactNativeStyleValue,
-  ReactNativeTransform
+  ReactNativeStyleValue
 } from '../../types/renderer.native';
 
 import * as React from 'react';
 import * as ReactNative from '../react-native';
 
 import { errorMsg, warnMsg } from '../../shared/logUtils';
+import {
+  isNumber,
+  isString,
+  canUseNativeDriver,
+  getEasingFunction
+} from './sharedAnimationUtils';
+import {
+  transformsHaveSameLengthTypesAndOrder,
+  transformListsAreEqual,
+  createBinaryAnimatedTransform
+} from './sharedInterpolation';
 
 type AnimatedStyle = {
   [string]: ?ReactNativeStyleValue | ReadonlyArray<unknown>
@@ -32,56 +42,6 @@ type TransitionMetadata = Readonly<{
 
 const INPUT_RANGE: ReadonlyArray<number> = [0, 1];
 
-function isNumber(num: unknown): num is number {
-  return typeof num === 'number';
-}
-
-function isString(str: unknown): str is string {
-  return typeof str === 'string';
-}
-
-function canUseNativeDriver(
-  transitionProperties: ReactNativeStyle | void
-): boolean {
-  if (transitionProperties === undefined) {
-    return false;
-  }
-  for (const property in transitionProperties) {
-    const value = transitionProperties?.[property];
-    if (property === 'opacity') {
-      continue;
-    }
-    if (
-      property === 'transform' &&
-      Array.isArray(value) &&
-      // $FlowFixMe[incompatible-type]
-      !value.includes('skew')
-    ) {
-      continue;
-    }
-    return false;
-  }
-  return true;
-}
-
-function getEasingFunction(input: ?string) {
-  if (input === 'ease') {
-    return ReactNative.Easing.ease;
-  } else if (input === 'ease-in') {
-    return ReactNative.Easing.in(ReactNative.Easing.ease);
-  } else if (input === 'ease-out') {
-    return ReactNative.Easing.out(ReactNative.Easing.ease);
-  } else if (input === 'ease-in-out') {
-    return ReactNative.Easing.inOut(ReactNative.Easing.ease);
-  } else if (input != null && input.includes('cubic-bezier')) {
-    const chunk = input.split('cubic-bezier(')[1];
-    const str = chunk.split(')')[0];
-    const curve = str.split(',').map((point) => parseFloat(point.trim()));
-    return ReactNative.Easing.bezier(...curve);
-  }
-  return ReactNative.Easing.linear;
-}
-
 function getTransitionProperties(property: unknown): ?(string[]) {
   if (property === 'all') {
     return ['opacity', 'transform'];
@@ -92,67 +52,7 @@ function getTransitionProperties(property: unknown): ?(string[]) {
   return null;
 }
 
-function transformsHaveSameLengthTypesAndOrder(
-  transformsA: ReadonlyArray<ReactNativeTransform>,
-  transformsB: ReadonlyArray<ReactNativeTransform>
-): boolean {
-  if (transformsA.length !== transformsB.length) {
-    return false;
-  }
-  for (let i = 0; i < transformsA.length; i++) {
-    if (
-      (transformsA[i].perspective != null &&
-        transformsB[i].perspective == null) ||
-      (transformsA[i].rotate != null && transformsB[i].rotate == null) ||
-      (transformsA[i].rotateX != null && transformsB[i].rotateX == null) ||
-      (transformsA[i].rotateY != null && transformsB[i].rotateY == null) ||
-      (transformsA[i].rotateZ != null && transformsB[i].rotateZ == null) ||
-      (transformsA[i].scale != null && transformsB[i].scale == null) ||
-      (transformsA[i].scaleX != null && transformsB[i].scaleX == null) ||
-      (transformsA[i].scaleY != null && transformsB[i].scaleY == null) ||
-      (transformsA[i].scaleZ != null && transformsB[i].scaleZ == null) ||
-      (transformsA[i].skewX != null && transformsB[i].skewX == null) ||
-      (transformsA[i].skewY != null && transformsB[i].skewY == null) ||
-      (transformsA[i].translateX != null &&
-        transformsB[i].translateX == null) ||
-      (transformsA[i].translateY != null && transformsB[i].translateY == null)
-    ) {
-      return false;
-    }
-  }
-  return true;
-}
-
-function transformListsAreEqual(
-  transformsA: ReadonlyArray<ReactNativeTransform>,
-  transformsB: ReadonlyArray<ReactNativeTransform>
-): boolean {
-  if (!transformsHaveSameLengthTypesAndOrder(transformsA, transformsB)) {
-    return false;
-  }
-  for (let i = 0; i < transformsA.length; i++) {
-    const tA = transformsA[i];
-    const tB = transformsB[i];
-    if (
-      (tA.perspective != null && tA.perspective !== tB.perspective) ||
-      (tA.rotate != null && tA.rotate !== tB.rotate) ||
-      (tA.rotateX != null && tA.rotateX !== tB.rotateX) ||
-      (tA.rotateY != null && tA.rotateY !== tB.rotateY) ||
-      (tA.rotateZ != null && tA.rotateZ !== tB.rotateZ) ||
-      (tA.scale != null && tA.scale !== tB.scale) ||
-      (tA.scaleX != null && tA.scaleX !== tB.scaleX) ||
-      (tA.scaleY != null && tA.scaleY !== tB.scaleY) ||
-      (tA.scaleZ != null && tA.scaleZ !== tB.scaleZ) ||
-      (tA.skewX != null && tA.skewX !== tB.skewX) ||
-      (tA.skewY != null && tA.skewY !== tB.skewY) ||
-      (tA.translateX != null && tA.translateX !== tB.translateX) ||
-      (tA.translateY != null && tA.translateY !== tB.translateY)
-    ) {
-      return false;
-    }
-  }
-  return true;
-}
+// Transform utility functions are imported from sharedInterpolation.
 
 function transitionStyleHasChanged(
   next: ReactNativeStyle | void,
@@ -428,172 +328,11 @@ export function useStyleTransition(style: ReactNativeStyle): ReactNativeStyle {
         return animatedStyle;
       }
 
-      // Animate the transforms
-      const animatedTransforms: Array<unknown> = [];
-      for (let i = 0; i < transforms.length; i++) {
-        const singleTransform = transforms[i];
-        const singlePrevTransform = prevTransforms[i];
-
-        if (singleTransform.perspective != null) {
-          animatedTransforms.push({
-            perspective: animatedValue.interpolate({
-              inputRange: INPUT_RANGE,
-              outputRange: [
-                +singlePrevTransform.perspective,
-                singleTransform.perspective
-              ]
-            })
-          });
-          continue;
-        }
-        if (
-          singlePrevTransform.rotate != null &&
-          singleTransform.rotate != null
-        ) {
-          animatedTransforms.push({
-            rotate: animatedValue.interpolate({
-              inputRange: INPUT_RANGE,
-              outputRange: [singlePrevTransform.rotate, singleTransform.rotate]
-            })
-          });
-          continue;
-        }
-        if (
-          singlePrevTransform.rotateX != null &&
-          singleTransform.rotateX != null
-        ) {
-          animatedTransforms.push({
-            rotateX: animatedValue.interpolate({
-              inputRange: INPUT_RANGE,
-              outputRange: [
-                singlePrevTransform.rotateX,
-                singleTransform.rotateX
-              ]
-            })
-          });
-          continue;
-        }
-        if (
-          singlePrevTransform.rotateY != null &&
-          singleTransform.rotateY != null
-        ) {
-          animatedTransforms.push({
-            rotateY: animatedValue.interpolate({
-              inputRange: INPUT_RANGE,
-              outputRange: [
-                singlePrevTransform.rotateY,
-                singleTransform.rotateY
-              ]
-            })
-          });
-          continue;
-        }
-        if (
-          singlePrevTransform.rotateZ != null &&
-          singleTransform.rotateZ != null
-        ) {
-          animatedTransforms.push({
-            rotateZ: animatedValue.interpolate({
-              inputRange: INPUT_RANGE,
-              outputRange: [
-                singlePrevTransform.rotateZ,
-                singleTransform.rotateZ
-              ]
-            })
-          });
-          continue;
-        }
-        if (singleTransform.scale != null) {
-          animatedTransforms.push({
-            scale: animatedValue.interpolate({
-              inputRange: INPUT_RANGE,
-              outputRange: [+singlePrevTransform.scale, singleTransform.scale]
-            })
-          });
-          continue;
-        }
-        if (singleTransform.scaleX != null) {
-          animatedTransforms.push({
-            scaleX: animatedValue.interpolate({
-              inputRange: INPUT_RANGE,
-              outputRange: [+singlePrevTransform.scaleX, singleTransform.scaleX]
-            })
-          });
-          continue;
-        }
-        if (singleTransform.scaleY != null) {
-          animatedTransforms.push({
-            scaleY: animatedValue.interpolate({
-              inputRange: INPUT_RANGE,
-              outputRange: [+singlePrevTransform.scaleY, singleTransform.scaleY]
-            })
-          });
-          continue;
-        }
-        if (singleTransform.scaleZ != null) {
-          animatedTransforms.push({
-            scaleZ: animatedValue.interpolate({
-              inputRange: INPUT_RANGE,
-              outputRange: [+singlePrevTransform.scaleZ, singleTransform.scaleZ]
-            })
-          });
-          continue;
-        }
-        if (
-          singlePrevTransform.skewX != null &&
-          singleTransform.skewX != null
-        ) {
-          animatedTransforms.push({
-            skewX: animatedValue.interpolate({
-              inputRange: INPUT_RANGE,
-              outputRange: [singlePrevTransform.skewX, singleTransform.skewX]
-            })
-          });
-          continue;
-        }
-        if (
-          singlePrevTransform.skewY != null &&
-          singleTransform.skewY != null
-        ) {
-          animatedTransforms.push({
-            skewY: animatedValue.interpolate({
-              inputRange: INPUT_RANGE,
-              outputRange: [singlePrevTransform.skewY, singleTransform.skewY]
-            })
-          });
-          continue;
-        }
-        if (
-          singlePrevTransform.translateX != null &&
-          singleTransform.translateX != null
-        ) {
-          animatedTransforms.push({
-            translateX: animatedValue.interpolate({
-              inputRange: INPUT_RANGE,
-              outputRange: [
-                +singlePrevTransform.translateX,
-                singleTransform.translateX
-              ]
-            })
-          });
-          continue;
-        }
-        if (
-          singlePrevTransform.translateY != null &&
-          singleTransform.translateY != null
-        ) {
-          animatedTransforms.push({
-            translateY: animatedValue.interpolate({
-              inputRange: INPUT_RANGE,
-              outputRange: [
-                +singlePrevTransform.translateY,
-                singleTransform.translateY
-              ]
-            })
-          });
-          continue;
-        }
-      }
+      const animatedTransforms = createBinaryAnimatedTransform(
+        animatedValue,
+        prevTransforms,
+        transforms
+      );
       animatedStyle[property] = animatedTransforms;
       return animatedStyle;
     }

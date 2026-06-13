@@ -10,7 +10,7 @@ Styles are defined in JavaScript using a strict subset of CSS capabilities. Defi
 * [css.createTheme](/api/css/createTheme)
 * [css.defineVars](/api/css/defineVars)
 * [css.firstThatWorks](/api/css/firstThatWorks)
-<!-- * [css.keyframes](/api/css/keyframes) - How to declare animation keyframes. -->
+* [css.keyframes](/api/css/keyframes) - How to declare animation keyframes.
 
 ## Compatibility
 
@@ -28,7 +28,7 @@ The following tables represent the compatibility status of the strict CSS API fo
 | css.createTheme() | 🟡 | 🟡 | |
 | css.defineVars() | 🟡 | 🟡 | |
 | css.firstThatWorks() | 🟡 | 🟡 | |
-<!-- | css.keyframes() | ❌ | ❌ | [#3](https://github.com/facebook/react-strict-dom/issues/3) | -->
+| css.keyframes() | 🟡 | 🟡 | |
 
 | States | Android | iOS | Issue # |
 | ---- | ---- | ---- | ---- |
@@ -62,14 +62,15 @@ The following tables represent the compatibility status of the strict CSS API fo
 | alignContent | ✅ | ✅ | |
 | alignItems | ✅ | ✅ | |
 | alignSelf | ✅ | ✅ | |
-| animationDelay | ❌ | ❌ | [#3](https://github.com/facebook/react-strict-dom/issues/3) |
-| animationDirection | ❌ | ❌ | [#3](https://github.com/facebook/react-strict-dom/issues/3) |
-| animationDuration | ❌ | ❌ | [#3](https://github.com/facebook/react-strict-dom/issues/3) |
-| animationFillMode | ❌ | ❌ | [#3](https://github.com/facebook/react-strict-dom/issues/3) |
-| animationIterationCount | ❌ | ❌ | [#3](https://github.com/facebook/react-strict-dom/issues/3) |
-| animationName | ❌ | ❌ | [#3](https://github.com/facebook/react-strict-dom/issues/3) |
-| animationPlayState | ❌ | ❌ | [#3](https://github.com/facebook/react-strict-dom/issues/3) |
-| animationTimingFunction | ❌ | ❌ | [#3](https://github.com/facebook/react-strict-dom/issues/3) |
+| animationComposition | 🟡 | 🟡 | |
+| animationDelay | 🟡 | 🟡 | |
+| animationDirection | 🟡 | 🟡 | |
+| animationDuration | 🟡 | 🟡 | |
+| animationFillMode | 🟡 | 🟡 | |
+| animationIterationCount | 🟡 | 🟡 | |
+| animationName | 🟡 | 🟡 | |
+| animationPlayState | 🟡 | 🟡 | |
+| animationTimingFunction | 🟡 | 🟡 | |
 | aspectRatio (string) | 🟡 | 🟡 | |
 | backdropFilter | ❌ | ❌ | |
 | backfaceVisibility | ✅ | ✅ | |

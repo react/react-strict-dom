@@ -17,6 +17,7 @@ import * as ReactNative from '../react-native';
 import { useInheritedStyles } from './ContextInheritedStyles';
 import { usePrefersReducedMotion } from './usePrefersReducedMotion';
 import { usePseudoStates } from './usePseudoStates';
+import { useStyleAnimation } from './useStyleAnimation';
 import { useStyleTransition } from './useStyleTransition';
 import { useViewportScale } from './ContextViewportScale';
 
@@ -61,6 +62,38 @@ type StyleOptions = {
 };
 
 const emptyObject = {};
+
+/**
+ * Checks if a component has persistent animation state
+ * This implements the "once animated, always animated" strategy
+ */
+function hasPersistedAnimationState(style: ReactNativeStyle): boolean {
+  // Recursively check if style contains Animated.Value instances
+  function checkValue(value: unknown): boolean {
+    if (value == null) {
+      return false;
+    }
+
+    if (typeof value === 'object') {
+      // Check if it's an AnimatedValue
+      if (value.constructor?.name === 'AnimatedValue') {
+        return true;
+      }
+
+      // Check arrays (like transform arrays)
+      if (Array.isArray(value)) {
+        return value.some(checkValue);
+      }
+
+      // Check object properties
+      return Object.values(value).some(checkValue);
+    }
+
+    return false;
+  }
+
+  return Object.values(style).some(checkValue);
+}
 
 /**
  * Unitless lineHeight acts as a fontSize multiplier. It is only fully resolved
@@ -162,11 +195,28 @@ export function useStyleProps(
   }
 
   // Polyfill CSS transitions
-  const styleWithAnimations = useStyleTransition(styleProps.style);
+  const styleWithTransitions = useStyleTransition(styleProps.style);
+  if (styleProps.style !== styleWithTransitions) {
+    // This is an internal prop used to track components that need Animated renderers
+    styleProps.animated = true;
+    styleProps.style = styleWithTransitions;
+  }
+
+  // Polyfill CSS animations (enhanced for arrays)
+  const styleWithAnimations = useStyleAnimation(styleProps.style);
   if (styleProps.style !== styleWithAnimations) {
     // This is an internal prop used to track components that need Animated renderers
     styleProps.animated = true;
     styleProps.style = styleWithAnimations;
+  }
+
+  // Check if this component has persistent animation state (unified View swapping)
+  const hasAnimationHistory =
+    Boolean(styleProps.animated) ||
+    hasPersistedAnimationState(styleProps.style);
+
+  if (hasAnimationHistory) {
+    styleProps.animated = true;
   }
 
   // Create inherited values lookup for performance
