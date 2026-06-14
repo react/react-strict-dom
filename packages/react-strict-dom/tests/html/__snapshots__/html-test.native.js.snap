@@ -216,6 +216,22 @@ exports[`<html.*> (native polyfills) polyfills: layout default flex layout: flex
 </ViewNativeComponent>
 `;
 
+exports[`<html.*> (native polyfills) polyfills: props <button> "disabled" prop 1`] = `
+<Pressable
+  disabled={true}
+  focusable={false}
+  ref={[Function]}
+  role="button"
+  style={
+    {
+      "borderWidth": 1,
+      "boxSizing": "content-box",
+      "position": "static",
+    }
+  }
+/>
+`;
+
 exports[`<html.*> (native polyfills) polyfills: props <img> "src" prop with loading props 1`] = `
 <Image
   crossOrigin="use-credentials"

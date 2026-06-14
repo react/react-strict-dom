@@ -500,6 +500,31 @@ describe('<html.*> (native polyfills)', () => {
         expect(root.toJSON()).toMatchSnapshot();
       });
     });
+
+    describe('<button>', () => {
+      test('"disabled" prop', () => {
+        let root;
+        act(() => {
+          root = create(<html.button disabled={true} />);
+        });
+        expect(root.toJSON()).toMatchSnapshot();
+      });
+
+      // Re-enabling must emit an explicit "disabled={false}" rather than
+      // dropping the prop. On Android, leaving "disabled" unset keeps the
+      // native view's enabled state false and the button stays unclickable.
+      test('"disabled" prop resets to an explicit false when re-enabled', () => {
+        let root;
+        act(() => {
+          root = create(<html.button disabled={true} />);
+        });
+        expect(root.toJSON().props.disabled).toBe(true);
+        act(() => {
+          root.update(<html.button disabled={false} />);
+        });
+        expect(root.toJSON().props.disabled).toBe(false);
+      });
+    });
   });
 
   describe('polyfills: inheritence', () => {
