@@ -73,6 +73,14 @@ export function processStyle(
   for (const propName in style) {
     const styleValue = style[propName];
 
+    // Drop "undefined" values so they don't reach the underlying style
+    // resolver, which only accepts strings, numbers, objects or null. This
+    // mirrors web behavior, where undefined values are ignored, and lets
+    // inline style functions return undefined to opt out of a property.
+    if (styleValue === undefined) {
+      continue;
+    }
+
     if (skipValidation !== true && !isAllowedStyleKey(propName)) {
       if (__DEV__) {
         warnMsg(`unsupported style property "${propName}"`);

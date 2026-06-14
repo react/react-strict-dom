@@ -2102,6 +2102,22 @@ describe('css.create()', () => {
       });
       expect(root.toJSON().props.style).toMatchSnapshot();
     });
+
+    test('undefined values are ignored', () => {
+      const styles = css.create({
+        root: (gap) => ({
+          rowGap: gap
+        })
+      });
+      let root;
+      act(() => {
+        root = create(<html.div style={styles.root(undefined)} />);
+      });
+      const { style } = root.toJSON().props;
+      // The property is dropped rather than passed through as undefined,
+      // which would otherwise be rejected by the style resolver.
+      expect(Object.prototype.hasOwnProperty.call(style, 'rowGap')).toBe(false);
+    });
   });
 
   /**
