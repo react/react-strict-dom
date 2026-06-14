@@ -40,6 +40,28 @@ export function stringContainsVariables(input: string): boolean {
   return input.includes('var(');
 }
 
+function stringContainsLightDark(input: string): boolean {
+  return input.includes('light-dark(');
+}
+
+const RE_LIGHT_DARK = /^light-dark\(\s*(.+?)\s*,\s*(.+?)\s*\)$/i;
+
+function resolveLightDarkValue(
+  variableValue: string,
+  colorScheme: 'light' | 'dark'
+) {
+  const match = RE_LIGHT_DARK.exec(variableValue);
+
+  if (match == null) {
+    warnMsg(`Invalid light-dark syntax: "${variableValue}"`);
+    return null;
+  }
+
+  const [, lightStr, darkStr] = match;
+
+  return colorScheme === 'dark' ? darkStr.trim() : lightStr.trim();
+}
+
 function resolveVariableReferenceValue(
   propName: string,
   variable: CSSVariableReferenceValue,
@@ -66,7 +88,15 @@ function resolveVariableReferenceValue(
   }
 
   if (variableValue != null) {
-    if (typeof variableValue === 'object' && variableValue.default != null) {
+    if (
+      typeof variableValue === 'string' &&
+      stringContainsLightDark(variableValue)
+    ) {
+      variableValue = resolveLightDarkValue(variableValue, colorScheme);
+    } else if (
+      typeof variableValue === 'object' &&
+      variableValue.default != null
+    ) {
       let defaultValue = variableValue.default;
       if (colorScheme === 'dark') {
         defaultValue = variableValue['@media (prefers-color-scheme: dark)'];
