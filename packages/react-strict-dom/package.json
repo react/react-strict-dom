@@ -57,9 +57,15 @@
     "rollup": "^4.22.4"
   },
   "peerDependencies": {
+    "@types/react": "^19.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-native": ">=0.82.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
   },
   "engines": {
     "node": ">=20.11.0"
