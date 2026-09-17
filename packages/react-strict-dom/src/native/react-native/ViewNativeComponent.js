@@ -7,5 +7,5 @@
  * @flow strict-local
  */
 
-import ViewNativeComponent from 'react-native/Libraries/Components/View/ViewNativeComponent';
+import { unstable_NativeView as ViewNativeComponent } from 'react-native';
 export { ViewNativeComponent };

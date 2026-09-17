@@ -10,8 +10,7 @@
 /* eslint-disable no-unreachable */
 
 import type { AnimatedStyleValue } from '../shared/SharedAnimatedTypes';
-import type { Text, View } from 'react-native';
-import type { ImageProps } from 'react-native/Libraries/Image/ImageProps';
+import type { ImageProps, Text, View } from 'react-native';
 import type { html } from 'react-strict-dom';
 
 import * as React from 'react';
