@@ -8,7 +8,7 @@
 const path = require('node:path');
 const fs = require('node:fs');
 const { normalize, resolve } = require('path');
-const { globSync } = require('fast-glob');
+const { globSync } = require('tinyglobby');
 const isGlob = require('is-glob');
 const globParent = require('glob-parent');
 const createBundler = require('./bundler');
@@ -96,6 +96,7 @@ function createBuilder() {
   function getFiles() {
     const { cwd, include, exclude } = getConfig();
     return globSync(include, {
+      expandDirectories: false,
       onlyFiles: true,
       ignore: exclude,
       cwd
