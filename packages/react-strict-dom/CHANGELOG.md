@@ -4,7 +4,7 @@
 
 ### Breaking changes
 
-* [Native] React Strict DOM and React Strict Animated now require `react-native >=0.82.0` for native builds that use RN DOM Node APIs.
+* [Native] React Strict DOM and React Strict Animated now require `react-native >=0.85.0` for native builds that use RN DOM Node APIs.
 
 ### Fixes
 
@@ -13,6 +13,7 @@
 ### Internal
 
 * [Native] `useStrictDOMElement` now wraps the RN host node with `Object.create(node)` and defines only strict-dom overrides as own properties.
+* [Native] Replaced every deep import into `react-native/Libraries/*` with the equivalent public `react-native` export.
 
 ## 0.0.55 (Jan 9, 2026)
 
