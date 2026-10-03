@@ -7,8 +7,6 @@
  * @flow strict
  */
 
-import { version } from '../modules/version';
-
 const allowedStyleKeySet = new Set<string>([
   'alignContent',
   'alignItems',
@@ -122,6 +120,10 @@ const allowedStyleKeySet = new Set<string>([
   'mixBlendMode',
   'objectFit',
   'opacity',
+  'outlineColor',
+  'outlineOffset',
+  'outlineStyle',
+  'outlineWidth',
   'overflow',
   'padding',
   'paddingBlock',
@@ -166,13 +168,6 @@ const allowedStyleKeySet = new Set<string>([
   // Pseudo-element keys
   '::placeholder'
 ]);
-
-if (version.experimental) {
-  allowedStyleKeySet.add('outlineColor');
-  allowedStyleKeySet.add('outlineOffset');
-  allowedStyleKeySet.add('outlineStyle');
-  allowedStyleKeySet.add('outlineWidth');
-}
 
 export function isAllowedStyleKey(key: string): boolean {
   return (

@@ -38,6 +38,104 @@ exports[`<html.*> (native polyfills) opt in to strict layout conformance: strict
 </LayoutConformance>
 `;
 
+exports[`<html.*> (native polyfills) polyfills: inheritence inherited fontWeight (dynamic values): fontWeight:300 1`] = `
+<ViewNativeComponent
+  ref={[Function]}
+  style={
+    {
+      "boxSizing": "content-box",
+      "position": "static",
+    }
+  }
+>
+  <ViewNativeComponent
+    ref={[Function]}
+    style={
+      {
+        "boxSizing": "content-box",
+        "position": "static",
+      }
+    }
+  >
+    <Text
+      ref={[Function]}
+      style={
+        {
+          "boxSizing": "content-box",
+          "fontWeight": 300,
+          "overflow": "visible",
+          "position": "static",
+        }
+      }
+    >
+      Inherited
+    </Text>
+    <Text
+      ref={[Function]}
+      style={
+        {
+          "boxSizing": "content-box",
+          "fontWeight": "400",
+          "overflow": "visible",
+          "position": "static",
+        }
+      }
+    >
+      Explicit
+    </Text>
+  </ViewNativeComponent>
+</ViewNativeComponent>
+`;
+
+exports[`<html.*> (native polyfills) polyfills: inheritence inherited fontWeight (dynamic values): fontWeight:700 1`] = `
+<ViewNativeComponent
+  ref={[Function]}
+  style={
+    {
+      "boxSizing": "content-box",
+      "position": "static",
+    }
+  }
+>
+  <ViewNativeComponent
+    ref={[Function]}
+    style={
+      {
+        "boxSizing": "content-box",
+        "position": "static",
+      }
+    }
+  >
+    <Text
+      ref={[Function]}
+      style={
+        {
+          "boxSizing": "content-box",
+          "fontWeight": 700,
+          "overflow": "visible",
+          "position": "static",
+        }
+      }
+    >
+      Inherited
+    </Text>
+    <Text
+      ref={[Function]}
+      style={
+        {
+          "boxSizing": "content-box",
+          "fontWeight": "400",
+          "overflow": "visible",
+          "position": "static",
+        }
+      }
+    >
+      Explicit
+    </Text>
+  </ViewNativeComponent>
+</ViewNativeComponent>
+`;
+
 exports[`<html.*> (native polyfills) polyfills: inheritence inherited styles 1`] = `
 <ViewNativeComponent
   ref={[Function]}
@@ -69,7 +167,7 @@ exports[`<html.*> (native polyfills) polyfills: inheritence inherited styles 1`]
           "fontSize": 96,
           "fontStyle": "italic",
           "fontVariant": "variant",
-          "fontWeight": "300",
+          "fontWeight": 300,
           "letterSpacing": 10,
           "lineHeight": 192,
           "overflow": "visible",
@@ -850,6 +948,21 @@ exports[`<html.*> (native polyfills) polyfills: props <input> "disabled" prop 1`
 />
 `;
 
+exports[`<html.*> (native polyfills) polyfills: props <input> "readOnly" prop 1`] = `
+<TextInput
+  onSelectionChange={[Function]}
+  readOnly={true}
+  ref={[Function]}
+  style={
+    {
+      "borderWidth": 1,
+      "boxSizing": "content-box",
+      "position": "static",
+    }
+  }
+/>
+`;
+
 exports[`<html.*> (native polyfills) polyfills: props <input> "style" prop 1`] = `
 <TextInput
   onSelectionChange={[Function]}
@@ -964,6 +1077,23 @@ exports[`<html.*> (native polyfills) polyfills: props <textarea> "disabled" prop
   focusable={false}
   multiline={true}
   onSelectionChange={[Function]}
+  ref={[Function]}
+  style={
+    {
+      "borderWidth": 1,
+      "boxSizing": "content-box",
+      "position": "static",
+      "verticalAlign": "top",
+    }
+  }
+/>
+`;
+
+exports[`<html.*> (native polyfills) polyfills: props <textarea> "readOnly" prop 1`] = `
+<TextInput
+  multiline={true}
+  onSelectionChange={[Function]}
+  readOnly={true}
   ref={[Function]}
   style={
     {

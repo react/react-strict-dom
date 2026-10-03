@@ -554,6 +554,26 @@ describe('css.create()', () => {
       expect(root.toJSON().props.style).toMatchSnapshot();
     });
 
+    test('fontWeight (dynamic values)', () => {
+      const styles = css.create({
+        root: (fontWeight) => ({ fontWeight })
+      });
+      let root;
+      act(() => {
+        root = create(<html.span style={styles.root(100)} />);
+      });
+      expect(root.toJSON().props.style).toMatchSnapshot('number:100');
+
+      ['100', 400, '400', 900, '900', 'bold'].forEach((fontWeight) => {
+        act(() => {
+          root.update(<html.span style={styles.root(fontWeight)} />);
+        });
+        expect(root.toJSON().props.style).toMatchSnapshot(
+          `${typeof fontWeight}:${fontWeight}`
+        );
+      });
+    });
+
     test('inlineSize', () => {
       const styles = css.create({
         inlineSize: {
@@ -953,6 +973,24 @@ describe('css.create()', () => {
         root = create(<html.img style={styles.none} />);
       });
       expect(root.toJSON().props).toMatchSnapshot('none');
+    });
+
+    test('objectFit (dynamic values)', () => {
+      const styles = css.create({
+        root: (objectFit) => ({ objectFit })
+      });
+      let root;
+      act(() => {
+        root = create(<html.img style={styles.root('none')} />);
+      });
+      expect(root.toJSON().props.style).toMatchSnapshot('none');
+
+      ['scale-down', 'cover', 'none'].forEach((objectFit) => {
+        act(() => {
+          root.update(<html.img style={styles.root(objectFit)} />);
+        });
+        expect(root.toJSON().props.style).toMatchSnapshot(objectFit);
+      });
     });
 
     test('opacity (string value)', () => {

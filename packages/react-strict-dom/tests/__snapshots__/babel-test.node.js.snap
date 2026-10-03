@@ -31,7 +31,7 @@ exports[`react-strict-dom/babel-preset [transform] <html.*> elements other props
 "import { defaultStyles as _rsdDefaultStyles, merge as _rsdMerge } from "react-strict-dom/runtime";
 import { html } from 'react-strict-dom';
 function App() {
-  return <div role="presentation" {..._rsdMerge(_rsdDefaultStyles.div)}>
+  return <div role="none" {..._rsdMerge(_rsdDefaultStyles.div)}>
                 <label htmlFor="for" {..._rsdMerge(_rsdDefaultStyles.label)} />
                 <input dir="auto" {..._rsdMerge(_rsdDefaultStyles.input)} />
                 <textarea dir="auto" {..._rsdMerge(_rsdDefaultStyles.textarea)} />

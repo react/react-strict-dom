@@ -198,7 +198,7 @@ function applyTextInputProps(
     nativeProps.placeholder = placeholder;
   }
   if (readOnly != null) {
-    nativeProps.editable = !readOnly;
+    nativeProps.readOnly = readOnly;
   }
   if (spellCheck != null) {
     nativeProps.spellCheck = spellCheck;

@@ -412,6 +412,14 @@ describe('<html.*> (native polyfills)', () => {
         expect(root.toJSON()).toMatchSnapshot();
       });
 
+      test('"readOnly" prop', () => {
+        let root;
+        act(() => {
+          root = create(<html.input readOnly />);
+        });
+        expect(root.toJSON()).toMatchSnapshot();
+      });
+
       test('"onChange" and "onInput" prop', () => {
         const onChange = jest.fn();
         const onInput = jest.fn();
@@ -492,6 +500,14 @@ describe('<html.*> (native polyfills)', () => {
         expect(root.toJSON()).toMatchSnapshot();
       });
 
+      test('"readOnly" prop', () => {
+        let root;
+        act(() => {
+          root = create(<html.textarea readOnly />);
+        });
+        expect(root.toJSON()).toMatchSnapshot();
+      });
+
       test('"rows" prop', () => {
         let root;
         act(() => {
@@ -546,6 +562,31 @@ describe('<html.*> (native polyfills)', () => {
         );
       });
       expect(root.toJSON()).toMatchSnapshot();
+    });
+
+    test('inherited fontWeight (dynamic values)', () => {
+      const styles = css.create({
+        root: (fontWeight) => ({ fontWeight }),
+        override: { fontWeight: '400' }
+      });
+      const render = (fontWeight) => (
+        <html.div style={styles.root(fontWeight)}>
+          <html.div>
+            <html.span>Inherited</html.span>
+            <html.span style={styles.override}>Explicit</html.span>
+          </html.div>
+        </html.div>
+      );
+
+      let root;
+      act(() => {
+        root = create(render(300));
+      });
+      expect(root.toJSON()).toMatchSnapshot('fontWeight:300');
+      act(() => {
+        root.update(render(700));
+      });
+      expect(root.toJSON()).toMatchSnapshot('fontWeight:700');
     });
 
     test('inherited fontSize', () => {

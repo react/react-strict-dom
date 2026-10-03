@@ -132,11 +132,6 @@ export function processStyle(
         }
         continue;
       }
-      // Workaround unsupported objectFit values
-      else if (propName === 'objectFit' && styleValue === 'none') {
-        result[propName] = 'scale-down';
-        continue;
-      }
       // Polyfill support for string opacity on Android
       else if (propName === 'opacity') {
         result[propName] = parseFloat(styleValue);
@@ -241,11 +236,6 @@ export function processStyle(
 
     // Number values
     else if (typeof styleValue === 'number') {
-      // Polyfill numeric fontWeight (for desktop)
-      if (propName === 'fontWeight') {
-        result[propName] = styleValue.toString();
-        continue;
-      }
       // Normalize unitless lineHeight to string
       if (propName === 'lineHeight') {
         result[propName] = styleValue.toString();

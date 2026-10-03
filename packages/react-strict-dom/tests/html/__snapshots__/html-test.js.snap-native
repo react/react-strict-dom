@@ -3232,6 +3232,7 @@ exports[`<html.*> "input" supports additional input attributes 1`] = `
   onChange={[Function]}
   onSelectionChange={[Function]}
   placeholder="Placeholder"
+  readOnly={true}
   ref={[Function]}
   style={
     {
@@ -5569,6 +5570,7 @@ exports[`<html.*> "textarea" supports additional textarea attributes 1`] = `
   onChange={[Function]}
   onSelectionChange={[Function]}
   placeholder="Placeholder"
+  readOnly={true}
   ref={[Function]}
   style={
     {
