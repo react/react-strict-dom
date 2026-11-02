@@ -11,7 +11,7 @@ import { warnMsg } from '../../shared/logUtils';
 
 const VALUES_REG = /,(?![^(]*\))/;
 const PARTS_REG = /\s(?![^(]*\))/;
-const LENGTH_REG = /^[0-9]+[a-zA-Z%]+?$/;
+const LENGTH_REG = /^-?([0-9]*\.)?[0-9]+[a-zA-Z%]+$/;
 
 function isLength(v: string): boolean {
   return v === '0' || LENGTH_REG.test(v);
@@ -24,10 +24,10 @@ function toMaybeNum(v: string): number | string {
 }
 
 function parseValue(str: string) {
-  const parts = str.split(PARTS_REG);
+  const parts = str.split(PARTS_REG).filter((p) => p !== '');
   const inset = parts.includes('inset');
-  const last = parts.slice(-1)[0];
-  const color = !isLength(last) ? last : null;
+  // The color may appear before or after the lengths
+  const color = parts.find((p) => p !== 'inset' && !isLength(p)) ?? null;
 
   const nums = parts
     .filter((n) => n !== 'inset')
