@@ -15,11 +15,10 @@ import type {
 } from '../../types/renderer.native';
 
 import * as css from '../css';
-import * as ReactNative from '../react-native';
 
 import { useInheritedStyles } from './ContextInheritedStyles';
-import { usePrefersReducedMotion } from './usePrefersReducedMotion';
 import { usePseudoStates } from './usePseudoStates';
+import { useStyleEnvironment } from './useStyleEnvironment';
 import { useStyleTransition } from './useStyleTransition';
 import { useViewportScale } from './ContextViewportScale';
 
@@ -109,8 +108,8 @@ export function useStyleProps(
     writingDirection: dir
   } = options;
 
-  const { fontScale, height, width } = ReactNative.useWindowDimensions();
-  const colorScheme = ReactNative.useColorScheme();
+  const { fontScale, height, width, colorScheme, prefersReducedMotion } =
+    useStyleEnvironment();
   const { scale: viewportScale } = useViewportScale();
 
   // These values are already computed
@@ -135,13 +134,12 @@ export function useStyleProps(
   } = useInheritedStyles();
 
   const { active, focus, hover, handlers } = usePseudoStates(flatStyle);
-  const prefersReducedMotion = usePrefersReducedMotion();
 
   // Get the computed style props
   const styleProps = css.props.call(
     {
       active,
-      colorScheme: colorScheme === 'unspecified' ? 'light' : colorScheme,
+      colorScheme,
       customProperties: customProperties ?? emptyObject,
       focus,
       fontScale,

@@ -49,6 +49,18 @@ export const Animated = {
   })
 };
 
+export const Appearance = {
+  getColorScheme: jest.fn().mockReturnValue('light'),
+  addChangeListener: jest.fn().mockReturnValue({ remove: jest.fn() })
+};
+
+export const Dimensions = {
+  get: jest
+    .fn()
+    .mockReturnValue({ fontScale: 1, height: 1000, scale: 1, width: 2000 }),
+  addEventListener: jest.fn().mockReturnValue({ remove: jest.fn() })
+};
+
 export const Easing = {
   linear: jest.fn(),
   ease: jest.fn(),
@@ -121,8 +133,6 @@ export const View = 'View';
 export const experimental_LayoutConformance = 'LayoutConformance';
 
 export const unstable_TextAncestorContext = 'TextAncestorContext';
-
-export const useColorScheme = jest.fn().mockReturnValue('light');
 
 export const useWindowDimensions = jest
   .fn()

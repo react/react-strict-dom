@@ -10,6 +10,8 @@
 export {
   AccessibilityInfo,
   Animated,
+  Appearance,
+  Dimensions,
   Easing,
   Image,
   Platform,
@@ -20,4 +22,4 @@ export {
 export { LayoutConformance } from './LayoutConformance';
 export { TextAncestorContext } from './TextAncestorContext';
 export { ViewNativeComponent } from './ViewNativeComponent';
-export { useColorScheme, useWindowDimensions } from 'react-native';
+export { useWindowDimensions } from 'react-native';

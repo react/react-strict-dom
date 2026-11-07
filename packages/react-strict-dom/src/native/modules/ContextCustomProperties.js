@@ -29,15 +29,13 @@ export function useCustomProperties(
   customPropertiesFromThemes: ?CustomProperties
 ): CustomProperties {
   const inheritedCustomProperties = React.useContext(ContextCustomProperties);
-  return React.useMemo(() => {
-    if (customPropertiesFromThemes == null) {
-      return inheritedCustomProperties;
-    }
-    // $FlowExpectedError[unsafe-object-assign]
-    return Object.assign(
-      {},
-      inheritedCustomProperties,
-      customPropertiesFromThemes
-    );
-  }, [inheritedCustomProperties, customPropertiesFromThemes]);
+  if (customPropertiesFromThemes == null) {
+    return inheritedCustomProperties;
+  }
+  // $FlowExpectedError[unsafe-object-assign]
+  return Object.assign(
+    {},
+    inheritedCustomProperties,
+    customPropertiesFromThemes
+  );
 }

@@ -18,7 +18,7 @@ describe('css.* themes', () => {
     console.error.mockImplementation(() => {});
     console.warn.mockImplementation(() => {});
 
-    ReactNative.useColorScheme.mockReturnValue('light');
+    ReactNative.Appearance.getColorScheme.mockReturnValue('light');
   });
 
   afterEach(() => {
@@ -68,7 +68,7 @@ describe('css.* themes', () => {
     expect(root.toJSON().props.style.color).toBe('blue');
 
     // dark theme
-    ReactNative.useColorScheme.mockReturnValue('dark');
+    ReactNative.Appearance.getColorScheme.mockReturnValue('dark');
     act(() => {
       root = create(<html.span style={styles.themeAwareColor} />);
     });

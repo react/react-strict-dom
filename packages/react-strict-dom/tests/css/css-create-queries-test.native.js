@@ -13,11 +13,11 @@ describe('css.create(): @media', () => {
   const ReactNative = require('../../src/native/react-native');
 
   beforeEach(() => {
-    ReactNative.useWindowDimensions.mockReturnValue({
+    ReactNative.Dimensions.get.mockReturnValue({
       height: 1000,
       width: 2000
     });
-    ReactNative.useColorScheme.mockReturnValue('light');
+    ReactNative.Appearance.getColorScheme.mockReturnValue('light');
 
     // avoid console messages for these tests
     jest.spyOn(console, 'error');
@@ -27,11 +27,11 @@ describe('css.create(): @media', () => {
   });
 
   afterEach(() => {
-    ReactNative.useWindowDimensions.mockReturnValue({
+    ReactNative.Dimensions.get.mockReturnValue({
       height: 1000,
       width: 2000
     });
-    ReactNative.useColorScheme.mockReturnValue('light');
+    ReactNative.Appearance.getColorScheme.mockReturnValue('light');
 
     console.error.mockRestore();
     console.warn.mockRestore();
@@ -90,7 +90,7 @@ describe('css.create(): @media', () => {
 
   describe('query matches', () => {
     test('(max-height: 400px)', () => {
-      ReactNative.useWindowDimensions.mockReturnValue({ height: 200 });
+      ReactNative.Dimensions.get.mockReturnValue({ height: 200 });
       let root;
       act(() => {
         root = create(<html.div style={styles.root} />);
@@ -107,7 +107,7 @@ describe('css.create(): @media', () => {
     });
 
     test('(max-width: 400px)', () => {
-      ReactNative.useWindowDimensions.mockReturnValue({ width: 200 });
+      ReactNative.Dimensions.get.mockReturnValue({ width: 200 });
       let root;
       act(() => {
         root = create(<html.div style={styles.root} />);
@@ -124,7 +124,7 @@ describe('css.create(): @media', () => {
     });
 
     test('(prefers-color-scheme: light)', () => {
-      ReactNative.useColorScheme.mockReturnValue('light');
+      ReactNative.Appearance.getColorScheme.mockReturnValue('light');
       let root;
       act(() => {
         root = create(<html.span style={[theme, styles.themed]} />);
@@ -133,7 +133,7 @@ describe('css.create(): @media', () => {
     });
 
     test('(prefers-color-scheme: dark)', () => {
-      ReactNative.useColorScheme.mockReturnValue('dark');
+      ReactNative.Appearance.getColorScheme.mockReturnValue('dark');
       let root;
       act(() => {
         root = create(<html.span style={[theme, styles.themed]} />);
@@ -144,7 +144,7 @@ describe('css.create(): @media', () => {
 
   describe('query does not match', () => {
     test('(max-height: 400px)', () => {
-      ReactNative.useWindowDimensions.mockReturnValue({ height: 500 });
+      ReactNative.Dimensions.get.mockReturnValue({ height: 500 });
       let root;
       act(() => {
         root = create(<html.div style={styles.root} />);
@@ -153,7 +153,7 @@ describe('css.create(): @media', () => {
     });
 
     test('(min-height: 400px)', () => {
-      ReactNative.useWindowDimensions.mockReturnValue({ height: 200 });
+      ReactNative.Dimensions.get.mockReturnValue({ height: 200 });
       let root;
       act(() => {
         root = create(<html.div style={styles.root} />);
@@ -162,7 +162,7 @@ describe('css.create(): @media', () => {
     });
 
     test('(max-width: 400px)', () => {
-      ReactNative.useWindowDimensions.mockReturnValue({ width: 500 });
+      ReactNative.Dimensions.get.mockReturnValue({ width: 500 });
       let root;
       act(() => {
         root = create(<html.div style={styles.root} />);
@@ -171,7 +171,7 @@ describe('css.create(): @media', () => {
     });
 
     test('(min-width: 400px)', () => {
-      ReactNative.useWindowDimensions.mockReturnValue({ width: 200 });
+      ReactNative.Dimensions.get.mockReturnValue({ width: 200 });
       let root;
       act(() => {
         root = create(<html.div style={styles.root} />);
@@ -180,7 +180,7 @@ describe('css.create(): @media', () => {
     });
 
     test('(prefers-color-scheme: light)', () => {
-      ReactNative.useColorScheme.mockReturnValue('dark');
+      ReactNative.Appearance.getColorScheme.mockReturnValue('dark');
       let root;
       act(() => {
         root = create(<html.span style={[theme, styles.themed]} />);
@@ -189,7 +189,7 @@ describe('css.create(): @media', () => {
     });
 
     test('(prefers-color-scheme: dark)', () => {
-      ReactNative.useColorScheme.mockReturnValue('light');
+      ReactNative.Appearance.getColorScheme.mockReturnValue('light');
       let root;
       act(() => {
         root = create(<html.span style={[theme, styles.themed]} />);

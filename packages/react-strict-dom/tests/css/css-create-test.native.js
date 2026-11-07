@@ -500,10 +500,10 @@ describe('css.create()', () => {
     describe('fontSize scaling', () => {
       const ReactNative = require('../../src/native/react-native');
       beforeEach(() => {
-        ReactNative.useWindowDimensions.mockReturnValue({ fontScale: 2 });
+        ReactNative.Dimensions.get.mockReturnValue({ fontScale: 2 });
       });
       afterEach(() => {
-        ReactNative.useWindowDimensions.mockReturnValue({ fontScale: 1 });
+        ReactNative.Dimensions.get.mockReturnValue({ fontScale: 1 });
       });
 
       test('fontScale:2', () => {
