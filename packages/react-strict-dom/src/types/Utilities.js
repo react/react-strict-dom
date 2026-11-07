@@ -9,4 +9,4 @@
 
 export type ReactRef<T> =
   | { writeonly current: T | null, ... }
-  | ((T | null) => unknown);
+  | ((v: T | null) => unknown);

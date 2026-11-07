@@ -23,7 +23,7 @@ type OptionalCleanup = (() => void) | void;
  * WARNING: The callback should be stable (e.g. using `useCallback`).
  */
 export function useElementCallback<T>(
-  callback: (T) => OptionalCleanup
+  callback: (v: T) => OptionalCleanup
 ): CallbackRef<T> {
   const cleanupRef = useRef<OptionalCleanup>(undefined);
   return useCallback(
