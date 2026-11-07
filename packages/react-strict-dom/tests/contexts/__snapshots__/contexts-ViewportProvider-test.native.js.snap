@@ -2,7 +2,6 @@
 
 exports[`<contexts.*> <ViewportProvider> all CSS lengths are scaled according to viewport width: scaled lengths 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "borderWidth": 0.75,
@@ -24,7 +23,6 @@ exports[`<contexts.*> <ViewportProvider> all CSS lengths are scaled according to
   }
 >
   <Text
-    ref={[Function]}
     style={
       {
         "boxSizing": "content-box",
@@ -38,7 +36,6 @@ exports[`<contexts.*> <ViewportProvider> all CSS lengths are scaled according to
     Scaled content
   </Text>
   <Text
-    ref={[Function]}
     style={
       {
         "boxSizing": "content-box",

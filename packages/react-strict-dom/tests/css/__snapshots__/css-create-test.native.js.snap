@@ -285,7 +285,6 @@ exports[`css.create() properties boxSizing: content-box 1`] = `
 exports[`css.create() properties caretColor: red caret color 1`] = `
 {
   "cursorColor": "red",
-  "ref": [Function],
   "style": {
     "boxSizing": "content-box",
     "position": "static",
@@ -296,7 +295,6 @@ exports[`css.create() properties caretColor: red caret color 1`] = `
 exports[`css.create() properties caretColor: transparent caret color 1`] = `
 {
   "caretHidden": true,
-  "ref": [Function],
   "style": {
     "boxSizing": "content-box",
     "position": "static",
@@ -306,7 +304,6 @@ exports[`css.create() properties caretColor: transparent caret color 1`] = `
 
 exports[`css.create() properties caretColor: unsupported caret color 1`] = `
 {
-  "ref": [Function],
   "style": {
     "boxSizing": "content-box",
     "position": "static",
@@ -545,7 +542,6 @@ exports[`css.create() properties inset: insetInlineStart 1`] = `
 
 exports[`css.create() properties isolation 1`] = `
 {
-  "ref": [Function],
   "style": {
     "boxSizing": "content-box",
     "isolation": "isolate",
@@ -558,7 +554,6 @@ exports[`css.create() properties isolation 1`] = `
 exports[`css.create() properties lineClamp 1`] = `
 <Text
   numberOfLines={3}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -703,7 +698,6 @@ exports[`css.create() properties mixBlendMode 1`] = `
 
 exports[`css.create() properties objectFit: contain 1`] = `
 {
-  "ref": [Function],
   "style": {
     "boxSizing": "content-box",
     "objectFit": "contain",
@@ -714,7 +708,6 @@ exports[`css.create() properties objectFit: contain 1`] = `
 
 exports[`css.create() properties objectFit: cover 1`] = `
 {
-  "ref": [Function],
   "style": {
     "boxSizing": "content-box",
     "objectFit": "cover",
@@ -725,7 +718,6 @@ exports[`css.create() properties objectFit: cover 1`] = `
 
 exports[`css.create() properties objectFit: fill 1`] = `
 {
-  "ref": [Function],
   "style": {
     "boxSizing": "content-box",
     "objectFit": "fill",
@@ -736,7 +728,6 @@ exports[`css.create() properties objectFit: fill 1`] = `
 
 exports[`css.create() properties objectFit: none 1`] = `
 {
-  "ref": [Function],
   "style": {
     "boxSizing": "content-box",
     "objectFit": "scale-down",
@@ -747,7 +738,6 @@ exports[`css.create() properties objectFit: none 1`] = `
 
 exports[`css.create() properties objectFit: scaleDown 1`] = `
 {
-  "ref": [Function],
   "style": {
     "boxSizing": "content-box",
     "objectFit": "scale-down",
@@ -1240,7 +1230,6 @@ exports[`css.create() properties visibility: collapse 1`] = `
   "focusable": false,
   "importantForAccessibility": "no-hide-descendants",
   "pointerEvents": "none",
-  "ref": [Function],
   "style": {
     "boxSizing": "content-box",
     "opacity": 0,
@@ -1255,7 +1244,6 @@ exports[`css.create() properties visibility: hidden 1`] = `
   "focusable": false,
   "importantForAccessibility": "no-hide-descendants",
   "pointerEvents": "none",
-  "ref": [Function],
   "style": {
     "boxSizing": "content-box",
     "opacity": 0,
@@ -1266,7 +1254,6 @@ exports[`css.create() properties visibility: hidden 1`] = `
 
 exports[`css.create() properties visibility: visible 1`] = `
 {
-  "ref": [Function],
   "style": {
     "boxSizing": "content-box",
     "position": "static",
@@ -1276,7 +1263,6 @@ exports[`css.create() properties visibility: visible 1`] = `
 
 exports[`css.create() properties willChange 1`] = `
 {
-  "ref": [Function],
   "renderToHardwareTextureAndroid": true,
   "style": {
     "boxSizing": "content-box",
@@ -1288,7 +1274,6 @@ exports[`css.create() properties willChange 1`] = `
 exports[`css.create() properties: "transition" backgroundColor transition: end 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "backgroundColor": {
@@ -1311,7 +1296,6 @@ exports[`css.create() properties: "transition" backgroundColor transition: end 1
 exports[`css.create() properties: "transition" backgroundColor transition: start 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "backgroundColor": "rgba(0,0,0,0.1)",
@@ -1325,7 +1309,6 @@ exports[`css.create() properties: "transition" backgroundColor transition: start
 exports[`css.create() properties: "transition" cubic-bezier() timing function: end 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1348,7 +1331,6 @@ exports[`css.create() properties: "transition" cubic-bezier() timing function: e
 exports[`css.create() properties: "transition" cubic-bezier() timing function: start 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1361,7 +1343,6 @@ exports[`css.create() properties: "transition" cubic-bezier() timing function: s
 
 exports[`css.create() properties: "transition" default: default 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "backgroundColor": "red",
@@ -1375,7 +1356,6 @@ exports[`css.create() properties: "transition" default: default 1`] = `
 exports[`css.create() properties: "transition" opacity transition: end 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1398,7 +1378,6 @@ exports[`css.create() properties: "transition" opacity transition: end 1`] = `
 exports[`css.create() properties: "transition" opacity transition: start 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1414,7 +1393,6 @@ exports[`css.create() properties: "transition" other element types 1`] = `"Anima
 exports[`css.create() properties: "transition" other transforms: rotate 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1477,7 +1455,6 @@ exports[`css.create() properties: "transition" other transforms: rotate 1`] = `
 exports[`css.create() properties: "transition" other transforms: scale 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1540,7 +1517,6 @@ exports[`css.create() properties: "transition" other transforms: scale 1`] = `
 exports[`css.create() properties: "transition" other transforms: skew 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1579,7 +1555,6 @@ exports[`css.create() properties: "transition" other transforms: skew 1`] = `
 exports[`css.create() properties: "transition" other transforms: translate 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1618,7 +1593,6 @@ exports[`css.create() properties: "transition" other transforms: translate 1`] =
 exports[`css.create() properties: "transition" spring() timing function: end 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1641,7 +1615,6 @@ exports[`css.create() properties: "transition" spring() timing function: end 1`]
 exports[`css.create() properties: "transition" spring() timing function: start 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1655,7 +1628,6 @@ exports[`css.create() properties: "transition" spring() timing function: start 1
 exports[`css.create() properties: "transition" transform transition: end 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1694,7 +1666,6 @@ exports[`css.create() properties: "transition" transform transition: end 1`] = `
 exports[`css.create() properties: "transition" transform transition: start 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1715,7 +1686,6 @@ exports[`css.create() properties: "transition" transform transition: start 1`] =
 exports[`css.create() properties: "transition" transition all properties (opacity and transform): end 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1776,7 +1746,6 @@ exports[`css.create() properties: "transition" transition all properties (opacit
 exports[`css.create() properties: "transition" transition all properties (opacity and transform): start 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1801,7 +1770,6 @@ exports[`css.create() properties: "transition" transition all properties (opacit
 exports[`css.create() properties: "transition" transition multiple properties: end 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "backgroundColor": {
@@ -1839,7 +1807,6 @@ exports[`css.create() properties: "transition" transition multiple properties: e
 exports[`css.create() properties: "transition" transition multiple properties: start 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "backgroundColor": "red",
@@ -1859,7 +1826,6 @@ exports[`css.create() properties: "transition" transition multiple properties: s
 exports[`css.create() properties: "transition" transition with missing properties 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1872,7 +1838,6 @@ exports[`css.create() properties: "transition" transition with missing propertie
 exports[`css.create() properties: "transition" transition with missing properties 2`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1916,7 +1881,6 @@ exports[`css.create() properties: "transition" transitionProperty 1`] = `
 exports[`css.create() properties: "transition" update triggers transition: green to blue 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "backgroundColor": {
@@ -1939,7 +1903,6 @@ exports[`css.create() properties: "transition" update triggers transition: green
 exports[`css.create() properties: "transition" update triggers transition: red to green 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "backgroundColor": {
@@ -1962,7 +1925,6 @@ exports[`css.create() properties: "transition" update triggers transition: red t
 exports[`css.create() properties: "transition" width transition: end 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1985,7 +1947,6 @@ exports[`css.create() properties: "transition" width transition: end 1`] = `
 exports[`css.create() properties: "transition" width transition: start 1`] = `
 <Animated.View
   animated={true}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1999,7 +1960,6 @@ exports[`css.create() properties: "transition" width transition: start 1`] = `
 exports[`css.create() pseudo-elements ::placeholder syntax: placeholderTextColor 1`] = `
 {
   "placeholderTextColor": "red",
-  "ref": [Function],
   "style": {
     "boxSizing": "content-box",
     "overflow": "visible",

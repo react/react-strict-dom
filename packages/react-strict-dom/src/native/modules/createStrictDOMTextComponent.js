@@ -38,7 +38,7 @@ function applyTextProps(
   nativeProps: ReactNativeProps,
   props: StrictProps,
   tagName: string,
-  elementRef: CallbackRef<HostInstance>
+  elementRef: ?CallbackRef<HostInstance>
 ): void {
   const { href, label } = props;
 
@@ -70,7 +70,9 @@ function applyTextProps(
 
   // Component-specific props
 
-  nativeProps.ref = elementRef;
+  if (elementRef != null) {
+    nativeProps.ref = elementRef;
+  }
 
   // Workaround: Android doesn't support ellipsis truncation if Text is selectable
   // See #136

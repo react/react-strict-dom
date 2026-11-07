@@ -12,7 +12,6 @@ import type { HostInstance } from '../../types/renderer.native';
 
 import * as React from 'react';
 
-import { useElementCallback } from '../../shared/useElementCallback';
 import { useViewportScale } from './ContextViewportScale';
 
 type Options = {
@@ -213,32 +212,41 @@ function getOrCreateStrictRef(
 export function useStrictDOMElement<T>(
   ref: React.RefSetter<T>,
   { tagName }: Options
-): CallbackRef<HostInstance> {
+): ?CallbackRef<HostInstance> {
   const { scale: viewportScale } = useViewportScale();
 
-  return useElementCallback<HostInstance>(
-    React.useCallback(
-      (node: HostInstance) => {
-        if (ref == null) return undefined;
-        const strictRef = getOrCreateStrictRef(node, tagName, viewportScale);
-        if (typeof ref === 'function') {
-          // Public ref type is the DOM element `T` (web/native parity); at
-          // runtime we hand over the RN-backed strict wrapper.
-          // $FlowFixMe[incompatible-type] - Flow does not understand ref cleanup.
-          const cleanup: void | (() => void) = ref(strictRef as $FlowFixMe);
-          return typeof cleanup === 'function'
-            ? cleanup
+  return React.useMemo(() => {
+    if (ref == null) {
+      return null;
+    }
+    let cleanup: void | (() => void);
+    return (node: HostInstance | null) => {
+      if (cleanup != null) {
+        cleanup();
+        cleanup = undefined;
+      }
+      if (node == null) {
+        return;
+      }
+      const strictRef = getOrCreateStrictRef(node, tagName, viewportScale);
+      if (typeof ref === 'function') {
+        // Public ref type is the DOM element `T` (web/native parity); at
+        // runtime we hand over the RN-backed strict wrapper.
+        // $FlowFixMe[incompatible-type] - Flow does not understand ref cleanup.
+        const refCleanup: void | (() => void) = ref(strictRef as $FlowFixMe);
+        cleanup =
+          typeof refCleanup === 'function'
+            ? refCleanup
             : () => {
                 ref(null);
               };
-        }
-        // $FlowFixMe[incompatible-type] - see the ref-callback note above.
-        ref.current = strictRef;
-        return () => {
-          ref.current = null;
-        };
-      },
-      [ref, tagName, viewportScale]
-    )
-  );
+        return;
+      }
+      // $FlowFixMe[incompatible-type] - see the ref-callback note above.
+      ref.current = strictRef;
+      cleanup = () => {
+        ref.current = null;
+      };
+    };
+  }, [ref, tagName, viewportScale]);
 }

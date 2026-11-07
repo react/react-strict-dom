@@ -41,7 +41,7 @@ function applyViewProps(
   tagName: string,
   isPressable: boolean,
   disabled: boolean,
-  elementRef: CallbackRef<HostInstance>,
+  elementRef: ?CallbackRef<HostInstance>,
   displayInsideValue: 'flow' | 'flex'
 ): 'flow' | 'flex' {
   // Tag-specific props
@@ -63,7 +63,9 @@ function applyViewProps(
     nativeProps.focusable = false;
   }
 
-  nativeProps.ref = elementRef;
+  if (elementRef != null) {
+    nativeProps.ref = elementRef;
+  }
 
   // Workaround: React Native doesn't support raw text children of View
   // Sometimes we can auto-fix this

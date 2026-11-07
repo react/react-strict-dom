@@ -2,7 +2,6 @@
 
 exports[`<html.*> (native polyfills) auto-wraps raw strings: auto-wrap raw strings 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -27,7 +26,6 @@ exports[`<html.*> (native polyfills) opt in to strict layout conformance: strict
   mode="strict"
 >
   <ViewNativeComponent
-    ref={[Function]}
     style={
       {
         "boxSizing": "content-box",
@@ -40,7 +38,6 @@ exports[`<html.*> (native polyfills) opt in to strict layout conformance: strict
 
 exports[`<html.*> (native polyfills) polyfills: inheritence inherited styles 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "borderColor": "red",
@@ -50,7 +47,6 @@ exports[`<html.*> (native polyfills) polyfills: inheritence inherited styles 1`]
   }
 >
   <ViewNativeComponent
-    ref={[Function]}
     style={
       {
         "boxSizing": "content-box",
@@ -59,7 +55,6 @@ exports[`<html.*> (native polyfills) polyfills: inheritence inherited styles 1`]
     }
   >
     <Text
-      ref={[Function]}
       style={
         {
           "boxSizing": "content-box",
@@ -102,7 +97,6 @@ exports[`<html.*> (native polyfills) polyfills: inheritence inherited styles 1`]
 
 exports[`<html.*> (native polyfills) polyfills: inheritence inherited styles for auto-fix of raw strings 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -111,7 +105,6 @@ exports[`<html.*> (native polyfills) polyfills: inheritence inherited styles for
   }
 >
   <ViewNativeComponent
-    ref={[Function]}
     style={
       {
         "boxSizing": "content-box",
@@ -136,7 +129,6 @@ exports[`<html.*> (native polyfills) polyfills: inheritence inherited styles for
 
 exports[`<html.*> (native polyfills) polyfills: layout block layout override of flex layout: block layout override of flex 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "alignItems": "stretch",
@@ -152,7 +144,6 @@ exports[`<html.*> (native polyfills) polyfills: layout block layout override of 
   }
 >
   <ViewNativeComponent
-    ref={[Function]}
     style={
       {
         "boxSizing": "content-box",
@@ -165,7 +156,6 @@ exports[`<html.*> (native polyfills) polyfills: layout block layout override of 
 
 exports[`<html.*> (native polyfills) polyfills: layout default block layout: block layout 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -177,7 +167,6 @@ exports[`<html.*> (native polyfills) polyfills: layout default block layout: blo
 
 exports[`<html.*> (native polyfills) polyfills: layout default flex layout: flex layout 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "alignContent": "stretch",
@@ -194,7 +183,6 @@ exports[`<html.*> (native polyfills) polyfills: layout default flex layout: flex
   }
 >
   <ViewNativeComponent
-    ref={[Function]}
     style={
       {
         "boxSizing": "content-box",
@@ -204,7 +192,6 @@ exports[`<html.*> (native polyfills) polyfills: layout default flex layout: flex
     }
   />
   <ViewNativeComponent
-    ref={[Function]}
     style={
       {
         "boxSizing": "content-box",
@@ -219,7 +206,6 @@ exports[`<html.*> (native polyfills) polyfills: layout default flex layout: flex
 exports[`<html.*> (native polyfills) polyfills: props <img> "src" prop with loading props 1`] = `
 <Image
   crossOrigin="use-credentials"
-  ref={[Function]}
   referrerPolicy="no-referrer"
   src="https://src.jpg"
   style={
@@ -235,7 +221,6 @@ exports[`<html.*> (native polyfills) polyfills: props <img> "src" prop with load
 exports[`<html.*> (native polyfills) polyfills: props <img> "srcSet" prop with loading props 1`] = `
 <Image
   crossOrigin="use-credentials"
-  ref={[Function]}
   referrerPolicy="no-referrer"
   srcSet="https://src.jpg 1x, https://srcx2.jpg 2x"
   style={
@@ -995,7 +980,6 @@ exports[`<html.*> (native polyfills) polyfills: props <textarea> "rows" prop 1`]
 
 exports[`<html.*> (native polyfills) polyfills: props global "dir" prop: "auto" block 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1007,7 +991,6 @@ exports[`<html.*> (native polyfills) polyfills: props global "dir" prop: "auto" 
 
 exports[`<html.*> (native polyfills) polyfills: props global "dir" prop: "auto" text 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1021,7 +1004,6 @@ exports[`<html.*> (native polyfills) polyfills: props global "dir" prop: "auto" 
 
 exports[`<html.*> (native polyfills) polyfills: props global "dir" prop: "ltr" block 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1034,7 +1016,6 @@ exports[`<html.*> (native polyfills) polyfills: props global "dir" prop: "ltr" b
 
 exports[`<html.*> (native polyfills) polyfills: props global "dir" prop: "ltr" text 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1049,7 +1030,6 @@ exports[`<html.*> (native polyfills) polyfills: props global "dir" prop: "ltr" t
 
 exports[`<html.*> (native polyfills) polyfills: props global "dir" prop: "rtl" block 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1062,7 +1042,6 @@ exports[`<html.*> (native polyfills) polyfills: props global "dir" prop: "rtl" b
 
 exports[`<html.*> (native polyfills) polyfills: props global "dir" prop: "rtl" text 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1077,7 +1056,6 @@ exports[`<html.*> (native polyfills) polyfills: props global "dir" prop: "rtl" t
 
 exports[`<html.*> (native polyfills) polyfills: props global "hidden" prop 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1178,7 +1156,6 @@ exports[`<html.*> (native polyfills) polyfills: props global "hidden" prop: "unt
 
 exports[`<html.*> (native polyfills) polyfills: props global "hidden" prop: display set 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "alignContent": "stretch",

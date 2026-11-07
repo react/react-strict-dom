@@ -3,7 +3,6 @@
 exports[`<compat.native> "as" equals "div": as=div 1`] = `
 <View
   accessibilityLabel="label"
-  ref={[Function]}
   style={
     {
       "paddingHorizontal": 32,
@@ -15,7 +14,6 @@ exports[`<compat.native> "as" equals "div": as=div 1`] = `
 exports[`<compat.native> "as" equals "img": as=img 1`] = `
 <Image
   accessibilityLabel="label"
-  ref={[Function]}
   srcSet="1x.img, 2x.img 2x"
   style={
     {
@@ -40,7 +38,6 @@ exports[`<compat.native> "as" equals "span": as=span 1`] = `
 <Text
   accessibilityLabel="label"
   numberOfLines={3}
-  ref={[Function]}
   style={
     {
       "color": "blue",
@@ -65,7 +62,6 @@ exports[`<compat.native> "as" equals "textarea": as=textarea 1`] = `
 exports[`<compat.native> default: default 1`] = `
 <Pressable
   accessibilityLabel="label"
-  ref={[Function]}
   style={
     {
       "paddingHorizontal": 32,
@@ -77,11 +73,9 @@ exports[`<compat.native> default: default 1`] = `
 exports[`<compat.native> nested: nested 1`] = `
 <View
   accessibilityLabel="label"
-  ref={[Function]}
   style={{}}
 >
   <Text
-    ref={[Function]}
     style={
       {
         "boxSizing": "content-box",
@@ -99,7 +93,6 @@ exports[`<compat.native> nested: nested 1`] = `
 exports[`<compat.native> styled: styled 1`] = `
 <Pressable
   accessibilityLabel="label"
-  ref={[Function]}
   style={
     [
       {
