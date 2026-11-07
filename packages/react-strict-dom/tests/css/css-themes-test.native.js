@@ -210,4 +210,42 @@ describe('css.* themes', () => {
     });
     expect(root.toJSON()).toMatchSnapshot();
   });
+
+  test('objectFit (theme updates)', () => {
+    const tokens = css.defineVars({ objectFit: 'none' });
+    const theme = css.createTheme(tokens, {
+      objectFit: 'scale-down'
+    });
+    const styles = css.create({
+      image: { objectFit: tokens.objectFit }
+    });
+
+    let root;
+    act(() => {
+      root = create(
+        <html.div>
+          <html.img style={styles.image} />
+        </html.div>
+      );
+    });
+    expect(root.toJSON().children[0].props.style).toMatchSnapshot('default');
+    act(() => {
+      root.update(
+        <html.div style={theme}>
+          <html.img style={styles.image} />
+        </html.div>
+      );
+    });
+    expect(root.toJSON().children[0].props.style).toMatchSnapshot('theme');
+    act(() => {
+      root.update(
+        <html.div>
+          <html.img style={styles.image} />
+        </html.div>
+      );
+    });
+    expect(root.toJSON().children[0].props.style).toMatchSnapshot(
+      'theme removed'
+    );
+  });
 });

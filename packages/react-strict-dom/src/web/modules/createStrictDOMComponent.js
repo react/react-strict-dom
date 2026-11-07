@@ -48,10 +48,6 @@ export function createStrictDOMComponent<T, P extends StrictProps>(
     if (htmlFor != null) {
       hostProps.htmlFor = htmlFor;
     }
-    if (props.role != null) {
-      // $FlowFixMe[incompatible-type] "presentation" synonym has wider browser support
-      hostProps.role = props.role === 'none' ? 'presentation' : props.role;
-    }
     if (TagName === 'button') {
       hostProps.type = hostProps.type ? hostProps.type : 'button';
     } else if (TagName === 'input' || TagName === 'textarea') {
