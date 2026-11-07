@@ -9,6 +9,7 @@
 
 import type { ReactNativeTransform } from '../../types/renderer.native';
 
+import { CSSCalcValue } from './CSSCalcValue';
 import { CSSTransformValue } from './CSSTransformValue';
 
 const transformRegex1 =
@@ -18,12 +19,55 @@ const transformRegex3 = /matrix\((.*)\)/;
 
 const memoizedValues = new Map<string, CSSTransformValue>();
 
+// Pre-evaluate calc() expressions inside a transform string, replacing each
+// calc(...) with its computed numeric value so the regex parser can handle it.
+function resolveCalcInTransform(input: string): string {
+  if (!input.includes('calc(')) {
+    return input;
+  }
+  let result = '';
+  let i = 0;
+  while (i < input.length) {
+    const calcIdx = input.indexOf('calc(', i);
+    if (calcIdx === -1) {
+      result += input.slice(i);
+      break;
+    }
+    result += input.slice(i, calcIdx);
+    // Find the matching closing paren for calc(
+    let depth = 0;
+    let j = calcIdx + 4; // position of '('
+    for (; j < input.length; j++) {
+      if (input[j] === '(') {
+        depth++;
+      } else if (input[j] === ')') {
+        depth--;
+        if (depth === 0) {
+          break;
+        }
+      }
+    }
+    const calcStr = input.slice(calcIdx, j + 1);
+    const calcValue = CSSCalcValue.parse(calcStr);
+    if (calcValue != null) {
+      const evaluated = calcValue.resolvePixelValue({ fontScale: 1 }, 'width');
+      result += typeof evaluated === 'number' ? String(evaluated) : '0';
+    } else {
+      result += '0';
+    }
+    i = j + 1;
+  }
+  return result;
+}
+
 export function parseTransform(transform: string): CSSTransformValue {
   const memoizedValue = memoizedValues.get(transform);
   if (memoizedValue != null) {
     return memoizedValue;
   }
 
+  const originalTransform = transform;
+  transform = resolveCalcInTransform(transform);
   const transforms = transform
     .split(')')
     .flatMap((s) => (s === '' ? ([] as string[]) : [s + ')']));
@@ -115,6 +159,6 @@ export function parseTransform(transform: string): CSSTransformValue {
   }
 
   const cssTransformValue = new CSSTransformValue(parsedTransforms);
-  memoizedValues.set(transform, cssTransformValue);
+  memoizedValues.set(originalTransform, cssTransformValue);
   return cssTransformValue;
 }

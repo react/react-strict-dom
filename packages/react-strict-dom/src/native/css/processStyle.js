@@ -7,6 +7,7 @@
  * @flow strict
  */
 
+import { CSSCalcValue } from './CSSCalcValue';
 import { CSSLengthUnitValue } from './CSSLengthUnitValue';
 import { CSSUnparsedValue } from './typed-om/CSSUnparsedValue';
 
@@ -114,6 +115,16 @@ export function processStyle(
       if (stringContainsVariables(styleValue)) {
         result[propName] = CSSUnparsedValue.parse(propName, styleValue);
         continue;
+      } else if (propName !== 'transform' && styleValue.includes('calc(')) {
+        const calcValue = CSSCalcValue.parse(styleValue);
+        if (calcValue != null) {
+          result[propName] = calcValue;
+        } else if (__DEV__) {
+          warnMsg(
+            `unsupported calc expression in "${propName}:${styleValue}"`
+          );
+        }
+        continue;
       }
       // Polyfill support for backgroundImage using experimental API
       else if (propName === 'backgroundImage') {
@@ -219,10 +230,7 @@ export function processStyle(
           }
           continue;
         }
-      } else if (
-        unsupportedValues.has(styleValue) ||
-        styleValue.includes('calc(')
-      ) {
+      } else if (unsupportedValues.has(styleValue)) {
         if (__DEV__) {
           warnMsg(
             `unsupported style value in "${propName}:${String(styleValue)}"`
