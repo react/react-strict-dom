@@ -20,7 +20,7 @@ import typeof * as TStyleX from '@stylexjs/stylex';
 export type Style = InlineStyles;
 
 export type Styles = StyleXArray<
-  StyleXStyles<> | Theme<VarGroup<{ readonly [string]: unknown }>>
+  StyleXStyles<> | Theme<VarGroup<{ readonly [key: string]: unknown }>>
 >;
 
 export type IStyleX = Readonly<{
@@ -35,5 +35,5 @@ export type IStyleX = Readonly<{
   ...
 }>;
 
-export type MutableCustomProperties = { [string]: unknown };
+export type MutableCustomProperties = { [key: string]: unknown };
 export type CustomProperties = Readonly<MutableCustomProperties>;
