@@ -23,11 +23,18 @@ type AnimatedStyle = {
   [string]: ?ReactNativeStyleValue | ReadonlyArray<unknown>
 };
 
-type TransitionMetadata = Readonly<{
+type Transition = Readonly<{
+  animatedValue: ReactNative.Animated.Value,
   delay: number,
   duration: number,
   timingFunction: string | null,
   shouldUseNativeDriver: boolean
+}>;
+
+type TransitionState = Readonly<{
+  currentStyle: ReactNativeStyle | void,
+  previousStyle: ReactNativeStyle | void,
+  transition: Transition | void
 }>;
 
 const INPUT_RANGE: ReadonlyArray<number> = [0, 1];
@@ -290,43 +297,28 @@ export function useStyleTransition(style: ReactNativeStyle): ReactNativeStyle {
     return output;
   }, {});
 
-  const [currentStyle, setCurrentStyle] =
-    React.useState<ReactNativeStyle | void>(style);
-  const [previousStyle, setPreviousStyle] =
-    React.useState<ReactNativeStyle | void>(undefined);
-  const [animatedValue, setAnimatedValue] =
-    React.useState<ReactNative.Animated.Value | void>(undefined);
+  const [{ currentStyle, previousStyle, transition }, setTransitionState] =
+    React.useState<TransitionState>(() => ({
+      currentStyle: style,
+      previousStyle: undefined,
+      transition: undefined
+    }));
 
-  // This ref is utilized as a performance optimization so that the effect that contains the
-  // animation trigger only is called when the animated value's identity changes. As far as the effect
-  // is concerned it just needs the most up to date version of these transition properties;
-  const transitionMetadataRef = React.useRef<TransitionMetadata>({
-    delay: transitionDelay,
-    duration: transitionDuration,
-    timingFunction: transitionTimingFunction,
-    shouldUseNativeDriver: canUseNativeDriver(transitionStyle)
-  });
-  // effect to sync the transition metadata
-  React.useEffect(() => {
-    transitionMetadataRef.current = {
-      delay: transitionDelay,
-      duration: transitionDuration,
-      timingFunction: transitionTimingFunction,
-      shouldUseNativeDriver: canUseNativeDriver(transitionStyle)
-    };
-  }, [
-    transitionDelay,
-    transitionDuration,
-    transitionStyle,
-    transitionTimingFunction
-  ]);
+  const animatedValue = transition?.animatedValue;
 
   // effect to trigger a transition
-  // REMEMBER: it is super important that this effect's dependency array **only** contains the animated value
+  // The transition object gets a new identity only when a new transition
+  // starts, so this effect runs exactly once per transition, using the timing
+  // values captured at that moment.
   React.useEffect(() => {
-    if (animatedValue !== undefined) {
-      const { delay, duration, timingFunction, shouldUseNativeDriver } =
-        transitionMetadataRef.current;
+    if (transition !== undefined) {
+      const {
+        animatedValue,
+        delay,
+        duration,
+        timingFunction,
+        shouldUseNativeDriver
+      } = transition;
 
       const animation = getAnimation(
         animatedValue,
@@ -341,7 +333,7 @@ export function useStyleTransition(style: ReactNativeStyle): ReactNativeStyle {
         animation.stop();
       };
     }
-  }, [animatedValue]);
+  }, [transition]);
 
   if (
     _delay == null &&
@@ -354,10 +346,18 @@ export function useStyleTransition(style: ReactNativeStyle): ReactNativeStyle {
   }
 
   if (transitionStyleHasChanged(transitionStyle, currentStyle)) {
-    setCurrentStyle(style);
-    setPreviousStyle(currentStyle);
-    setAnimatedValue(new ReactNative.Animated.Value(0));
-    // This commit will be thrown away due to the above state setters so we can bail out early
+    setTransitionState({
+      currentStyle: style,
+      previousStyle: currentStyle,
+      transition: {
+        animatedValue: new ReactNative.Animated.Value(0),
+        delay: transitionDelay,
+        duration: transitionDuration,
+        timingFunction: transitionTimingFunction,
+        shouldUseNativeDriver: canUseNativeDriver(transitionStyle)
+      }
+    });
+    // This commit will be thrown away due to the above state setter so we can bail out early
     return style;
   }
 
