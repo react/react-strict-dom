@@ -40,7 +40,7 @@ type StrictInputProps = StrictReactDOMInputProps | StrictReactDOMTextAreaProps;
 // Helper to update cached selection state for selectionStart/End polyfill
 function updateCachedSelection(
   node: ?HostInstance,
-  selection: ?{ start: number, end: number }
+  selection: ?Readonly<{ start: number, end: number }>
 ) {
   if (node != null && selection != null) {
     // $FlowFixMe[class-object-subtyping] - write polyfill-only cache fields.
@@ -57,7 +57,7 @@ function applyTextInputProps(
   props: StrictInputProps,
   tagName: string,
   mergedRef: CallbackRef<HostInstance>,
-  cacheSelection: (selection: ?{ start: number, end: number }) => void
+  cacheSelection: (selection: ?Readonly<{ start: number, end: number }>) => void
 ): void {
   const {
     autoCapitalize,
@@ -244,7 +244,7 @@ export function createStrictDOMTextInputComponent<
     // Reads nodeRef lazily so the ref object never enters the plain props
     // builder, which would trip react-rule-unsafe-ref.
     const cacheSelection = React.useCallback(
-      (selection: ?{ start: number, end: number }) => {
+      (selection: ?Readonly<{ start: number, end: number }>) => {
         updateCachedSelection(nodeRef.current, selection);
       },
       []

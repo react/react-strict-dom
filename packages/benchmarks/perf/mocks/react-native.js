@@ -111,6 +111,8 @@ export const TextInput = 'TextInput';
 
 export const Text = 'Text';
 
+export const unstable_NativeView = 'ViewNativeComponent';
+
 export const unstable_TextAncestorContext = 'TextAncestorContext';
 
 export const View = 'View';

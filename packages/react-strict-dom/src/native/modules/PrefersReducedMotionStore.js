@@ -7,7 +7,7 @@
  * @flow strict-local
  */
 
-import type { EventSubscription } from 'react-native/Libraries/vendor/emitter/EventEmitter';
+import type { EventSubscription } from 'react-native';
 
 import * as ReactNative from '../react-native';
 

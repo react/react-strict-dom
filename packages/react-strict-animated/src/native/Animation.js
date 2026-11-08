@@ -13,8 +13,9 @@ import type {
   SpringAnimationConfig,
   TimingAnimationConfig
 } from '../shared/SharedAnimatedTypes';
-import type { CompositeAnimation } from 'react-native/Libraries/Animated/Animated';
 import { Animated, useAnimatedValue } from 'react-native';
+
+type CompositeAnimation = Animated.CompositeAnimation;
 
 export function useValue(initialValue: number): Animated.Value {
   return useAnimatedValue(initialValue, { useNativeDriver: true });
