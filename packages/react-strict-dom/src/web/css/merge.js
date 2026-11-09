@@ -26,7 +26,7 @@ type StylesArray<out T> = T | ReadonlyArray<StylesArray<T>>;
 type Props = Readonly<{
   className?: string,
   'data-style-src'?: string,
-  style?: Readonly<{ [string]: string | number }>
+  style?: Readonly<{ [key: string]: string | number }>
 }>;
 
 const optimizedStyleq = styleq.factory({
