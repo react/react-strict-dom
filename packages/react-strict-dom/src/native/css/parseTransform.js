@@ -101,12 +101,12 @@ export function parseTransform(transform: string): CSSTransformValue {
           matrix[3],
           0,
           0,
-          matrix[4],
-          matrix[5],
+          0,
+          0,
           1,
           0,
-          0,
-          0,
+          matrix[4],
+          matrix[5],
           0,
           1
         ]
