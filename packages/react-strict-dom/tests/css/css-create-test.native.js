@@ -1307,6 +1307,19 @@ describe('css.create()', () => {
       expect(console.warn).toHaveBeenCalledTimes(1);
     });
 
+    test('matrix translation', () => {
+      const styles = css.create({
+        root: { transform: 'matrix(1, 0, 0, 1, 12, -34)' }
+      });
+      let root;
+      act(() => {
+        root = create(<html.div style={styles.root} />);
+      });
+      expect(root.toJSON().props.style.transform).toEqual([
+        { matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 12, -34, 0, 1] }
+      ]);
+    });
+
     test('transform', () => {
       const styles = css.create({
         none: {
