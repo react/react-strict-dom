@@ -253,6 +253,35 @@ describe('<html.*> (native polyfills)', () => {
         );
       });
 
+      test('"enterKeyHint" prop', () => {
+        const getProps = (element) => {
+          let root;
+          act(() => {
+            root = create(element);
+          });
+          return root.root.children[0].props;
+        };
+        const onKeyDown = () => {};
+        // "next" with a keydown handler keeps focus on submit
+        const next = getProps(
+          <html.input enterKeyHint="next" onKeyDown={onKeyDown} />
+        );
+        expect(next.enterKeyHint).toBe('next');
+        expect(next.submitBehavior).toBe('submit');
+        // otherwise the React Native default is preserved
+        expect(
+          getProps(<html.input enterKeyHint="next" />).submitBehavior
+        ).toBeUndefined();
+        expect(
+          getProps(<html.input enterKeyHint="done" onKeyDown={onKeyDown} />)
+            .submitBehavior
+        ).toBeUndefined();
+        expect(
+          getProps(<html.textarea enterKeyHint="next" onKeyDown={onKeyDown} />)
+            .submitBehavior
+        ).toBeUndefined();
+      });
+
       test('"tabIndex" prop', () => {
         let root;
         act(() => {
