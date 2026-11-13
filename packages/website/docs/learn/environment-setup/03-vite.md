@@ -130,7 +130,7 @@ export default {
         "node_modules/<package-name>/**/*.{js,mjs}",
       ],
       babelConfig,
-      useLayers: true,
+      useCSSLayers: true,
     },
   },
 };
