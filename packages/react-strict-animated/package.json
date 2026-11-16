@@ -44,6 +44,6 @@
   "peerDependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-native": ">=0.82.0"
+    "react-native": ">=0.85.0"
   }
 }

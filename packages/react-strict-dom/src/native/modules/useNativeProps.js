@@ -8,7 +8,10 @@
  */
 
 import type { CustomProperties } from '../../types/styles';
-import type { PressEvent, ReactNativeProps } from '../../types/renderer.native';
+import type {
+  GestureResponderEvent,
+  ReactNativeProps
+} from '../../types/renderer.native';
 import type { StrictProps as StrictPropsOriginal } from '../../types/StrictProps';
 import type { Style } from '../../types/styles';
 
@@ -210,7 +213,7 @@ function applyHtmlProps(
   }
   // TODO: remove once PointerEvent onClick is available
   if (onClick != null) {
-    nativeProps.onPress = function (e: PressEvent) {
+    nativeProps.onPress = function (e: GestureResponderEvent) {
       const { nativeEvent } = e;
       const event: unknown = nativeEvent;
       let altKey = false;

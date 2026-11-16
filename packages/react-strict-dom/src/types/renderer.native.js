@@ -7,34 +7,22 @@
  * @flow strict
  */
 
-// $FlowFixMe[nonstrict-import]
-import type AnimatedNode from 'react-native/Libraries/Animated/nodes/AnimatedNode';
 import type {
   // $FlowFixMe[nonstrict-import]
-  CompositeAnimation
-} from 'react-native/Libraries/Animated/Animated';
-import type {
+  GestureResponderEvent,
   // $FlowFixMe[nonstrict-import]
-  // $FlowFixMe[missing-export]
-  Props as TextInputProps
-} from 'react-native/Libraries/Components/TextInput/TextInput';
-import type {
+  HostInstance,
   // $FlowFixMe[nonstrict-import]
-  ImageProps
-} from 'react-native/Libraries/Image/ImageProps';
-import type {
-  // $FlowFixMe[missing-export]
-  PressEvent,
-  // $FlowFixMe[missing-export]
-  SyntheticEvent
-} from 'react-native/Libraries/Types/CoreEventTypes';
-import type {
+  ImageProps,
+  // $FlowFixMe[nonstrict-import]
+  TextInputProps,
   // $FlowFixMe[nonstrict-import]
   ViewProps
-} from 'react-native/Libraries/Components/View/ViewPropTypes';
-// $FlowFixMe[nonstrict-import]
-import type { HostInstance } from 'react-native';
+} from 'react-native';
 import type { CallbackRef } from './react';
+
+// $FlowFixMe[nonstrict-import]
+import { Animated } from 'react-native';
 
 type ReactNativeProps = {
   accessible?: ViewProps['accessible'],
@@ -103,7 +91,7 @@ type ReactNativeProps = {
   onPointerOut?: ViewProps['onPointerOut'],
   onPointerOver?: ViewProps['onPointerOver'],
   onPointerUp?: ViewProps['onPointerUp'],
-  onPress?: ?(event: PressEvent) => void,
+  onPress?: ?(event: GestureResponderEvent) => void,
   onScroll?: ?(event: unknown) => void,
   onSelectionChange?: TextInputProps['onSelectionChange'],
   onSubmitEditing?: TextInputProps['onSubmitEditing'],
@@ -148,17 +136,18 @@ type ReactNativeStyleValue =
   | number
   | string
   | ReactNativeTransform[]
-  | AnimatedNode;
+  | Animated.Node;
 
 type ReactNativeStyle = { [string]: ?ReactNativeStyleValue };
 
+type CompositeAnimation = Animated.CompositeAnimation;
+
 export type {
   CompositeAnimation,
+  GestureResponderEvent,
   HostInstance,
-  PressEvent,
   ReactNativeProps,
   ReactNativeStyle,
   ReactNativeStyleValue,
-  ReactNativeTransform,
-  SyntheticEvent
+  ReactNativeTransform
 };

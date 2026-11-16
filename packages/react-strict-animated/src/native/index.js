@@ -14,13 +14,12 @@ import type {
   SpringAnimationConfig,
   TimingAnimationConfig
 } from '../shared/SharedAnimatedTypes';
-import type { CompositeAnimation } from 'react-native/Libraries/Animated/Animated';
 
 import { Animated } from 'react-native';
 
 export type AnimatedValue = Animated.Value;
+export type CompositeAnimation = Animated.CompositeAnimation;
 export type {
-  CompositeAnimation,
   SpringAnimationConfig,
   TimingAnimationConfig,
   InterpolationConfig
