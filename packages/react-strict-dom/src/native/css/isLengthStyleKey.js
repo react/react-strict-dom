@@ -7,8 +7,6 @@
  * @flow strict
  */
 
-import { version } from '../modules/version';
-
 export const lengthStyleKeySet: Set<string> = new Set([
   'blockSize',
   'borderBottomLeftRadius',
@@ -65,6 +63,8 @@ export const lengthStyleKeySet: Set<string> = new Set([
   'minHeight',
   'minInlineSize',
   'minWidth',
+  'outlineOffset',
+  'outlineWidth',
   'padding',
   'paddingBlock',
   'paddingBlockEnd',
@@ -81,8 +81,3 @@ export const lengthStyleKeySet: Set<string> = new Set([
   'top',
   'width'
 ]);
-
-if (version.experimental) {
-  lengthStyleKeySet.add('outlineOffset');
-  lengthStyleKeySet.add('outlineWidth');
-}
