@@ -13,6 +13,7 @@ import type { CustomProperties } from '../../types/styles';
 import type { MutableCustomProperties } from '../../types/styles';
 import type { IStyleX } from '../../types/styles';
 
+import { CSSCalcValue } from './CSSCalcValue';
 import { CSSLengthUnitValue } from './CSSLengthUnitValue';
 import { CSSTransformValue } from './CSSTransformValue';
 import { CSSUnparsedValue } from './typed-om/CSSUnparsedValue';
@@ -207,6 +208,20 @@ function resolveStyle(
         }
         continue;
       }
+    }
+
+    if (styleValue instanceof CSSCalcValue) {
+      result[propName] = styleValue.resolvePixelValue(
+        {
+          fontScale,
+          inheritedFontSize,
+          viewportHeight,
+          viewportScale,
+          viewportWidth
+        },
+        propName
+      );
+      continue;
     }
 
     if (styleValue instanceof CSSTransformValue) {
