@@ -68,7 +68,10 @@ function resolveVariableReferenceValue(
   if (variableValue != null) {
     if (typeof variableValue === 'object' && variableValue.default != null) {
       let defaultValue = variableValue.default;
-      if (colorScheme === 'dark') {
+      if (
+        colorScheme === 'dark' &&
+        Object.hasOwn(variableValue, '@media (prefers-color-scheme: dark)')
+      ) {
         defaultValue = variableValue['@media (prefers-color-scheme: dark)'];
       }
       return defaultValue;
