@@ -111,6 +111,7 @@ type ReactNativeProps = {
   src?: ImageProps['src'],
   srcSet?: ImageProps['srcSet'],
   style: ReactNativeStyle,
+  submitBehavior?: TextInputProps['submitBehavior'],
   testID?: ViewProps['testID'],
   value?: TextInputProps['value'],
   width?: ImageProps['width']

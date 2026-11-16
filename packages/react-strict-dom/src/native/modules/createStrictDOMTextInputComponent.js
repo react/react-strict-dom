@@ -137,6 +137,11 @@ function applyTextInputProps(
   }
   if (enterKeyHint != null) {
     nativeProps.enterKeyHint = enterKeyHint;
+    // On web, Enter does not blur an input. Keep focus on "next" so that an
+    // onKeyDown handler can move focus without the keyboard hiding in between.
+    if (tagName === 'input' && enterKeyHint === 'next' && onKeyDown != null) {
+      nativeProps.submitBehavior = 'submit';
+    }
   }
   if (maxLength != null) {
     nativeProps.maxLength = maxLength;
