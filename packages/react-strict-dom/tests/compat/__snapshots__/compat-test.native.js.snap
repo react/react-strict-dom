@@ -6,7 +6,7 @@ exports[`<compat.native> "as" equals "div": as=div 1`] = `
   ref={[Function]}
   style={
     {
-      "paddingHorizontal": 32,
+      "paddingInline": 32,
     }
   }
 />
@@ -68,7 +68,7 @@ exports[`<compat.native> default: default 1`] = `
   ref={[Function]}
   style={
     {
-      "paddingHorizontal": 32,
+      "paddingInline": 32,
     }
   }
 />
@@ -106,7 +106,7 @@ exports[`<compat.native> styled: styled 1`] = `
         "position": "absolute",
       },
       {
-        "paddingHorizontal": 32,
+        "paddingInline": 32,
       },
     ]
   }

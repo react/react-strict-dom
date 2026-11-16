@@ -104,6 +104,7 @@ type ReactNativeProps = {
   pointerEvents?: ViewProps['pointerEvents'],
   ref?: CallbackRef<HostInstance>,
   referrerPolicy?: ImageProps['referrerPolicy'],
+  readOnly?: TextInputProps['readOnly'],
   renderToHardwareTextureAndroid?: ViewProps['renderToHardwareTextureAndroid'],
   role?: ?string,
   secureTextEntry?: TextInputProps['secureTextEntry'],

@@ -70,7 +70,7 @@ The following tables represent the compatibility status of the strict CSS API fo
 | animationName | ❌ | ❌ | [#3](https://github.com/facebook/react-strict-dom/issues/3) |
 | animationPlayState | ❌ | ❌ | [#3](https://github.com/facebook/react-strict-dom/issues/3) |
 | animationTimingFunction | ❌ | ❌ | [#3](https://github.com/facebook/react-strict-dom/issues/3) |
-| aspectRatio (string) | 🟡 | 🟡 | |
+| aspectRatio (string) | ✅ | ✅ | |
 | backdropFilter | ❌ | ❌ | |
 | backfaceVisibility | ✅ | ✅ | |
 | backgroundColor | ✅ | ✅ | |
@@ -80,11 +80,11 @@ The following tables represent the compatibility status of the strict CSS API fo
 | backgroundRepeat | ❌ | ❌ | |
 | backgroundSize | ❌ | ❌ | |
 | blockSize | 🟡 | 🟡 | |
-| borderBlockColor | 🟡 | 🟡 | |
-| borderBlockEndColor | 🟡 | 🟡 | |
+| borderBlockColor | ✅ | ✅ | |
+| borderBlockEndColor | ✅ | ✅ | |
 | borderBlockEndStyle | 🟡 | 🟡 | |
 | borderBlockEndWidth | 🟡 | 🟡 | |
-| borderBlockStartColor | 🟡 | 🟡 | |
+| borderBlockStartColor | ✅ | ✅ | |
 | borderBlockStartStyle | 🟡 | 🟡 | |
 | borderBlockStartWidth | 🟡 | 🟡 | |
 | borderBlockStyle | 🟡 | 🟡 | |
@@ -95,8 +95,8 @@ The following tables represent the compatibility status of the strict CSS API fo
 | borderBottomStyle | ✅ | ✅ | |
 | borderBottomWidth | ✅ | ✅ | |
 | borderColor | ✅ | ✅ | |
-| borderEndEndRadius | 🟡 | 🟡 | |
-| borderEndStartRadius | 🟡 | 🟡 | |
+| borderEndEndRadius | ✅ | ✅ | |
+| borderEndStartRadius | ✅ | ✅ | |
 | borderInlineColor | 🟡 | 🟡 | |
 | borderInlineEndColor | 🟡 | 🟡 | |
 | borderInlineEndStyle | 🟡 | 🟡 | |
@@ -114,8 +114,8 @@ The following tables represent the compatibility status of the strict CSS API fo
 | borderRightColor | ✅ | ✅ | |
 | borderRightStyle | ✅ | ✅ | |
 | borderRightWidth | ✅ | ✅ | |
-| borderStartEndRadius | 🟡 | 🟡 | |
-| borderStartStartRadius | 🟡 | 🟡 | |
+| borderStartEndRadius | ✅ | ✅ | |
+| borderStartStartRadius | ✅ | ✅ | |
 | borderStyle | ✅ | ✅ | |
 | borderTopColor | ✅ | ✅ | |
 | borderTopLeftRadius | ✅ | ✅ | |
@@ -132,7 +132,7 @@ The following tables represent the compatibility status of the strict CSS API fo
 | color | ✅ | ✅ | |
 | columnGap | ✅ | ✅ | |
 | cursor | ❌ | ✅ Partial | |
-| direction | ❌ | ❌ | |
+| direction | ✅ | ✅ | |
 | display: block | 🟡 Partial | 🟡 Partial | [#2](https://github.com/facebook/react-strict-dom/issues/2) |
 | display: contents | ✅ | ✅ | |
 | display: flex | ✅ | ✅ | |
@@ -158,13 +158,13 @@ The following tables represent the compatibility status of the strict CSS API fo
 | gap | ✅ | ✅ | |
 | height | ✅ | ✅ | |
 | inlineSize | 🟡 | 🟡 | |
-| inset | 🟡 | 🟡 | |
-| insetBlock | 🟡 | 🟡 | |
-| insetBlockEnd | 🟡 | 🟡 | |
-| insetBlockStart | 🟡 | 🟡 | |
-| insetInline | 🟡 | 🟡 | |
-| insetInlineEnd | 🟡 | 🟡 | |
-| insetInlineStart | 🟡 | 🟡 | |
+| inset | ✅ | ✅ | |
+| insetBlock | ✅ | ✅ | |
+| insetBlockEnd | ✅ | ✅ | |
+| insetBlockStart | ✅ | ✅ | |
+| insetInline | ✅ | ✅ | |
+| insetInlineEnd | ✅ | ✅ | |
+| insetInlineStart | ✅ | ✅ | |
 | isolation | ✅ | ✅ | |
 | justifyContent | ✅ | ✅ | |
 | justifyItems | ❌ | ❌ | |
@@ -177,13 +177,13 @@ The following tables represent the compatibility status of the strict CSS API fo
 | listStylePosition | ❌ | ❌ | |
 | listStyleType | ❌ | ❌ | |
 | margin | ✅ | ✅ | |
-| marginBlock | 🟡 | 🟡 | |
-| marginBlockEnd | 🟡 | 🟡 | |
-| marginBlockStart | 🟡 | 🟡 | |
+| marginBlock | ✅ | ✅ | |
+| marginBlockEnd | ✅ | ✅ | |
+| marginBlockStart | ✅ | ✅ | |
 | marginBottom | ✅ | ✅ | |
-| marginInline | 🟡 | 🟡 | |
-| marginInlineEnd | 🟡 | 🟡 | |
-| marginInlineStart | 🟡 | 🟡 | |
+| marginInline | ✅ | ✅ | |
+| marginInlineEnd | ✅ | ✅ | |
+| marginInlineStart | ✅ | ✅ | |
 | marginLeft | ✅ | ✅ | |
 | marginRight | ✅ | ✅ | |
 | marginTop | ✅ | ✅ | |
@@ -210,13 +210,13 @@ The following tables represent the compatibility status of the strict CSS API fo
 | overflowX | ❌ | ❌ | |
 | overflowY | ❌ | ❌ | |
 | padding | ✅ | ✅ | |
-| paddingBlock | 🟡 | 🟡 | |
-| paddingBlockEnd | 🟡 | 🟡 | |
-| paddingBlockStart | 🟡 | 🟡 | |
+| paddingBlock | ✅ | ✅ | |
+| paddingBlockEnd | ✅ | ✅ | |
+| paddingBlockStart | ✅ | ✅ | |
 | paddingBottom | ✅ | ✅ | |
-| paddingInline | 🟡 | 🟡 | |
-| paddingInlineEnd | 🟡 | 🟡 | |
-| paddingInlineStart | 🟡 | 🟡 | |
+| paddingInline | ✅ | ✅ | |
+| paddingInlineEnd | ✅ | ✅ | |
+| paddingInlineStart | ✅ | ✅ | |
 | paddingLeft | ✅ | ✅ | |
 | paddingRight | ✅ | ✅ | |
 | paddingTop | ✅ | ✅ | |
@@ -256,7 +256,7 @@ The following tables represent the compatibility status of the strict CSS API fo
 | transform: scaleX | ✅ | ✅ | |
 | transform: scaleY | ✅ | ✅ | |
 | transform: scaleZ | ❌ | ❌ | |
-| transform: skew | ✅ | ✅ | |
+| transform: skew | ❌ | ❌ | |
 | transform: skewX | ✅ | ✅ | |
 | transform: skewY | ✅ | ✅ | |
 | transform: translate | ❌ | ❌ | |
@@ -264,9 +264,6 @@ The following tables represent the compatibility status of the strict CSS API fo
 | transform: translateX | ✅ | ✅ | |
 | transform: translateY | ✅ | ✅ | |
 | transform: translateZ | ❌ | ❌ | |
-| transform: skew | ❌ | ❌ | |
-| transform: skewX | ✅ | ✅ | |
-| transform: skewY | ✅ | ✅ | |
 | transformOrigin | ✅ | ✅ | |
 | transformStyle | ❌ | ❌ | |
 | transitionDelay | 🟡 | 🟡 | |
@@ -274,8 +271,8 @@ The following tables represent the compatibility status of the strict CSS API fo
 | transitionProperty | 🟡 | 🟡 | |
 | transitionTimingFunction | 🟡 | 🟡 | |
 | translate | ❌ | ❌ | |
-| userSelect | 🟡 | 🟡 | |
-| verticalAlign | 🟡 | ❌ | |
+| userSelect | ✅ | ✅ | |
+| verticalAlign | ✅ | ❌ | |
 | visibility | 🟡 | 🟡 | |
 | whiteSpace | ❌ | ❌ | |
 | width | ✅ | ✅ | |

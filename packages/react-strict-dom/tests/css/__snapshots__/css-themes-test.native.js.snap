@@ -162,3 +162,27 @@ exports[`css.* themes inherited themes 1`] = `
   </Text>,
 ]
 `;
+
+exports[`css.* themes objectFit (theme updates): default 1`] = `
+{
+  "boxSizing": "content-box",
+  "objectFit": "none",
+  "position": "static",
+}
+`;
+
+exports[`css.* themes objectFit (theme updates): theme 1`] = `
+{
+  "boxSizing": "content-box",
+  "objectFit": "scale-down",
+  "position": "static",
+}
+`;
+
+exports[`css.* themes objectFit (theme updates): theme removed 1`] = `
+{
+  "boxSizing": "content-box",
+  "objectFit": "none",
+  "position": "static",
+}
+`;
