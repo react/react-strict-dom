@@ -85,6 +85,10 @@ function applyImageProps(
 
   // Component-specific props
 
+  // RN Image fades in over 300ms on Android by default. That is not a web
+  // behavior, so disable it. CSS transitions can still animate opacity.
+  nativeProps.fadeDuration = 0;
+
   nativeProps.ref = elementRef;
 }
 

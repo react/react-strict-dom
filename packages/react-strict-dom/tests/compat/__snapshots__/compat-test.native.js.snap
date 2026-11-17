@@ -15,6 +15,7 @@ exports[`<compat.native> "as" equals "div": as=div 1`] = `
 exports[`<compat.native> "as" equals "img": as=img 1`] = `
 <Image
   accessibilityLabel="label"
+  fadeDuration={0}
   ref={[Function]}
   srcSet="1x.img, 2x.img 2x"
   style={

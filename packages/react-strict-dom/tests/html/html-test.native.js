@@ -297,6 +297,14 @@ describe('<html.*> (native polyfills)', () => {
         expect(root.toJSON()).toMatchSnapshot();
       });
 
+      test('disables Android fadeDuration default', () => {
+        let root;
+        act(() => {
+          root = create(<html.img src="https://src.jpg" />);
+        });
+        expect(root.toJSON().props.fadeDuration).toBe(0);
+      });
+
       test('"onError" and "onLoad" prop', () => {
         const onError = jest.fn();
         const onLoad = jest.fn();

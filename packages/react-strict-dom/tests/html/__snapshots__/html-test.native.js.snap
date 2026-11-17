@@ -219,6 +219,7 @@ exports[`<html.*> (native polyfills) polyfills: layout default flex layout: flex
 exports[`<html.*> (native polyfills) polyfills: props <img> "src" prop with loading props 1`] = `
 <Image
   crossOrigin="use-credentials"
+  fadeDuration={0}
   ref={[Function]}
   referrerPolicy="no-referrer"
   src="https://src.jpg"
@@ -235,6 +236,7 @@ exports[`<html.*> (native polyfills) polyfills: props <img> "src" prop with load
 exports[`<html.*> (native polyfills) polyfills: props <img> "srcSet" prop with loading props 1`] = `
 <Image
   crossOrigin="use-credentials"
+  fadeDuration={0}
   ref={[Function]}
   referrerPolicy="no-referrer"
   srcSet="https://src.jpg 1x, https://srcx2.jpg 2x"

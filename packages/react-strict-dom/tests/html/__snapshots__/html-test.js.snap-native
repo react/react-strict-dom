@@ -3057,6 +3057,7 @@ exports[`<html.*> "i" supports inline event handlers 1`] = `
 
 exports[`<html.*> "img" default rendering 1`] = `
 <Image
+  fadeDuration={0}
   ref={[Function]}
   style={
     {
@@ -3070,6 +3071,7 @@ exports[`<html.*> "img" default rendering 1`] = `
 
 exports[`<html.*> "img" ignores and warns about unsupported attributes 1`] = `
 <Image
+  fadeDuration={0}
   ref={[Function]}
   style={
     {
@@ -3085,6 +3087,7 @@ exports[`<html.*> "img" supports additional image attributes 1`] = `
 <Image
   alt="Alt text"
   crossOrigin="anonymous"
+  fadeDuration={0}
   height={100}
   onError={[Function]}
   onLoad={[Function]}
@@ -3136,6 +3139,7 @@ exports[`<html.*> "img" supports global attributes 1`] = `
     }
   }
   accessibilityViewIsModal={true}
+  fadeDuration={0}
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
@@ -3159,6 +3163,7 @@ exports[`<html.*> "img" supports global attributes 1`] = `
 
 exports[`<html.*> "img" supports inline event handlers 1`] = `
 <Image
+  fadeDuration={0}
   onBlur={[Function]}
   onFocus={[Function]}
   onGotPointerCapture={[Function]}
