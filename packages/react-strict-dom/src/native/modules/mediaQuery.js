@@ -54,6 +54,10 @@ const RE_MEDIA_QUERY =
   /^(?:(only|not)?\s*([_a-z][_a-z0-9-]*)|(\([^)]+\)))(?:\s*and\s*(.*))?$/i;
 const RE_MQ_EXPRESSION = /^\(\s*([_a-z-][_a-z0-9-]*)\s*(?::\s*([^)]+))?\s*\)$/;
 const RE_MQ_FEATURE = /^(?:(min|max)-)?(.+)/;
+// Media Queries Level 4 range syntax, e.g. "(width >= 600px)",
+// "(600px <= width)" or "(400px < width <= 800px)".
+const RE_MQ_RANGE =
+  /^\(\s*(?:([^<>=\s][^<>=]*?)\s*(<=?|>=?|=)\s*)?([_a-z-][_a-z0-9-]*)\s*(?:(<=?|>=?|=)\s*([^<>=\s][^<>=]*?))?\s*\)$/;
 const RE_LENGTH_UNIT = /(em|rem|px|cm|mm|in|pt|pc)?\s*$/;
 const RE_RESOLUTION_UNIT = /(dpi|dpcm|dppx)?\s*$/;
 const RE_EXPRESSION = /\([^)]+\)/g;
@@ -130,6 +134,10 @@ function matchQuery(mediaQuery, values) {
           return value >= expValue;
         case 'max':
           return value <= expValue;
+        case 'gt':
+          return value > expValue;
+        case 'lt':
+          return value < expValue;
         default:
           return value === expValue;
       }
@@ -179,21 +187,28 @@ function parseQuery(mediaQuery) {
       throw new SyntaxError('Invalid CSS media query: "' + query + '"');
     }
 
-    parsed.expressions = expressions.map(function (expression) {
+    parsed.expressions = [];
+    expressions.forEach(function (expression) {
       const captures = expression.match(RE_MQ_EXPRESSION);
 
+      if (captures) {
+        const feature = captures[1].toLowerCase().match(RE_MQ_FEATURE);
+        parsed.expressions.push({
+          modifier: feature[1],
+          feature: feature[2],
+          value: captures[2]
+        });
+        return;
+      }
+
+      const rangeExpressions = parseRangeExpression(expression);
+
       // Media Query must be valid.
-      if (!captures) {
+      if (!rangeExpressions) {
         throw new SyntaxError('Invalid CSS media query: "' + query + '"');
       }
 
-      const feature = captures[1].toLowerCase().match(RE_MQ_FEATURE);
-
-      return {
-        modifier: feature[1],
-        feature: feature[2],
-        value: captures[2]
-      };
+      parsed.expressions.push(...rangeExpressions);
     });
 
     return parsed;
@@ -201,6 +216,72 @@ function parseQuery(mediaQuery) {
 
   memoizedValues.set(mediaQuery, parsedQuery);
   return parsedQuery;
+}
+
+// Converts a range expression into the same { modifier, feature, value }
+// shape used for "min-" / "max-" features. "<" and ">" use the "lt" and "gt"
+// modifiers so that the comparison stays exclusive.
+const RANGE_MODIFIERS = { '>=': 'min', '<=': 'max', '>': 'gt', '<': 'lt' };
+const FLIPPED_OPERATORS = { '>=': '<=', '<=': '>=', '>': '<', '<': '>' };
+
+function toRangeExpression(feature, operator, value) {
+  return {
+    modifier: operator === '=' ? undefined : RANGE_MODIFIERS[operator],
+    feature,
+    value
+  };
+}
+
+function parseRangeExpression(expression) {
+  const captures = expression.match(RE_MQ_RANGE);
+  if (!captures) {
+    return null;
+  }
+
+  const leftValue = captures[1];
+  const leftOperator = captures[2];
+  const feature = captures[3].toLowerCase();
+  const rightOperator = captures[4];
+  const rightValue = captures[5];
+
+  // "min-" and "max-" prefixes cannot be combined with range operators.
+  if (RE_MQ_FEATURE.exec(feature)[1] != null) {
+    return null;
+  }
+
+  // "(value op feature)", e.g. "(600px <= width)"
+  if (leftOperator != null && rightOperator == null) {
+    return [
+      toRangeExpression(
+        feature,
+        leftOperator === '=' ? '=' : FLIPPED_OPERATORS[leftOperator],
+        leftValue
+      )
+    ];
+  }
+
+  // "(feature op value)", e.g. "(width >= 600px)"
+  if (leftOperator == null && rightOperator != null) {
+    return [toRangeExpression(feature, rightOperator, rightValue)];
+  }
+
+  // "(value op feature op value)", e.g. "(400px < width <= 800px)". Both
+  // operators must point the same way.
+  if (leftOperator != null && rightOperator != null) {
+    const isLess = (op) => op === '<' || op === '<=';
+    const isGreater = (op) => op === '>' || op === '>=';
+    if (
+      (isLess(leftOperator) && isLess(rightOperator)) ||
+      (isGreater(leftOperator) && isGreater(rightOperator))
+    ) {
+      return [
+        toRangeExpression(feature, FLIPPED_OPERATORS[leftOperator], leftValue),
+        toRangeExpression(feature, rightOperator, rightValue)
+      ];
+    }
+  }
+
+  return null;
 }
 
 // -- Utilities ----------------------------------------------------------------
