@@ -197,4 +197,52 @@ describe('css.create(): @media', () => {
       expect(root.toJSON().props.style).toMatchSnapshot();
     });
   });
+
+  describe('range syntax', () => {
+    const rangeStyles = css.create({
+      root: {
+        width: {
+          default: 100,
+          '@media (width >= 600px)': 200,
+          '@media (400px < height <= 800px)': 300
+        }
+      }
+    });
+
+    test('(width >= 600px)', () => {
+      ReactNative.useWindowDimensions.mockReturnValue({
+        height: 1000,
+        width: 600
+      });
+      let root;
+      act(() => {
+        root = create(<html.div style={rangeStyles.root} />);
+      });
+      expect(root.toJSON().props.style.width).toBe(200);
+    });
+
+    test('(400px < height <= 800px)', () => {
+      ReactNative.useWindowDimensions.mockReturnValue({
+        height: 800,
+        width: 300
+      });
+      let root;
+      act(() => {
+        root = create(<html.div style={rangeStyles.root} />);
+      });
+      expect(root.toJSON().props.style.width).toBe(300);
+    });
+
+    test('no range matches', () => {
+      ReactNative.useWindowDimensions.mockReturnValue({
+        height: 400,
+        width: 599
+      });
+      let root;
+      act(() => {
+        root = create(<html.div style={rangeStyles.root} />);
+      });
+      expect(root.toJSON().props.style.width).toBe(100);
+    });
+  });
 });

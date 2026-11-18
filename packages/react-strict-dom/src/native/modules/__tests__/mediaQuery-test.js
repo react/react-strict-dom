@@ -62,6 +62,46 @@ describe('mediaQuery.parse()', function () {
     expect(parse('(foo) (bar)')).toThrow(SyntaxError);
     expect(parse('(foo:) and (bar)')).toThrow(SyntaxError);
   });
+  test('should parse range syntax', function () {
+    expect(mediaQuery.parse('(width >= 600px)')[0].expressions).toEqual([
+      { modifier: 'min', feature: 'width', value: '600px' }
+    ]);
+    expect(mediaQuery.parse('(600px < width)')[0].expressions).toEqual([
+      { modifier: 'gt', feature: 'width', value: '600px' }
+    ]);
+    expect(
+      mediaQuery.parse('screen and (400px <= width < 800px)')[0].expressions
+    ).toEqual([
+      { modifier: 'min', feature: 'width', value: '400px' },
+      { modifier: 'lt', feature: 'width', value: '800px' }
+    ]);
+    expect(
+      mediaQuery.parse(
+        '(800px > height >= 400px) and (orientation: portrait)'
+      )[0].expressions
+    ).toEqual([
+      { modifier: 'lt', feature: 'height', value: '800px' },
+      { modifier: 'min', feature: 'height', value: '400px' },
+      { modifier: undefined, feature: 'orientation', value: 'portrait' }
+    ]);
+    expect(mediaQuery.parse('(width = 600px)')[0].expressions).toEqual([
+      { modifier: undefined, feature: 'width', value: '600px' }
+    ]);
+  });
+
+  test('should throw a SyntaxError for invalid range syntax', function () {
+    function parse(query) {
+      return function () {
+        mediaQuery.parse(query);
+      };
+    }
+
+    expect(parse('(min-width >= 600px)')).toThrow(SyntaxError);
+    expect(parse('(400px < width > 800px)')).toThrow(SyntaxError);
+    expect(parse('(width >= )')).toThrow(SyntaxError);
+    expect(parse('(>= 600px)')).toThrow(SyntaxError);
+    expect(parse('(400px < 800px)')).toThrow(SyntaxError);
+  });
 });
 
 describe('mediaQuery.match()', function () {
@@ -196,6 +236,41 @@ describe('mediaQuery.match()', function () {
           mediaQuery.match('(max-height: 1000px)', { height: '60pc' })
         ).toBe(true);
       });
+    });
+  });
+
+  describe('range syntax', function () {
+    test('should match width ranges', function () {
+      expect(mediaQuery.match('(width >= 600px)', { width: 600 })).toBe(true);
+      expect(mediaQuery.match('(width >= 600px)', { width: 599 })).toBe(false);
+      expect(mediaQuery.match('(width > 600px)', { width: 600 })).toBe(false);
+      expect(mediaQuery.match('(width > 600px)', { width: 601 })).toBe(true);
+      expect(mediaQuery.match('(width <= 600px)', { width: 600 })).toBe(true);
+      expect(mediaQuery.match('(width < 600px)', { width: 600 })).toBe(false);
+      expect(mediaQuery.match('(600px <= width)', { width: 600 })).toBe(true);
+      expect(mediaQuery.match('(600px < width)', { width: 600 })).toBe(false);
+      expect(mediaQuery.match('(width = 600px)', { width: 600 })).toBe(true);
+    });
+
+    test('should match interval ranges', function () {
+      const query = '(400px <= width < 800px)';
+      expect(mediaQuery.match(query, { width: 399 })).toBe(false);
+      expect(mediaQuery.match(query, { width: 400 })).toBe(true);
+      expect(mediaQuery.match(query, { width: 799 })).toBe(true);
+      expect(mediaQuery.match(query, { width: 800 })).toBe(false);
+      expect(
+        mediaQuery.match('(800px > height > 400px)', { height: 500 })
+      ).toBe(true);
+    });
+
+    test('should convert units and ratios', function () {
+      expect(mediaQuery.match('(width >= 40em)', { width: 640 })).toBe(true);
+      expect(
+        mediaQuery.match('(aspect-ratio > 16/9)', { 'aspect-ratio': 2 })
+      ).toBe(true);
+      expect(
+        mediaQuery.match('not screen and (width >= 600px)', { width: 500 })
+      ).toBe(true);
     });
   });
 
