@@ -46,6 +46,74 @@ describe('<html.*> (native polyfills)', () => {
     expect(root.toJSON()).toMatchSnapshot('auto-wrap raw strings');
   });
 
+  test('auto-wraps interpolated text siblings', () => {
+    const count = 3;
+
+    let root;
+    act(() => {
+      root = create(<html.div>Count: {count}</html.div>);
+    });
+    expect(root.toJSON()).toMatchObject({
+      type: 'ViewNativeComponent',
+      children: [{ type: 'Text', children: ['Count: 3'] }]
+    });
+  });
+
+  test('auto-wraps numeric only child', () => {
+    const count = 3;
+
+    let root;
+    act(() => {
+      root = create(<html.div>{count}</html.div>);
+    });
+    expect(root.toJSON()).toMatchObject({
+      type: 'ViewNativeComponent',
+      children: [{ type: 'Text', children: ['3'] }]
+    });
+  });
+
+  test('ignores empty interpolated children', () => {
+    const count = 3;
+
+    let root;
+    act(() => {
+      root = create(
+        <html.div>
+          {count}
+          {null}
+          {false}
+          {' items'}
+        </html.div>
+      );
+    });
+    expect(root.toJSON()).toMatchObject({
+      type: 'ViewNativeComponent',
+      children: [{ type: 'Text', children: ['3 items'] }]
+    });
+  });
+
+  test('does not wrap mixed text and element children', () => {
+    const count = 3;
+
+    let root;
+    act(() => {
+      root = create(
+        <html.div>
+          Count: {count}
+          <html.span>nested</html.span>
+        </html.div>
+      );
+    });
+    const children = root.toJSON().children;
+    expect(children).toHaveLength(3);
+    expect(children[0]).toBe('Count: ');
+    expect(children[1]).toBe('3');
+    expect(children[2]).toMatchObject({
+      type: 'Text',
+      children: ['nested']
+    });
+  });
+
   describe('polyfills: layout', () => {
     test('default block layout', () => {
       let root;
