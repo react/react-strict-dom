@@ -34,6 +34,27 @@ const AnimatedPressable = ReactNative.Animated.createAnimatedComponent(
   ReactNative.Pressable
 );
 
+function getTextContent(children: React.Node): ?string {
+  if (typeof children === 'string') {
+    return children;
+  }
+  if (typeof children === 'number') {
+    return String(children);
+  }
+  if (!Array.isArray(children)) {
+    return null;
+  }
+  let textContent: ?string = null;
+  for (const child of children) {
+    if (typeof child === 'string' || typeof child === 'number') {
+      textContent = (textContent ?? '') + String(child);
+    } else if (child != null && typeof child !== 'boolean') {
+      return null;
+    }
+  }
+  return textContent;
+}
+
 // Plain (non-hook) helper so it can mutate the caller-owned `nativeProps`
 // without a defensive copy (a hook may not mutate its own return value).
 function applyViewProps(
@@ -67,8 +88,9 @@ function applyViewProps(
 
   // Workaround: React Native doesn't support raw text children of View
   // Sometimes we can auto-fix this
-  if (typeof nativeProps.children === 'string') {
-    nativeProps.children = <TextString children={nativeProps.children} />;
+  const textContent = getTextContent(nativeProps.children);
+  if (textContent != null) {
+    nativeProps.children = <TextString children={textContent} />;
   }
 
   // Polyfill for default of "display:block"
