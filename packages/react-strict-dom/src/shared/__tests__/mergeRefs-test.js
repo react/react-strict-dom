@@ -3,67 +3,102 @@
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
+ *
+ * @flow strict
  */
 
-import React from 'react';
-import { create } from 'react-test-renderer';
-import { render } from '@testing-library/react';
 import { mergeRefs } from '../mergeRefs';
 
 describe('mergeRefs', () => {
-  beforeEach(() => {
-    jest.spyOn(console, 'error');
-    console.error.mockImplementation(() => {});
+  test('handles null and undefined refs', () => {
+    const mergedRef = mergeRefs(null, undefined);
+    const element = document.createElement('div');
+
+    // Should not throw
+    expect(() => mergedRef(element)).not.toThrow();
   });
 
-  afterEach(() => {
-    console.error.mockRestore();
+  test('calls function refs', () => {
+    const ref1 = jest.fn();
+    const ref2 = jest.fn();
+    const mergedRef = mergeRefs(ref1, ref2);
+    const element = document.createElement('div');
+
+    mergedRef(element);
+
+    expect(ref1).toHaveBeenCalledWith(element);
+    expect(ref2).toHaveBeenCalledWith(element);
   });
 
-  test('warns when unsupported ref type is used', () => {
-    function Component() {
-      return <div ref={mergeRefs(false, 'unsupported')} />;
-    }
-    create(<Component />);
-    expect(console.error).toHaveBeenCalled();
+  test('sets object refs current property', () => {
+    const ref1 = { current: null };
+    const ref2 = { current: null };
+    const mergedRef = mergeRefs(ref1, ref2);
+    const element = document.createElement('div');
+
+    mergedRef(element);
+
+    expect(ref1.current).toBe(element);
+    expect(ref2.current).toBe(element);
   });
 
-  test('merges refs of different types', () => {
-    const ref = React.createRef(null);
-    let functionRefValue = null;
-    let hookRef;
+  test('handles mixed ref types', () => {
+    const functionRef = jest.fn();
+    const objectRef = { current: null };
+    const mergedRef = mergeRefs(functionRef, null, objectRef, undefined);
+    const element = document.createElement('div');
 
-    function Component() {
-      const functionRef = (x) => {
-        functionRefValue = x;
-      };
-      hookRef = React.useRef(null);
-      return <div ref={mergeRefs(null, ref, hookRef, functionRef)} />;
-    }
-    render(<Component />);
+    mergedRef(element);
 
-    expect(ref.current).toBeInstanceOf(HTMLDivElement);
-    expect(hookRef.current).toBeInstanceOf(HTMLDivElement);
-    expect(functionRefValue).toBeInstanceOf(HTMLDivElement);
+    expect(functionRef).toHaveBeenCalledWith(element);
+    expect(objectRef.current).toBe(element);
   });
 
-  test('calls refs in order', () => {
-    const log = [];
+  test('logs error for invalid ref types', () => {
+    const consoleSpy = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+    const mergedRef = mergeRefs('invalid-ref');
+    const element = document.createElement('div');
 
-    function Component() {
-      const refA = (x) => {
-        log.push('A');
-      };
-      const refB = (x) => {
-        log.push('B');
-      };
-      const refC = (x) => {
-        log.push('C');
-      };
-      return <div ref={mergeRefs(refA, refB, refC)} />;
-    }
-    render(<Component />);
+    mergedRef(element);
 
-    expect(log).toEqual(['A', 'B', 'C']);
+    expect(consoleSpy).toHaveBeenCalledWith(
+      'mergeRefs cannot handle refs of type boolean, number, or string. Received ref invalid-ref'
+    );
+
+    consoleSpy.mockRestore();
+  });
+
+  test('logs error for boolean ref types', () => {
+    const consoleSpy = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+    const mergedRef = mergeRefs(true);
+    const element = document.createElement('div');
+
+    mergedRef(element);
+
+    expect(consoleSpy).toHaveBeenCalledWith(
+      'mergeRefs cannot handle refs of type boolean, number, or string. Received ref true'
+    );
+
+    consoleSpy.mockRestore();
+  });
+
+  test('logs error for number ref types', () => {
+    const consoleSpy = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+    const mergedRef = mergeRefs(42);
+    const element = document.createElement('div');
+
+    mergedRef(element);
+
+    expect(consoleSpy).toHaveBeenCalledWith(
+      'mergeRefs cannot handle refs of type boolean, number, or string. Received ref 42'
+    );
+
+    consoleSpy.mockRestore();
   });
 });

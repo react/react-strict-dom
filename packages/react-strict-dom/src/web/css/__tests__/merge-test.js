@@ -237,4 +237,11 @@ describe('merge()', () => {
     const { 'data-style-src': dataStyleSrc } = merge([a, b]);
     expect(dataStyleSrc).toBeUndefined();
   });
+
+  test('handles debug strings without line numbers', () => {
+    // This tests the line 67 coverage: if (line != null)
+    const a = { $$css: 'path/to/a', a: 'aaa' }; // No line number after colon
+    const { 'data-style-src': dataStyleSrc } = merge([a]);
+    expect(dataStyleSrc).toBe('');
+  });
 });

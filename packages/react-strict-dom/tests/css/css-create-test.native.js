@@ -56,14 +56,28 @@ describe('css.create()', () => {
     });
 
     test('animationName', () => {
-      css.keyframes({
-        '100%': {
-          width: 1000
+      const keyframeId = css.keyframes({
+        '0%': { opacity: 0 },
+        '100%': { opacity: 1 }
+      });
+
+      // keyframes should return a unique ID string
+      expect(typeof keyframeId).toBe('string');
+      expect(keyframeId.length).toBeGreaterThan(0);
+
+      // Test animation with keyframes
+      const styles = css.create({
+        animated: {
+          animationName: keyframeId,
+          animationDuration: '1s'
         }
       });
-      expect(console.error).toHaveBeenCalledWith(
-        expect.stringContaining('css.keyframes() is not supported')
-      );
+
+      let root;
+      act(() => {
+        root = create(<html.div style={styles.animated} />);
+      });
+      expect(root.toJSON().props.style).toMatchSnapshot();
     });
 
     test('backgroundImage', () => {

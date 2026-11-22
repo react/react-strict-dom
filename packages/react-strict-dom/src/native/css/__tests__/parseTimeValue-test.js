@@ -69,4 +69,18 @@ describe('parseTimeValue', () => {
       expect(parseTimeValue(timeValue)).toEqual(expectedMilliseconds);
     }
   });
+
+  test('parses raw numeric strings as milliseconds', () => {
+    expect(parseTimeValue('1.5s')).toBe(1500);
+    expect(parseTimeValue('2s')).toBe(2000);
+    expect(parseTimeValue('0.5s')).toBe(500);
+    expect(parseTimeValue('0s')).toBe(0);
+    expect(parseTimeValue('1234.5')).toBe(1234.5);
+  });
+
+  test('handles invalid numeric strings', () => {
+    expect(parseTimeValue('abc')).toBe(0);
+    expect(parseTimeValue('')).toBe(0);
+    expect(parseTimeValue('123abc')).toBe(123);
+  });
 });

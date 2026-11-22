@@ -29,5 +29,12 @@ export function parseTimeValue(timeValue: string): Milliseconds {
     memoizedValues.set(timeValue, normalizedValue);
     return normalizedValue;
   }
+
+  const numericValue = parseFloat(trimmedTimeValue);
+  if (Number.isFinite(numericValue)) {
+    memoizedValues.set(timeValue, numericValue);
+    return numericValue;
+  }
+
   return 0;
 }
