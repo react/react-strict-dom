@@ -5,14 +5,34 @@
  * LICENSE file in the root directory of this source tree.
  */
 const postcss = require('postcss');
-const createBuilder = require('./builder');
+const { createBuilder, getBuilderKey } = require('./builder');
 
 module.exports = function createPlugin() {
   const PLUGIN_NAME = 'postcss-react-strict-dom';
 
-  const builder = createBuilder();
+  // The builder of each configuration. Some bundlers create the plugin again
+  // for each build, so equal configurations share one builder and its state.
+  const builderMap = new Map();
 
   const isDev = process.env.NODE_ENV === 'development';
+
+  // Only Turbopack needs the disk cache, because it runs PostCSS in
+  // short-lived worker processes. Next.js sets TURBOPACK for Turbopack.
+  const useDiskCache = isDev && Boolean(process.env.TURBOPACK);
+
+  // Returns the builder for the configuration.
+  function getBuilder(config) {
+    const key = getBuilderKey(config);
+    if (key == null) {
+      return createBuilder(config);
+    }
+    let builder = builderMap.get(key);
+    if (builder == null) {
+      builder = createBuilder(config);
+      builderMap.set(key, builder);
+    }
+    return builder;
+  }
 
   const plugin = ({
     cwd = process.cwd(),
@@ -37,6 +57,15 @@ module.exports = function createPlugin() {
       ...(exclude ?? [])
     ];
 
+    const builder = getBuilder({
+      include,
+      exclude,
+      cwd,
+      babelConfig,
+      isDev,
+      useDiskCache
+    });
+
     // Whether to skip the error when transforming styles.
     // Useful in watch mode where Fast Refresh can recover from errors.
     // Initial transform will still throw errors in watch mode to surface issues early.
@@ -48,16 +77,6 @@ module.exports = function createPlugin() {
         // Processes the PostCSS root node to find and transform @-rules.
         async function (root, result) {
           const fileName = result.opts.from;
-
-          // Configure the builder with the provided options
-          await builder.configure({
-            include,
-            exclude,
-            cwd,
-            babelConfig,
-            useCSSLayers,
-            isDev
-          });
 
           // Find the @-rule
           const atRule = builder.findAtRule(root);
@@ -81,7 +100,8 @@ module.exports = function createPlugin() {
 
           // Build and parse the CSS from collected styles
           const css = await builder.build({
-            shouldSkipTransformError
+            shouldSkipTransformError,
+            useCSSLayers
           });
           const parsed = await postcss.parse(css, {
             from: fileName

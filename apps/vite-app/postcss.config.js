@@ -8,7 +8,7 @@ export default {
         '../../node_modules/example-ui/**/*.{js,jsx,mjs}'
       ],
       babelConfig,
-      useLayers: true
+      useCSSLayers: true
     },
     autoprefixer: {}
   }
