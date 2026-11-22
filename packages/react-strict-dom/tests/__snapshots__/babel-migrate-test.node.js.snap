@@ -1,0 +1,440 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`react-strict-dom-migrate "accessibilityElementsHidden" prop 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import * as React from 'react';
+export default function ReactNativeElementTransform() {
+  return <>
+      <html.div aria-hidden={false} style={reactNativeStyles.view} />
+      <html.div aria-hidden={true} style={reactNativeStyles.view} />
+      <html.div aria-hidden={accessibilityElementsHidden} style={reactNativeStyles.view} />
+    </>;
+}"
+`;
+
+exports[`react-strict-dom-migrate "accessibilityLabel" prop 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import * as React from 'react';
+export default function ReactNativeElementTransform() {
+  return <>
+      <html.div aria-label="Hello world" style={reactNativeStyles.view} />
+      <html.div aria-label={accessibilityLabel} style={reactNativeStyles.view} />
+    </>;
+}"
+`;
+
+exports[`react-strict-dom-migrate "accessibilityLabelledBy" prop 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import * as React from 'react';
+export default function ReactNativeElementTransform() {
+  return <>
+      <html.div aria-labelledby="abc123" style={reactNativeStyles.view} />
+      <html.div aria-labelledby={accessibilityLabelledBy} style={reactNativeStyles.view} />
+    </>;
+}"
+`;
+
+exports[`react-strict-dom-migrate "accessibilityLiveRegion" prop 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import * as React from 'react';
+export default function ReactNativeElementTransform() {
+  return <>
+      <html.div aria-live="off" style={reactNativeStyles.view} />
+      <html.div aria-live="polite" style={reactNativeStyles.view} />
+      <html.div aria-live="assertive" style={reactNativeStyles.view} />
+      <html.div aria-live={accessibilityLiveRegion === "off" ? "none" : accessibilityLiveRegion} style={reactNativeStyles.view} />
+    </>;
+}"
+`;
+
+exports[`react-strict-dom-migrate "accessibilityRole" prop 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import * as React from 'react';
+export default function ReactNativeElementTransform() {
+  return <>
+      <html.div role="slider" style={reactNativeStyles.view} />
+      <html.div role="alert" style={reactNativeStyles.view} />
+      <html.button style={reactNativeStyles.view} />
+      <html.div role="checkbox" style={reactNativeStyles.view} />
+      <html.div role="combobox" style={reactNativeStyles.view} />
+      <html.header style={reactNativeStyles.view} />
+      <html.div role="img" style={reactNativeStyles.view} />
+      <html.div role="link" style={reactNativeStyles.view} />
+      <html.div role="menu" style={reactNativeStyles.view} />
+      <html.div role="menubar" style={reactNativeStyles.view} />
+      <html.div role="menuitem" style={reactNativeStyles.view} />
+      <html.div role="none" style={reactNativeStyles.view} />
+      <html.div role="progressbar" style={reactNativeStyles.view} />
+      <html.div role="radio" style={reactNativeStyles.view} />
+      <html.div role="radiogroup" style={reactNativeStyles.view} />
+      <html.div role="scrollbar" style={reactNativeStyles.view} />
+      <html.div role="search" style={reactNativeStyles.view} />
+      <html.div role="spinbutton" style={reactNativeStyles.view} />
+      <html.div role="switch" style={reactNativeStyles.view} />
+      <html.div role="tab" style={reactNativeStyles.view} />
+      <html.div role="tablist" style={reactNativeStyles.view} />
+      <html.div role="timer" style={reactNativeStyles.view} />
+      <html.div role="toolbar" style={reactNativeStyles.view} />
+      <html.div role={accessibilityRole} style={reactNativeStyles.view} />
+    </>;
+}"
+`;
+
+exports[`react-strict-dom-migrate "accessibilityState" prop 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import * as React from 'react';
+export default function ReactNativeElementTransform() {
+  return <>
+      <html.div aria-busy={false} style={reactNativeStyles.view} />
+      <html.div aria-busy={true} style={reactNativeStyles.view} />
+      <html.div aria-checked={false} style={reactNativeStyles.view} />
+      <html.div aria-checked={true} style={reactNativeStyles.view} />
+      <html.div aria-checked="mixed" style={reactNativeStyles.view} />
+      <html.div aria-disabled={false} style={reactNativeStyles.view} />
+      <html.div aria-disabled={true} style={reactNativeStyles.view} />
+      <html.div aria-expanded={false} style={reactNativeStyles.view} />
+      <html.div aria-expanded={true} style={reactNativeStyles.view} />
+      <html.div aria-selected={false} style={reactNativeStyles.view} />
+      <html.div aria-selected={true} style={reactNativeStyles.view} />
+      <html.div aria-busy={false} aria-checked="mixed" aria-disabled={false} aria-expanded={true} aria-selected={true} style={reactNativeStyles.view} />
+      <html.div aria-busy={accessibilityState?.busy} aria-checked={accessibilityState?.checked} aria-disabled={accessibilityState?.disabled} aria-expanded={accessibilityState?.expanded} aria-selected={accessibilityState?.selected} style={reactNativeStyles.view} />
+    </>;
+}"
+`;
+
+exports[`react-strict-dom-migrate "accessibilityValue" prop 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import * as React from 'react';
+export default function ReactNativeElementTransform() {
+  return <>
+      <html.div aria-valuemax={10} style={reactNativeStyles.view} />
+      <html.div aria-valuemin={1} style={reactNativeStyles.view} />
+      <html.div aria-valuenow={5} style={reactNativeStyles.view} />
+      <html.div aria-valuetext="Five" style={reactNativeStyles.view} />
+      <html.div aria-valuemax={10} aria-valuemin={1} aria-valuenow={5} aria-valuetext="Five" style={reactNativeStyles.view} />
+      <html.div aria-valuemax={accessibilityValue?.max} aria-valuemin={accessibilityValue?.min} aria-valuenow={accessibilityValue?.now} aria-valuetext={accessibilityValue?.text} style={reactNativeStyles.view} />
+    </>;
+}"
+`;
+
+exports[`react-strict-dom-migrate "accessibilityViewIsModal" prop 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import * as React from 'react';
+export default function ReactNativeElementTransform() {
+  return <>
+      <html.div aria-modal={false} style={reactNativeStyles.view} />
+      <html.div aria-modal={true} style={reactNativeStyles.view} />
+      <html.div aria-modal={accessibilityViewIsModal} style={reactNativeStyles.view} />
+    </>;
+}"
+`;
+
+exports[`react-strict-dom-migrate "focusable" prop 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import * as React from 'react';
+export default function ReactNativeElementTransform() {
+  return <>
+      <html.div tabIndex="0" style={reactNativeStyles.view} />
+      <html.div tabIndex="0" style={reactNativeStyles.view} />
+      <html.div style={reactNativeStyles.view} />
+      <html.div tabIndex={focusable === true ? "0" : undefined} style={reactNativeStyles.view} />
+    </>;
+}"
+`;
+
+exports[`react-strict-dom-migrate "importantForAccessibility" prop 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import * as React from 'react';
+export default function ReactNativeElementTransform() {
+  return <>
+      <html.div aria-hidden={true} style={reactNativeStyles.view} />
+      <html.div aria-hidden={importantForAccessibility === "no-hide-descendants" ? true : undefined} style={reactNativeStyles.view} />
+    </>;
+}"
+`;
+
+exports[`react-strict-dom-migrate "nativeID" prop 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import * as React from 'react';
+export default function ReactNativeElementTransform() {
+  return <>
+      <html.div id="codemod" style={reactNativeStyles.view} />
+      <html.div id={nativeID} style={reactNativeStyles.view} />
+    </>;
+}"
+`;
+
+exports[`react-strict-dom-migrate "testID" prop 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import * as React from 'react';
+export default function ReactNativeElementTransform() {
+  return <>
+      <html.div data-testid="codemod" style={reactNativeStyles.view} />
+      <html.div data-testid={testID} style={reactNativeStyles.view} />
+    </>;
+}"
+`;
+
+exports[`react-strict-dom-migrate <Button> element and props 1`] = `
+"import { html } from "react-strict-dom";
+import * as React from 'react';
+export default function ReactNativeElementTransform() {
+  return <>
+      <html.button onPress={onButtonPress}>Launch Unicorns</html.button>
+    </>;
+}"
+`;
+
+exports[`react-strict-dom-migrate <Image> element and props 1`] = `
+"import { html } from "react-strict-dom";
+import * as React from 'react';
+export default function ReactNativeElementTransform() {
+  return <>
+      <html.img alt="test1" src="https://example.com/image.png" />
+      <html.img alt="test2" src="https://example.com/image.png" />
+    </>;
+}"
+`;
+
+exports[`react-strict-dom-migrate <ScrollView> element and props 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import * as React from 'react';
+export default function ReactNativeElementTransform() {
+  return <html.div style={reactNativeStyles.view}>
+      <html.div style={reactNativeStyles.view} />
+    </html.div>;
+}"
+`;
+
+exports[`react-strict-dom-migrate <Switch> element and props 1`] = `
+"import { html } from "react-strict-dom";
+import * as React from 'react';
+export default function ReactNativeElementTransform() {
+  return <>
+      <html.input type="checkbox" />
+    </>;
+}"
+`;
+
+exports[`react-strict-dom-migrate <Text> element and props 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import * as React from 'react';
+export default function ReactNativeElementTransform() {
+  return <>
+      <html.span style={reactNativeStyles.text}>Hello World</html.span>
+      <html.span style={reactNativeStyles.text}>{text}</html.span>
+    </>;
+}"
+`;
+
+exports[`react-strict-dom-migrate <Text> element with styles 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import stylex from "stylex";
+import * as React from 'react';
+const styles = stylex.create({
+  root: {
+    borderColor: 'red',
+    borderWidth: 1
+  },
+  child: {
+    backgroundColor: 'green'
+  },
+  padding: {
+    padding: 10
+  }
+});
+export default function ReactNativeElementTransform(props) {
+  return <html.span style={[reactNativeStyles.text, styles.root]}>
+      <html.span style={[reactNativeStyles.text, [styles.child, [styles.padding, {
+      color: props.color
+    }]]]}>
+        <html.span style={reactNativeStyles.text} />
+      </html.span>
+    </html.span>;
+}"
+`;
+
+exports[`react-strict-dom-migrate <TextInput> element and props 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import * as React from 'react';
+export default function ReactNativeElementTransform() {
+  return <>
+      <html.input style={reactNativeStyles.textInput} />
+      <html.textarea style={reactNativeStyles.textInput} />
+      <html.textarea rows={5} style={reactNativeStyles.textInput} />
+      {multiline === true ? <html.textarea style={reactNativeStyles.textInput} rows={numberOfLines} /> : <html.input style={reactNativeStyles.textInput} />}
+    </>;
+}"
+`;
+
+exports[`react-strict-dom-migrate <TextInput> element with styles 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import stylex from "stylex";
+import * as React from 'react';
+const styles = stylex.create({
+  root: {
+    borderColor: 'red',
+    borderWidth: 1
+  },
+  padding: {
+    padding: 10
+  }
+});
+export default function ReactNativeElementTransform(props) {
+  return <>
+      <html.input style={[reactNativeStyles.textInput, styles.root]} />
+      <html.input style={[reactNativeStyles.textInput, [styles.root, [styles.padding, {
+      color: props.color
+    }]]]} />
+    </>;
+}"
+`;
+
+exports[`react-strict-dom-migrate <View> element and props 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import * as React from 'react';
+export default function ReactNativeElementTransform() {
+  return <html.div style={reactNativeStyles.view}>
+      <html.div style={reactNativeStyles.view} />
+    </html.div>;
+}"
+`;
+
+exports[`react-strict-dom-migrate <View> element with styles 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import stylex from "stylex";
+import * as React from 'react';
+const styles = stylex.create({
+  root: {
+    borderColor: 'red',
+    borderWidth: 1
+  },
+  child: {
+    backgroundColor: 'green'
+  },
+  padding: {
+    padding: 10
+  }
+});
+export default function ReactNativeElementTransform(props) {
+  return <html.div style={[reactNativeStyles.view, styles.root]}>
+      <html.div style={[reactNativeStyles.view, [styles.child, [styles.padding, {
+      color: props.color
+    }]]]}>
+        <html.div style={reactNativeStyles.view} />
+      </html.div>
+    </html.div>;
+}"
+`;
+
+exports[`react-strict-dom-migrate Spread props 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import * as React from 'react';
+export default function ReactNativeElementTransform(props) {
+  return <>
+      <html.div {...props} style={reactNativeStyles.view} />
+    </>;
+}"
+`;
+
+exports[`react-strict-dom-migrate StyleSheet.create() 1`] = `
+"import stylex from "stylex";
+const styles = stylex.create({
+  basic: {
+    backgroundColor: '#eee',
+    flex: 1,
+    flexDirection: 'column'
+  },
+  logicalBorder: {
+    borderEndEndRadius: '1px',
+    borderEndStartRadius: 2,
+    borderInlineEndColor: 3,
+    borderInlineEndStyle: 4,
+    borderInlineEndWidth: 5,
+    borderInlineStartColor: 6,
+    borderInlineStartStyle: 7,
+    borderInlineStartWidth: 8,
+    borderStartEndRadius: 9,
+    borderStartStartRadius: null
+  },
+  logicalInset: {
+    insetInlineEnd: 10,
+    insetInlineStart: '20%'
+  },
+  logicalMargin: {
+    marginInlineEnd: 'auto',
+    marginInlineStart: 6,
+    marginInline: 10,
+    marginBlock: 15
+  },
+  logicalPadding: {
+    paddingInlineEnd: 7,
+    paddingInlineStart: 8,
+    paddingInline: 20,
+    paddingBlock: 25
+  },
+  transforms: {
+    transform: "perspective(50px) scaleX(20) translateX(20px) rotate(20deg) matrix(1,2,3,4,5,6) matrix3d(1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4)",
+    transformOrigin: "2px 30% 10px"
+  },
+  text: {
+    fontSize: 20,
+    fontVariant: "common-ligatures small-caps",
+    verticalAlign: "middle",
+    direction: 'ltr'
+  }
+});"
+`;
+
+exports[`react-strict-dom-migrate full example 1`] = `
+"import { html } from "react-strict-dom";
+import reactNativeStyles from "reactNativeStyles";
+import stylex from "stylex";
+import * as React from 'react';
+const styles = stylex.create({
+  root: {
+    backgroundColor: '#eee'
+  },
+  text: {
+    fontSize: 20
+  }
+});
+export default function ReactNativeElementTransform(props) {
+  const {
+    color
+  } = props;
+  return <html.div style={[reactNativeStyles.view, styles.root]}>
+      <html.span style={[reactNativeStyles.text, [styles.text, {
+      color
+    }]]}>Hello World</html.span>
+      <html.img alt="test1" src="https://example.com/image.png" />
+      <html.img alt="test2" src="https://example.com/image.png" />
+      <html.div style={reactNativeStyles.view}>
+        <html.div style={reactNativeStyles.view} />
+      </html.div>
+      <html.input style={reactNativeStyles.textInput} />
+      <html.input type="checkbox" />
+      <html.button onPress={onButtonPress}>Launch Unicorns</html.button>
+    </html.div>;
+}"
+`;
