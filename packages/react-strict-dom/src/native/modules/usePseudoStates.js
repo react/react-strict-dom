@@ -30,17 +30,29 @@ type Interaction = {
   handlers: ?InteractionHandlers
 };
 
+type PseudoState = {
+  +active: boolean,
+  +focus: boolean,
+  +mouseHover: boolean,
+  +pointerHover: boolean
+};
+
+const defaultState: PseudoState = {
+  active: false,
+  focus: false,
+  mouseHover: false,
+  pointerHover: false
+};
+
 export function usePseudoStates(style: Style): Interaction {
-  const [focus, setFocus] = React.useState(false);
-  const [mouseHover, setMouseHover] = React.useState(false);
-  const [pointerHover, setPointerHover] = React.useState(false);
-  const [active, setActive] = React.useState(false);
+  const [state, setState] = React.useState<PseudoState>(defaultState);
 
   let isHoverStyledElement = false;
   let isFocusStyledElement = false;
   let isActiveStyledElement = false;
 
-  for (const styleValue of Object.values(style)) {
+  for (const key in style) {
+    const styleValue = style[key];
     if (styleValue != null && typeof styleValue === 'object') {
       if (styleValue.hasOwnProperty(':hover')) {
         isHoverStyledElement = true;
@@ -64,39 +76,35 @@ export function usePseudoStates(style: Style): Interaction {
   const handlers = React.useMemo(() => {
     let value = null;
     if (isHoverStyledElement || isFocusStyledElement || isActiveStyledElement) {
+      const set = (changes: Partial<PseudoState>) =>
+        setState((prev) => ({ ...prev, ...changes }));
       value = {} as InteractionHandlers;
       if (isHoverStyledElement) {
-        value.onMouseEnter = () => setMouseHover(true);
-        value.onMouseLeave = () => setMouseHover(false);
-        value.onPointerEnter = () => setPointerHover(true);
+        value.onMouseEnter = () => set({ mouseHover: true });
+        value.onMouseLeave = () => set({ mouseHover: false });
+        value.onPointerEnter = () => set({ pointerHover: true });
       }
       if (isFocusStyledElement) {
-        value.onBlur = () => setFocus(false);
-        value.onFocus = () => setFocus(true);
+        value.onBlur = () => set({ focus: false });
+        value.onFocus = () => set({ focus: true });
       }
       if (isActiveStyledElement) {
-        value.onPointerCancel = () => setActive(false);
-        value.onPointerDown = () => setActive(true);
-        value.onPointerUp = () => setActive(false);
+        value.onPointerCancel = () => set({ active: false });
+        value.onPointerDown = () => set({ active: true });
+        value.onPointerUp = () => set({ active: false });
       }
       if (isHoverStyledElement || isActiveStyledElement) {
-        value.onPointerLeave = () => {
-          if (isHoverStyledElement) {
-            setPointerHover(false);
-          }
-          if (isActiveStyledElement) {
-            setActive(false);
-          }
-        };
+        value.onPointerLeave = () =>
+          set({ active: false, pointerHover: false });
       }
     }
     return value;
   }, [isHoverStyledElement, isFocusStyledElement, isActiveStyledElement]);
 
   return {
-    active,
-    focus,
-    hover: mouseHover || pointerHover,
+    active: state.active,
+    focus: state.focus,
+    hover: state.mouseHover || state.pointerHover,
     handlers
   };
 }
