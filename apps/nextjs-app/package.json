@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "example-ui": "0.0.55",
-    "next": "15.5.9",
+    "next": "15.5.10",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-strict-dom": "0.0.55"
