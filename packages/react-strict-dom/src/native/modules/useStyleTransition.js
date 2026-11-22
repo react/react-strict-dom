@@ -54,8 +54,15 @@ function canUseNativeDriver(
     if (
       property === 'transform' &&
       Array.isArray(value) &&
-      // $FlowFixMe[incompatible-type]
-      !value.includes('skew')
+      // The transform value is an array of transform objects (e.g.
+      // `[{ skewX: '10deg' }]`), so detect skew by inspecting each object's
+      // keys. Skew transforms are not supported by the native driver.
+      !value.some(
+        // $FlowFixMe[incompatible-use]
+        (transform) =>
+          transform != null &&
+          (transform.skewX != null || transform.skewY != null)
+      )
     ) {
       continue;
     }

@@ -1759,6 +1759,32 @@ describe('css.create()', () => {
       );
     });
 
+    test('skew transform transition does not use the native driver', () => {
+      const skewStyles = css.create({
+        skew: (transform) => ({
+          transform: transform ?? 'skewX(0deg)',
+          transitionDelay: 0,
+          transitionDuration: 1000,
+          transitionProperty: 'transform',
+          transitionTimingFunction: 'ease-out'
+        })
+      });
+      let root;
+      act(() => {
+        root = create(<html.div style={skewStyles.skew()} />);
+      });
+      act(() => {
+        root.update(<html.div style={skewStyles.skew('skewX(45deg)')} />);
+      });
+      // Skew transforms are not supported by the native animation driver.
+      expect(Animated.timing).toHaveBeenCalledWith(
+        expect.anything(),
+        expect.objectContaining({
+          useNativeDriver: false
+        })
+      );
+    });
+
     test('width transition', () => {
       let root;
       // width transition
