@@ -3,7 +3,7 @@
 exports[`css.* themes css.createTheme: theme 1`] = `
 {
   "$$theme": "theme",
-  "rootColor__id__3": "green",
+  "rootColor__id__4": "green",
 }
 `;
 
@@ -16,6 +16,7 @@ exports[`css.* themes css.defineConsts: constants 1`] = `
 
 exports[`css.* themes css.defineVars: tokens 1`] = `
 {
+  "lightDarkColor": "var(--lightDarkColor__id__3)",
   "rootColor": "var(--rootColor__id__1)",
   "themeAwareColor": "var(--themeAwareColor__id__2)",
 }

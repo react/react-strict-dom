@@ -43,7 +43,8 @@ describe('css.* themes', () => {
       themeAwareColor: {
         default: 'blue',
         '@media (prefers-color-scheme: dark)': 'green'
-      }
+      },
+      lightDarkColor: 'light-dark(blue, green)'
     });
 
     expect(tokens).toMatchSnapshot('tokens');
@@ -54,6 +55,9 @@ describe('css.* themes', () => {
       },
       themeAwareColor: {
         color: tokens.themeAwareColor
+      },
+      lightDarkColor: {
+        color: tokens.lightDarkColor
       }
     });
 
@@ -66,11 +70,19 @@ describe('css.* themes', () => {
       root = create(<html.span style={styles.themeAwareColor} />);
     });
     expect(root.toJSON().props.style.color).toBe('blue');
+    act(() => {
+      root = create(<html.span style={styles.lightDarkColor} />);
+    });
+    expect(root.toJSON().props.style.color).toBe('blue');
 
     // dark theme
     ReactNative.useColorScheme.mockReturnValue('dark');
     act(() => {
       root = create(<html.span style={styles.themeAwareColor} />);
+    });
+    expect(root.toJSON().props.style.color).toBe('green');
+    act(() => {
+      root = create(<html.span style={styles.lightDarkColor} />);
     });
     expect(root.toJSON().props.style.color).toBe('green');
   });
