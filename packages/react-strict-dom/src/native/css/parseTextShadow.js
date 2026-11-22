@@ -11,7 +11,7 @@ import { warnMsg } from '../../shared/logUtils';
 
 const VALUES_REG = /,(?![^(]*\))/;
 const PARTS_REG = /\s(?![^(]*\))/;
-const LENGTH_REG = /^[0-9]+[a-zA-Z%]+?$/;
+const LENGTH_REG = /^-?(?:[0-9]*\.)?[0-9]+[a-zA-Z%]+$/;
 
 function isLength(v: string): boolean {
   return v === '0' || LENGTH_REG.test(v);
@@ -26,13 +26,13 @@ function toMaybeNum(v: string): number | string {
 function parseValue(str: string) {
   const parts = str.split(PARTS_REG);
   const inset = parts.includes('inset');
-  const last = parts.slice(-1)[0];
-  const color = !isLength(last) ? last : null;
+  const tokens = parts.filter((n) => n !== 'inset');
+  // The color is the single token that is not a length value. CSS allows it to
+  // be specified either before or after the offset values, so search all tokens
+  // rather than assuming it is last.
+  const color = tokens.find((n) => !isLength(n)) ?? null;
 
-  const nums = parts
-    .filter((n) => n !== 'inset')
-    .filter((n) => n !== color)
-    .map(toMaybeNum);
+  const nums = tokens.filter((n) => n !== color).map(toMaybeNum);
 
   const [offsetX, offsetY, blurRadius, spreadRadius] = nums;
 
