@@ -1,6 +1,6 @@
 # react-strict-dom dev
 
-[![Action status](https://github.com/facebook/react-strict-dom/actions/workflows/tests.yml/badge.svg)](https://github.com/facebook/react-strict-dom/actions/workflows/tests.yml)
+[![Action status](https://github.com/react/react-strict-dom/actions/workflows/tests.yml/badge.svg)](https://github.com/react/react-strict-dom/actions/workflows/tests.yml)
 
 Development monorepo for "React Strict DOM".
 
@@ -13,24 +13,24 @@ Development monorepo for "React Strict DOM".
   * Contains issue templates.
 * `apps`
   * Example applications using React Strict DOM.
-  * [example-ui](https://github.com/facebook/react-strict-dom/blob/main/apps/example-ui)
-  * [expo-app](https://github.com/facebook/react-strict-dom/tree/main/apps/expo-app)
-  * [nextjs-app](https://github.com/facebook/react-strict-dom/blob/main/apps/nextjs-app)
-  * [vite-app](https://github.com/facebook/react-strict-dom/blob/main/apps/vite-app)
-  * [platform-tests](https://github.com/facebook/react-strict-dom/blob/main/apps/platform-tests)
+  * [example-ui](https://github.com/react/react-strict-dom/blob/main/apps/example-ui)
+  * [expo-app](https://github.com/react/react-strict-dom/tree/main/apps/expo-app)
+  * [nextjs-app](https://github.com/react/react-strict-dom/blob/main/apps/nextjs-app)
+  * [vite-app](https://github.com/react/react-strict-dom/blob/main/apps/vite-app)
+  * [platform-tests](https://github.com/react/react-strict-dom/blob/main/apps/platform-tests)
 * `packages`
   * Contains the individual packages managed in the monorepo.
-  * [benchmarks](https://github.com/facebook/react-strict-dom/blob/main/packages/benchmarks)
-  * [postcss-react-strict-dom](https://github.com/facebook/react-strict-dom/blob/main/packages/postcss-react-strict-dom)
-  * [react-strict-dom](https://github.com/facebook/react-strict-dom/blob/main/packages/react-strict-dom) ([docs](https://facebook.github.io/react-strict-dom/))
-  * [scripts](https://github.com/facebook/react-strict-dom/blob/main/packages/scripts)
-  * [website](https://github.com/facebook/react-strict-dom/blob/main/packages/website)
+  * [benchmarks](https://github.com/react/react-strict-dom/blob/main/packages/benchmarks)
+  * [postcss-react-strict-dom](https://github.com/react/react-strict-dom/blob/main/packages/postcss-react-strict-dom)
+  * [react-strict-dom](https://github.com/react/react-strict-dom/blob/main/packages/react-strict-dom) ([docs](https://react.github.io/react-strict-dom/))
+  * [scripts](https://github.com/react/react-strict-dom/blob/main/packages/scripts)
+  * [website](https://github.com/react/react-strict-dom/blob/main/packages/website)
 * `tools`
   * Tools used by the monorepo (pre-commit tasks, etc.)
 
 ## Contributing
 
-Learn more about [how to contribute](https://facebook.github.io/react-strict-dom/contribute/).
+Learn more about [how to contribute](https://react.github.io/react-strict-dom/contribute/).
 
 ## Code of conduct
 
