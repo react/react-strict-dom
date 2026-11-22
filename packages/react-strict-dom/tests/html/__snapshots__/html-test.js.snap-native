@@ -2,7 +2,6 @@
 
 exports[`<html.*> "a" default rendering 1`] = `
 <Text
-  ref={[Function]}
   role="link"
   style={
     {
@@ -18,7 +17,6 @@ exports[`<html.*> "a" default rendering 1`] = `
 
 exports[`<html.*> "a" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   role="link"
   style={
     {
@@ -35,7 +33,6 @@ exports[`<html.*> "a" ignores and warns about unsupported attributes 1`] = `
 exports[`<html.*> "a" supports additional anchor attributes 1`] = `
 <Text
   onPress={[Function]}
-  ref={[Function]}
   role="link"
   style={
     {
@@ -82,7 +79,6 @@ exports[`<html.*> "a" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -129,7 +125,6 @@ exports[`<html.*> "a" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   role="link"
   style={
     {
@@ -145,7 +140,6 @@ exports[`<html.*> "a" supports inline event handlers 1`] = `
 
 exports[`<html.*> "article" default rendering 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -157,7 +151,6 @@ exports[`<html.*> "article" default rendering 1`] = `
 
 exports[`<html.*> "article" ignores and warns about unsupported attributes 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -200,7 +193,6 @@ exports[`<html.*> "article" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -251,7 +243,6 @@ exports[`<html.*> "article" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -263,7 +254,6 @@ exports[`<html.*> "article" supports inline event handlers 1`] = `
 
 exports[`<html.*> "aside" default rendering 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -275,7 +265,6 @@ exports[`<html.*> "aside" default rendering 1`] = `
 
 exports[`<html.*> "aside" ignores and warns about unsupported attributes 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -318,7 +307,6 @@ exports[`<html.*> "aside" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -369,7 +357,6 @@ exports[`<html.*> "aside" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -381,7 +368,6 @@ exports[`<html.*> "aside" supports inline event handlers 1`] = `
 
 exports[`<html.*> "b" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -395,7 +381,6 @@ exports[`<html.*> "b" default rendering 1`] = `
 
 exports[`<html.*> "b" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -440,7 +425,6 @@ exports[`<html.*> "b" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -486,7 +470,6 @@ exports[`<html.*> "b" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -500,7 +483,6 @@ exports[`<html.*> "b" supports inline event handlers 1`] = `
 
 exports[`<html.*> "bdi" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -513,7 +495,6 @@ exports[`<html.*> "bdi" default rendering 1`] = `
 
 exports[`<html.*> "bdi" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -557,7 +538,6 @@ exports[`<html.*> "bdi" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -602,7 +582,6 @@ exports[`<html.*> "bdi" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -615,7 +594,6 @@ exports[`<html.*> "bdi" supports inline event handlers 1`] = `
 
 exports[`<html.*> "bdo" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -628,7 +606,6 @@ exports[`<html.*> "bdo" default rendering 1`] = `
 
 exports[`<html.*> "bdo" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -672,7 +649,6 @@ exports[`<html.*> "bdo" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -717,7 +693,6 @@ exports[`<html.*> "bdo" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -730,7 +705,6 @@ exports[`<html.*> "bdo" supports inline event handlers 1`] = `
 
 exports[`<html.*> "blockquote" default rendering 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -742,7 +716,6 @@ exports[`<html.*> "blockquote" default rendering 1`] = `
 
 exports[`<html.*> "blockquote" ignores and warns about unsupported attributes 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -785,7 +758,6 @@ exports[`<html.*> "blockquote" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -836,7 +808,6 @@ exports[`<html.*> "blockquote" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -848,7 +819,6 @@ exports[`<html.*> "blockquote" supports inline event handlers 1`] = `
 
 exports[`<html.*> "br" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "overflow": "visible",
@@ -862,7 +832,6 @@ exports[`<html.*> "br" default rendering 1`] = `
 
 exports[`<html.*> "br" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "overflow": "visible",
@@ -907,7 +876,6 @@ exports[`<html.*> "br" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -951,7 +919,6 @@ exports[`<html.*> "br" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "overflow": "visible",
@@ -965,7 +932,6 @@ exports[`<html.*> "br" supports inline event handlers 1`] = `
 
 exports[`<html.*> "button" default rendering 1`] = `
 <Pressable
-  ref={[Function]}
   role="button"
   style={
     {
@@ -979,7 +945,6 @@ exports[`<html.*> "button" default rendering 1`] = `
 
 exports[`<html.*> "button" ignores and warns about unsupported attributes 1`] = `
 <Pressable
-  ref={[Function]}
   role="button"
   style={
     {
@@ -995,7 +960,6 @@ exports[`<html.*> "button" supports additional button attributes 1`] = `
 <Pressable
   disabled={true}
   focusable={false}
-  ref={[Function]}
   role="button"
   style={
     {
@@ -1040,7 +1004,6 @@ exports[`<html.*> "button" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -1092,7 +1055,6 @@ exports[`<html.*> "button" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   role="button"
   style={
     {
@@ -1106,7 +1068,6 @@ exports[`<html.*> "button" supports inline event handlers 1`] = `
 
 exports[`<html.*> "code" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1120,7 +1081,6 @@ exports[`<html.*> "code" default rendering 1`] = `
 
 exports[`<html.*> "code" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1165,7 +1125,6 @@ exports[`<html.*> "code" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -1211,7 +1170,6 @@ exports[`<html.*> "code" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1225,7 +1183,6 @@ exports[`<html.*> "code" supports inline event handlers 1`] = `
 
 exports[`<html.*> "del" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1239,7 +1196,6 @@ exports[`<html.*> "del" default rendering 1`] = `
 
 exports[`<html.*> "del" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1284,7 +1240,6 @@ exports[`<html.*> "del" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -1330,7 +1285,6 @@ exports[`<html.*> "del" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1344,7 +1298,6 @@ exports[`<html.*> "del" supports inline event handlers 1`] = `
 
 exports[`<html.*> "div" default rendering 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1356,7 +1309,6 @@ exports[`<html.*> "div" default rendering 1`] = `
 
 exports[`<html.*> "div" ignores and warns about unsupported attributes 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1399,7 +1351,6 @@ exports[`<html.*> "div" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -1450,7 +1401,6 @@ exports[`<html.*> "div" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1462,7 +1412,6 @@ exports[`<html.*> "div" supports inline event handlers 1`] = `
 
 exports[`<html.*> "em" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1476,7 +1425,6 @@ exports[`<html.*> "em" default rendering 1`] = `
 
 exports[`<html.*> "em" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1521,7 +1469,6 @@ exports[`<html.*> "em" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -1567,7 +1514,6 @@ exports[`<html.*> "em" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1581,7 +1527,6 @@ exports[`<html.*> "em" supports inline event handlers 1`] = `
 
 exports[`<html.*> "fieldset" default rendering 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1593,7 +1538,6 @@ exports[`<html.*> "fieldset" default rendering 1`] = `
 
 exports[`<html.*> "fieldset" ignores and warns about unsupported attributes 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1636,7 +1580,6 @@ exports[`<html.*> "fieldset" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -1687,7 +1630,6 @@ exports[`<html.*> "fieldset" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1699,7 +1641,6 @@ exports[`<html.*> "fieldset" supports inline event handlers 1`] = `
 
 exports[`<html.*> "footer" default rendering 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1711,7 +1652,6 @@ exports[`<html.*> "footer" default rendering 1`] = `
 
 exports[`<html.*> "footer" ignores and warns about unsupported attributes 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1754,7 +1694,6 @@ exports[`<html.*> "footer" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -1805,7 +1744,6 @@ exports[`<html.*> "footer" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1817,7 +1755,6 @@ exports[`<html.*> "footer" supports inline event handlers 1`] = `
 
 exports[`<html.*> "form" default rendering 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1829,7 +1766,6 @@ exports[`<html.*> "form" default rendering 1`] = `
 
 exports[`<html.*> "form" ignores and warns about unsupported attributes 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1872,7 +1808,6 @@ exports[`<html.*> "form" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -1923,7 +1858,6 @@ exports[`<html.*> "form" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -1935,7 +1869,6 @@ exports[`<html.*> "form" supports inline event handlers 1`] = `
 
 exports[`<html.*> "h1" default rendering 1`] = `
 <Text
-  ref={[Function]}
   role="heading"
   style={
     {
@@ -1951,7 +1884,6 @@ exports[`<html.*> "h1" default rendering 1`] = `
 
 exports[`<html.*> "h1" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   role="heading"
   style={
     {
@@ -1998,7 +1930,6 @@ exports[`<html.*> "h1" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -2045,7 +1976,6 @@ exports[`<html.*> "h1" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   role="heading"
   style={
     {
@@ -2061,7 +1991,6 @@ exports[`<html.*> "h1" supports inline event handlers 1`] = `
 
 exports[`<html.*> "h2" default rendering 1`] = `
 <Text
-  ref={[Function]}
   role="heading"
   style={
     {
@@ -2077,7 +2006,6 @@ exports[`<html.*> "h2" default rendering 1`] = `
 
 exports[`<html.*> "h2" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   role="heading"
   style={
     {
@@ -2124,7 +2052,6 @@ exports[`<html.*> "h2" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -2171,7 +2098,6 @@ exports[`<html.*> "h2" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   role="heading"
   style={
     {
@@ -2187,7 +2113,6 @@ exports[`<html.*> "h2" supports inline event handlers 1`] = `
 
 exports[`<html.*> "h3" default rendering 1`] = `
 <Text
-  ref={[Function]}
   role="heading"
   style={
     {
@@ -2203,7 +2128,6 @@ exports[`<html.*> "h3" default rendering 1`] = `
 
 exports[`<html.*> "h3" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   role="heading"
   style={
     {
@@ -2250,7 +2174,6 @@ exports[`<html.*> "h3" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -2297,7 +2220,6 @@ exports[`<html.*> "h3" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   role="heading"
   style={
     {
@@ -2313,7 +2235,6 @@ exports[`<html.*> "h3" supports inline event handlers 1`] = `
 
 exports[`<html.*> "h4" default rendering 1`] = `
 <Text
-  ref={[Function]}
   role="heading"
   style={
     {
@@ -2329,7 +2250,6 @@ exports[`<html.*> "h4" default rendering 1`] = `
 
 exports[`<html.*> "h4" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   role="heading"
   style={
     {
@@ -2376,7 +2296,6 @@ exports[`<html.*> "h4" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -2423,7 +2342,6 @@ exports[`<html.*> "h4" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   role="heading"
   style={
     {
@@ -2439,7 +2357,6 @@ exports[`<html.*> "h4" supports inline event handlers 1`] = `
 
 exports[`<html.*> "h5" default rendering 1`] = `
 <Text
-  ref={[Function]}
   role="heading"
   style={
     {
@@ -2455,7 +2372,6 @@ exports[`<html.*> "h5" default rendering 1`] = `
 
 exports[`<html.*> "h5" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   role="heading"
   style={
     {
@@ -2502,7 +2418,6 @@ exports[`<html.*> "h5" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -2549,7 +2464,6 @@ exports[`<html.*> "h5" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   role="heading"
   style={
     {
@@ -2565,7 +2479,6 @@ exports[`<html.*> "h5" supports inline event handlers 1`] = `
 
 exports[`<html.*> "h6" default rendering 1`] = `
 <Text
-  ref={[Function]}
   role="heading"
   style={
     {
@@ -2581,7 +2494,6 @@ exports[`<html.*> "h6" default rendering 1`] = `
 
 exports[`<html.*> "h6" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   role="heading"
   style={
     {
@@ -2628,7 +2540,6 @@ exports[`<html.*> "h6" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -2675,7 +2586,6 @@ exports[`<html.*> "h6" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   role="heading"
   style={
     {
@@ -2691,7 +2601,6 @@ exports[`<html.*> "h6" supports inline event handlers 1`] = `
 
 exports[`<html.*> "header" default rendering 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   role="header"
   style={
     {
@@ -2704,7 +2613,6 @@ exports[`<html.*> "header" default rendering 1`] = `
 
 exports[`<html.*> "header" ignores and warns about unsupported attributes 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   role="header"
   style={
     {
@@ -2748,7 +2656,6 @@ exports[`<html.*> "header" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -2799,7 +2706,6 @@ exports[`<html.*> "header" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   role="header"
   style={
     {
@@ -2812,7 +2718,6 @@ exports[`<html.*> "header" supports inline event handlers 1`] = `
 
 exports[`<html.*> "hr" default rendering 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "backgroundColor": "black",
@@ -2826,7 +2731,6 @@ exports[`<html.*> "hr" default rendering 1`] = `
 
 exports[`<html.*> "hr" ignores and warns about unsupported attributes 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "backgroundColor": "black",
@@ -2871,7 +2775,6 @@ exports[`<html.*> "hr" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -2924,7 +2827,6 @@ exports[`<html.*> "hr" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "backgroundColor": "black",
@@ -2938,7 +2840,6 @@ exports[`<html.*> "hr" supports inline event handlers 1`] = `
 
 exports[`<html.*> "i" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -2952,7 +2853,6 @@ exports[`<html.*> "i" default rendering 1`] = `
 
 exports[`<html.*> "i" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -2997,7 +2897,6 @@ exports[`<html.*> "i" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -3043,7 +2942,6 @@ exports[`<html.*> "i" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -3057,7 +2955,6 @@ exports[`<html.*> "i" supports inline event handlers 1`] = `
 
 exports[`<html.*> "img" default rendering 1`] = `
 <Image
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -3070,7 +2967,6 @@ exports[`<html.*> "img" default rendering 1`] = `
 
 exports[`<html.*> "img" ignores and warns about unsupported attributes 1`] = `
 <Image
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -3088,7 +2984,6 @@ exports[`<html.*> "img" supports additional image attributes 1`] = `
   height={100}
   onError={[Function]}
   onLoad={[Function]}
-  ref={[Function]}
   referrerPolicy="no-referrer"
   src="https://src.jpg"
   srcSet="https://srcSet-1x.jpg 1x, https://srcSet-2x.jpg 2x"
@@ -3139,7 +3034,6 @@ exports[`<html.*> "img" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -3183,7 +3077,6 @@ exports[`<html.*> "img" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -3344,7 +3237,6 @@ exports[`<html.*> "input" supports inline event handlers 1`] = `
 
 exports[`<html.*> "ins" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -3358,7 +3250,6 @@ exports[`<html.*> "ins" default rendering 1`] = `
 
 exports[`<html.*> "ins" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -3403,7 +3294,6 @@ exports[`<html.*> "ins" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -3449,7 +3339,6 @@ exports[`<html.*> "ins" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -3463,7 +3352,6 @@ exports[`<html.*> "ins" supports inline event handlers 1`] = `
 
 exports[`<html.*> "kbd" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -3477,7 +3365,6 @@ exports[`<html.*> "kbd" default rendering 1`] = `
 
 exports[`<html.*> "kbd" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -3522,7 +3409,6 @@ exports[`<html.*> "kbd" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -3568,7 +3454,6 @@ exports[`<html.*> "kbd" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -3582,7 +3467,6 @@ exports[`<html.*> "kbd" supports inline event handlers 1`] = `
 
 exports[`<html.*> "label" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -3595,7 +3479,6 @@ exports[`<html.*> "label" default rendering 1`] = `
 
 exports[`<html.*> "label" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -3608,7 +3491,6 @@ exports[`<html.*> "label" ignores and warns about unsupported attributes 1`] = `
 
 exports[`<html.*> "label" supports additional label attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -3652,7 +3534,6 @@ exports[`<html.*> "label" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -3697,7 +3578,6 @@ exports[`<html.*> "label" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -3710,7 +3590,6 @@ exports[`<html.*> "label" supports inline event handlers 1`] = `
 
 exports[`<html.*> "li" supports list item attributes 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   role="listitem"
   style={
     {
@@ -3723,7 +3602,6 @@ exports[`<html.*> "li" supports list item attributes 1`] = `
 
 exports[`<html.*> "main" default rendering 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -3735,7 +3613,6 @@ exports[`<html.*> "main" default rendering 1`] = `
 
 exports[`<html.*> "main" ignores and warns about unsupported attributes 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -3778,7 +3655,6 @@ exports[`<html.*> "main" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -3829,7 +3705,6 @@ exports[`<html.*> "main" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -3841,7 +3716,6 @@ exports[`<html.*> "main" supports inline event handlers 1`] = `
 
 exports[`<html.*> "mark" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "backgroundColor": "yellow",
@@ -3856,7 +3730,6 @@ exports[`<html.*> "mark" default rendering 1`] = `
 
 exports[`<html.*> "mark" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "backgroundColor": "yellow",
@@ -3902,7 +3775,6 @@ exports[`<html.*> "mark" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -3949,7 +3821,6 @@ exports[`<html.*> "mark" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "backgroundColor": "yellow",
@@ -3964,7 +3835,6 @@ exports[`<html.*> "mark" supports inline event handlers 1`] = `
 
 exports[`<html.*> "nav" default rendering 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -3976,7 +3846,6 @@ exports[`<html.*> "nav" default rendering 1`] = `
 
 exports[`<html.*> "nav" ignores and warns about unsupported attributes 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4019,7 +3888,6 @@ exports[`<html.*> "nav" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -4070,7 +3938,6 @@ exports[`<html.*> "nav" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4082,7 +3949,6 @@ exports[`<html.*> "nav" supports inline event handlers 1`] = `
 
 exports[`<html.*> "ol" default rendering 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   role="list"
   style={
     {
@@ -4095,7 +3961,6 @@ exports[`<html.*> "ol" default rendering 1`] = `
 
 exports[`<html.*> "ol" ignores and warns about unsupported attributes 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   role="list"
   style={
     {
@@ -4139,7 +4004,6 @@ exports[`<html.*> "ol" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -4190,7 +4054,6 @@ exports[`<html.*> "ol" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   role="list"
   style={
     {
@@ -4203,7 +4066,6 @@ exports[`<html.*> "ol" supports inline event handlers 1`] = `
 
 exports[`<html.*> "ol" supports list attributes 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   role="list"
   style={
     {
@@ -4216,7 +4078,6 @@ exports[`<html.*> "ol" supports list attributes 1`] = `
 
 exports[`<html.*> "optgroup" default rendering 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4228,7 +4089,6 @@ exports[`<html.*> "optgroup" default rendering 1`] = `
 
 exports[`<html.*> "optgroup" ignores and warns about unsupported attributes 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4271,7 +4131,6 @@ exports[`<html.*> "optgroup" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -4322,7 +4181,6 @@ exports[`<html.*> "optgroup" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4334,7 +4192,6 @@ exports[`<html.*> "optgroup" supports inline event handlers 1`] = `
 
 exports[`<html.*> "option" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4347,7 +4204,6 @@ exports[`<html.*> "option" default rendering 1`] = `
 
 exports[`<html.*> "option" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4391,7 +4247,6 @@ exports[`<html.*> "option" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -4434,7 +4289,6 @@ exports[`<html.*> "option" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4447,7 +4301,6 @@ exports[`<html.*> "option" supports inline event handlers 1`] = `
 
 exports[`<html.*> "option" supports input attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4462,7 +4315,6 @@ exports[`<html.*> "option" supports input attributes 1`] = `
 
 exports[`<html.*> "p" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4475,7 +4327,6 @@ exports[`<html.*> "p" default rendering 1`] = `
 
 exports[`<html.*> "p" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4519,7 +4370,6 @@ exports[`<html.*> "p" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -4564,7 +4414,6 @@ exports[`<html.*> "p" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4577,7 +4426,6 @@ exports[`<html.*> "p" supports inline event handlers 1`] = `
 
 exports[`<html.*> "pre" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4591,7 +4439,6 @@ exports[`<html.*> "pre" default rendering 1`] = `
 
 exports[`<html.*> "pre" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4636,7 +4483,6 @@ exports[`<html.*> "pre" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -4682,7 +4528,6 @@ exports[`<html.*> "pre" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4696,7 +4541,6 @@ exports[`<html.*> "pre" supports inline event handlers 1`] = `
 
 exports[`<html.*> "s" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4710,7 +4554,6 @@ exports[`<html.*> "s" default rendering 1`] = `
 
 exports[`<html.*> "s" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4755,7 +4598,6 @@ exports[`<html.*> "s" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -4801,7 +4643,6 @@ exports[`<html.*> "s" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4815,7 +4656,6 @@ exports[`<html.*> "s" supports inline event handlers 1`] = `
 
 exports[`<html.*> "section" default rendering 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4827,7 +4667,6 @@ exports[`<html.*> "section" default rendering 1`] = `
 
 exports[`<html.*> "section" ignores and warns about unsupported attributes 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4870,7 +4709,6 @@ exports[`<html.*> "section" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -4921,7 +4759,6 @@ exports[`<html.*> "section" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4933,7 +4770,6 @@ exports[`<html.*> "section" supports inline event handlers 1`] = `
 
 exports[`<html.*> "select" default rendering 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4945,7 +4781,6 @@ exports[`<html.*> "select" default rendering 1`] = `
 
 exports[`<html.*> "select" ignores and warns about unsupported attributes 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -4957,7 +4792,6 @@ exports[`<html.*> "select" ignores and warns about unsupported attributes 1`] = 
 
 exports[`<html.*> "select" supports additional select attributes 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -5000,7 +4834,6 @@ exports[`<html.*> "select" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -5051,7 +4884,6 @@ exports[`<html.*> "select" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -5063,7 +4895,6 @@ exports[`<html.*> "select" supports inline event handlers 1`] = `
 
 exports[`<html.*> "span" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -5076,7 +4907,6 @@ exports[`<html.*> "span" default rendering 1`] = `
 
 exports[`<html.*> "span" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -5120,7 +4950,6 @@ exports[`<html.*> "span" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -5165,7 +4994,6 @@ exports[`<html.*> "span" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -5178,7 +5006,6 @@ exports[`<html.*> "span" supports inline event handlers 1`] = `
 
 exports[`<html.*> "strong" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -5192,7 +5019,6 @@ exports[`<html.*> "strong" default rendering 1`] = `
 
 exports[`<html.*> "strong" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -5237,7 +5063,6 @@ exports[`<html.*> "strong" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -5283,7 +5108,6 @@ exports[`<html.*> "strong" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -5297,7 +5121,6 @@ exports[`<html.*> "strong" supports inline event handlers 1`] = `
 
 exports[`<html.*> "sub" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -5310,7 +5133,6 @@ exports[`<html.*> "sub" default rendering 1`] = `
 
 exports[`<html.*> "sub" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -5354,7 +5176,6 @@ exports[`<html.*> "sub" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -5399,7 +5220,6 @@ exports[`<html.*> "sub" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -5412,7 +5232,6 @@ exports[`<html.*> "sub" supports inline event handlers 1`] = `
 
 exports[`<html.*> "sup" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -5425,7 +5244,6 @@ exports[`<html.*> "sup" default rendering 1`] = `
 
 exports[`<html.*> "sup" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -5469,7 +5287,6 @@ exports[`<html.*> "sup" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -5514,7 +5331,6 @@ exports[`<html.*> "sup" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -5685,7 +5501,6 @@ exports[`<html.*> "textarea" supports inline event handlers 1`] = `
 
 exports[`<html.*> "u" default rendering 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -5699,7 +5514,6 @@ exports[`<html.*> "u" default rendering 1`] = `
 
 exports[`<html.*> "u" ignores and warns about unsupported attributes 1`] = `
 <Text
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -5744,7 +5558,6 @@ exports[`<html.*> "u" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -5790,7 +5603,6 @@ exports[`<html.*> "u" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",
@@ -5804,7 +5616,6 @@ exports[`<html.*> "u" supports inline event handlers 1`] = `
 
 exports[`<html.*> "ul" default rendering 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   role="list"
   style={
     {
@@ -5817,7 +5628,6 @@ exports[`<html.*> "ul" default rendering 1`] = `
 
 exports[`<html.*> "ul" ignores and warns about unsupported attributes 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   role="list"
   style={
     {
@@ -5861,7 +5671,6 @@ exports[`<html.*> "ul" supports global attributes 1`] = `
   focusable={true}
   importantForAccessibility="no-hide-descendants"
   nativeID="some-id"
-  ref={[Function]}
   role="article"
   style={
     {
@@ -5912,7 +5721,6 @@ exports[`<html.*> "ul" supports inline event handlers 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
-  ref={[Function]}
   role="list"
   style={
     {
@@ -5925,7 +5733,6 @@ exports[`<html.*> "ul" supports inline event handlers 1`] = `
 
 exports[`<html.*> "ul" supports list attributes 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   role="list"
   style={
     {
@@ -5938,7 +5745,6 @@ exports[`<html.*> "ul" supports list attributes 1`] = `
 
 exports[`<html.*> temporary data-* props support 1`] = `
 <ViewNativeComponent
-  ref={[Function]}
   style={
     {
       "boxSizing": "content-box",

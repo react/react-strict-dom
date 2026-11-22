@@ -32,7 +32,6 @@ exports[`css.* themes handles undefined variables 1`] = `
 exports[`css.* themes inherited themes 1`] = `
 [
   <Text
-    ref={[Function]}
     style={
       {
         "backgroundColor": "pink",
@@ -46,7 +45,6 @@ exports[`css.* themes inherited themes 1`] = `
     Expect color:red
   </Text>,
   <Text
-    ref={[Function]}
     style={
       {
         "backgroundColor": "pink",
@@ -73,7 +71,6 @@ exports[`css.* themes inherited themes 1`] = `
     }
   />,
   <ViewNativeComponent
-    ref={[Function]}
     style={
       {
         "boxSizing": "content-box",
@@ -82,7 +79,6 @@ exports[`css.* themes inherited themes 1`] = `
     }
   >
     <Text
-      ref={[Function]}
       style={
         {
           "backgroundColor": "pink",
@@ -109,7 +105,6 @@ exports[`css.* themes inherited themes 1`] = `
       }
     />
     <ViewNativeComponent
-      ref={[Function]}
       style={
         {
           "boxSizing": "content-box",
@@ -118,7 +113,6 @@ exports[`css.* themes inherited themes 1`] = `
       }
     >
       <Text
-        ref={[Function]}
         style={
           {
             "backgroundColor": "pink",
@@ -147,7 +141,6 @@ exports[`css.* themes inherited themes 1`] = `
     </ViewNativeComponent>
   </ViewNativeComponent>,
   <Text
-    ref={[Function]}
     style={
       {
         "backgroundColor": "pink",
