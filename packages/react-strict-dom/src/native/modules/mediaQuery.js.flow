@@ -14,6 +14,7 @@ type MediaQueryValues = Readonly<{
   orientation?: 'landscape' | 'portrait',
   'aspect-ratio'?: number,
   direction?: 'ltr' | 'rtl',
+  'prefers-color-scheme'?: 'light' | 'dark',
   'prefers-reduced-motion'?: 'reduce' | 'no-preference',
 }>;
 

@@ -27,6 +27,45 @@ function transform(source, pluginOptions = {}) {
 }
 
 describe('react-strict-dom/babel-preset', () => {
+  test('emits base and nested media declarations for variables', () => {
+    const { metadata } = transformSync(
+      `
+        import { css } from 'react-strict-dom';
+        export const tokens = css.defineVars({
+          '--rsd-size': {
+            default: '1rem',
+            '@media (min-width: 400px)': {
+              default: '2rem',
+              '@media (prefers-color-scheme: dark)': '3rem'
+            },
+            '@media (prefers-color-scheme: dark)': '1.5rem'
+          },
+          '--rsd-opacity': {
+            default: null,
+            '@media (min-width: 400px)': 0
+          }
+        });
+      `,
+      {
+        filename: 'tokens.css.js',
+        presets: [[reactStrictPreset, { debug: false }]]
+      }
+    );
+    const css = reactStrictPreset.generateStyles(metadata.stylex);
+    expect(css.split('\n')).toEqual([
+      expect.stringMatching(/^:root.*\{--rsd-size:1rem;\}$/),
+      expect.stringMatching(
+        /^@media \(prefers-color-scheme: dark\).*--rsd-size:1\.5rem;/
+      ),
+      expect.stringMatching(
+        /^@media \(min-width: 400px\).*--rsd-size:2rem;--rsd-opacity:0;/
+      ),
+      expect.stringMatching(
+        /^@media \(prefers-color-scheme: dark\).*@media \(min-width: 400px\).*--rsd-size:3rem;/
+      )
+    ]);
+  });
+
   describe('[transform] ignore unrelated elements', () => {
     test('noop <div>', () => {
       expect(

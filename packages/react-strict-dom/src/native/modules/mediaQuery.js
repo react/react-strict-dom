@@ -89,6 +89,7 @@ function matchQuery(mediaQuery, values) {
       }
 
       switch (feature) {
+        case 'prefers-color-scheme':
         case 'prefers-reduced-motion':
         case 'orientation':
         case 'scan':

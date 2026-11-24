@@ -210,4 +210,130 @@ describe('css.* themes', () => {
     });
     expect(root.toJSON()).toMatchSnapshot();
   });
+
+  test.each(['light', 'dark'])(
+    'updates a width-dependent variable in %s mode',
+    (colorScheme) => {
+      const tokens = css.defineVars({
+        fontSize: {
+          default: '1rem',
+          '@media (min-width: 400px)': '2rem'
+        }
+      });
+      const styles = css.create({ text: { fontSize: tokens.fontSize } });
+      ReactNative.useColorScheme.mockReturnValue(colorScheme);
+      ReactNative.useWindowDimensions.mockReturnValue({
+        fontScale: 1,
+        height: 1000,
+        width: 200
+      });
+      let root;
+      act(() => {
+        root = create(<html.span style={styles.text} />);
+      });
+      expect(root.toJSON().props.style.fontSize).toBe(16);
+
+      ReactNative.useWindowDimensions.mockReturnValue({
+        fontScale: 1,
+        height: 1000,
+        width: 400
+      });
+      act(() => {
+        root.update(<html.span style={styles.text} />);
+      });
+      expect(root.toJSON().props.style.fontSize).toBe(32);
+    }
+  );
+
+  test('resolves nested media, aliases and omitted variable declarations', () => {
+    const wide = '@media (min-width: 400px)';
+    const dark = '@media (prefers-color-scheme: dark)';
+    const tokens = css.defineVars({
+      size: {
+        default: '1rem',
+        [wide]: { default: '2rem', [dark]: '3rem' },
+        [dark]: '1.5rem'
+      },
+      opacity: { default: null, [wide]: 0 },
+      color: { default: 'red', [dark]: null },
+      width: { default: '10px', '@media (width >= 400px)': '20px' }
+    });
+    const aliases = css.defineVars({
+      fontSize: { default: '1rem', [wide]: tokens.size }
+    });
+    const styles = css.create({
+      text: {
+        color: tokens.color,
+        fontSize: aliases.fontSize,
+        minWidth: tokens.width,
+        opacity: tokens.opacity.replace(')', ', 1)')
+      }
+    });
+    ReactNative.useColorScheme.mockReturnValue('dark');
+    ReactNative.useWindowDimensions.mockReturnValue({
+      fontScale: 1,
+      height: 1000,
+      width: 200
+    });
+    let root;
+    act(() => {
+      root = create(<html.span style={styles.text} />);
+    });
+    expect(root.toJSON().props.style).toMatchObject({
+      color: 'red',
+      fontSize: 16,
+      minWidth: 10,
+      opacity: 1
+    });
+
+    ReactNative.useWindowDimensions.mockReturnValue({
+      fontScale: 1,
+      height: 1000,
+      width: 400
+    });
+    act(() => {
+      root.update(<html.span style={styles.text} />);
+    });
+    expect(root.toJSON().props.style).toMatchObject({
+      color: 'red',
+      fontSize: 48,
+      minWidth: 10,
+      opacity: 0
+    });
+  });
+
+  test('matches compound media in scoped theme overrides', () => {
+    const tokens = css.defineVars({ color: 'red' });
+    const theme = css.createTheme(tokens, {
+      color: {
+        default: 'blue',
+        '@media (min-width: 400px) and (prefers-color-scheme: dark)': 'green'
+      }
+    });
+    const styles = css.create({ text: { color: tokens.color } });
+    ReactNative.useWindowDimensions.mockReturnValue({
+      height: 1000,
+      width: 400
+    });
+    const render = () => (
+      <>
+        <html.span style={styles.text} />
+        <html.div style={theme}>
+          <html.span style={styles.text} />
+        </html.div>
+      </>
+    );
+    let root;
+    act(() => {
+      root = create(render());
+    });
+    expect(root.toJSON()[1].children[0].props.style.color).toBe('blue');
+
+    ReactNative.useColorScheme.mockReturnValue('dark');
+    act(() => {
+      root.update(render());
+    });
+    expect(root.toJSON()[0].props.style.color).toBe('red');
+    expect(root.toJSON()[1].children[0].props.style.color).toBe('green');
+  });
 });

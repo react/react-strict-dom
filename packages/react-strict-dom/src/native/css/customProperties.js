@@ -8,9 +8,11 @@
  */
 
 import type { CustomProperties } from '../../types/styles';
+import type { MediaQueryContext } from './mediaQueryMatches';
 
 import { CSSUnparsedValue } from './typed-om/CSSUnparsedValue';
 import { CSSVariableReferenceValue } from './typed-om/CSSVariableReferenceValue';
+import { mediaQueryMatches } from './mediaQueryMatches';
 import { warnMsg } from '../../shared/logUtils';
 
 const memoizedValues = new Map<string, string>();
@@ -40,16 +42,52 @@ export function stringContainsVariables(input: string): boolean {
   return input.includes('var(');
 }
 
+function selectVariableValue(
+  value: unknown,
+  context: MediaQueryContext,
+  depth: number = 0
+): ?{ value: string | number, depth: number } {
+  if (typeof value === 'string' || typeof value === 'number') {
+    return { value, depth };
+  }
+  if (
+    value == null ||
+    typeof value !== 'object' ||
+    !Object.hasOwn(value, 'default')
+  ) {
+    return null;
+  }
+
+  let selected = selectVariableValue(value.default, context, depth);
+  // StyleX emits nested conditions after shallower ones. At equal depth,
+  // keep the native convention of taking the last matching declaration.
+  for (const query in value) {
+    if (query.startsWith('@media') && mediaQueryMatches(query, context)) {
+      const match = selectVariableValue(value[query], context, depth + 1);
+      if (
+        match != null &&
+        (selected == null || match.depth >= selected.depth)
+      ) {
+        selected = match;
+      }
+    }
+  }
+  return selected;
+}
+
 function resolveVariableReferenceValue(
   propName: string,
   variable: CSSVariableReferenceValue,
   propertyRegistry: CustomProperties,
-  colorScheme: 'light' | 'dark'
+  context: MediaQueryContext
 ) {
   const variableName = normalizeVariableName(variable.variable);
   const fallbackValue = variable.fallback;
 
   let variableValue: unknown = propertyRegistry[variableName];
+  if (variableValue != null && typeof variableValue === 'object') {
+    variableValue = selectVariableValue(variableValue, context)?.value;
+  }
 
   // Perform variable resolution on the variable's resolved value if it itself
   // contains variables
@@ -61,25 +99,18 @@ function resolveVariableReferenceValue(
       propName,
       CSSUnparsedValue.parse(propName, variableValue),
       propertyRegistry,
-      colorScheme
+      context
     );
   }
 
   if (variableValue != null) {
-    if (typeof variableValue === 'object' && variableValue.default != null) {
-      let defaultValue = variableValue.default;
-      if (colorScheme === 'dark') {
-        defaultValue = variableValue['@media (prefers-color-scheme: dark)'];
-      }
-      return defaultValue;
-    }
     return variableValue;
   } else if (fallbackValue != null) {
     const resolvedFallback = resolveVariableReferences(
       propName,
       fallbackValue,
       propertyRegistry,
-      colorScheme
+      context
     );
     if (resolvedFallback != null) {
       return resolvedFallback;
@@ -98,7 +129,7 @@ export function resolveVariableReferences(
   propName: string,
   propValue: CSSUnparsedValue,
   propertyRegistry: CustomProperties,
-  colorScheme: 'light' | 'dark' = 'light'
+  context: MediaQueryContext
 ): string | number | null {
   const result: Array<unknown> = [];
   for (const value of propValue.values()) {
@@ -107,7 +138,7 @@ export function resolveVariableReferences(
         propName,
         value,
         propertyRegistry,
-        colorScheme
+        context
       );
       if (resolvedValue == null) {
         // Failure to resolve a CSS variable in a value means the entire value
