@@ -11,18 +11,41 @@ import { mediaQuery } from '../modules/mediaQuery';
 
 const MEDIA = '@media';
 
+export type MediaQueryContext = Readonly<{
+  colorScheme: ?('light' | 'dark'),
+  prefersReducedMotion: boolean,
+  viewportHeight: number,
+  viewportWidth: number,
+  ...
+}>;
+
 export function mediaQueryMatches(
   query: string,
-  width: number,
-  height: number,
-  prefersReducedMotion: boolean
+  context: MediaQueryContext
 ): boolean {
+  const {
+    colorScheme,
+    prefersReducedMotion,
+    viewportHeight: height,
+    viewportWidth: width
+  } = context;
   const q = query.split(MEDIA)[1];
-  return mediaQuery.match(q, {
-    width: width,
-    height: height,
-    orientation: width > height ? 'landscape' : 'portrait',
-    'aspect-ratio': width / height,
-    'prefers-reduced-motion': prefersReducedMotion ? 'reduce' : 'no-preference'
-  });
+  try {
+    return mediaQuery.match(q, {
+      width,
+      height,
+      orientation: width > height ? 'landscape' : 'portrait',
+      'aspect-ratio': width / height,
+      'prefers-color-scheme': colorScheme ?? 'light',
+      'prefers-reduced-motion': prefersReducedMotion
+        ? 'reduce'
+        : 'no-preference'
+    });
+  } catch (error) {
+    // A valid web query may use syntax the native parser does not support.
+    if (error instanceof SyntaxError || error instanceof TypeError) {
+      return false;
+    }
+    throw error;
+  }
 }

@@ -146,7 +146,6 @@ function resolveStyle(
     fontSize: _fontSize,
     hover,
     inheritedFontSize,
-    prefersReducedMotion,
     viewportHeight,
     viewportScale = 1,
     viewportWidth
@@ -167,7 +166,7 @@ function resolveStyle(
         propName,
         styleValue,
         customProperties,
-        colorScheme
+        options
       );
       if (resolvedValue != null) {
         stylesToReprocess[propName] = resolvedValue;
@@ -244,16 +243,12 @@ function resolveStyle(
       // Just picks the last MQ in order that matches.
       // TODO: decide how StyleX should handle multiple MQs.
       for (const variant in styleValue) {
-        if (variant.startsWith('@media') && variant !== mqDark) {
-          const matches = mediaQueryMatches(
-            variant,
-            viewportWidth,
-            viewportHeight,
-            prefersReducedMotion
-          );
-          if (matches) {
-            activeVariant = variant;
-          }
+        if (
+          variant.startsWith('@media') &&
+          variant !== mqDark &&
+          mediaQueryMatches(variant, options)
+        ) {
+          activeVariant = variant;
         }
       }
       stylesToReprocess[propName] = styleValue[activeVariant];
